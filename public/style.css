@@ -2,7 +2,13 @@ body {
     background: rgb(255, 255, 255);
 }
 
-textarea {
+textarea.title {
+    resize: none;
+    width: 50%;
+    height: 50px;
+}
+
+textarea.content {
     resize: none;
     width: 50%;
     height: 200px;
