@@ -41,11 +41,14 @@
         title: document.getElementById("memoTitle").value,
         contents: document.getElementById("memoContents").value,
       };
-      const jsonString = JSON.stringify(memo);
-      localStorage.setItem(key, jsonString);
-      appendMemo();
-      key++;
-      clearText();
+
+      if (memo.title && memo.contents) {
+        const jsonString = JSON.stringify(memo);
+        localStorage.setItem(key, jsonString);
+        appendMemo();
+        key++;
+        clearText();
+      }
     }
 
     function appendMemo() {
