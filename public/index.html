@@ -21,10 +21,15 @@
         placeholder="memo"
       ></textarea>
       <button type="button" onclick="saveMemo()">Save</button>
+      <ul id="memoList"></ul>
     </div>
   </body>
   <script>
-    let key = 0;
+    let key = 1;
+
+    window.onload = function () {
+      localStorage.clear();
+    };
 
     const clearText = () => {
       document.getElementById("memoTitle").value = "";
@@ -34,12 +39,36 @@
     function saveMemo() {
       const memo = {
         title: document.getElementById("memoTitle").value,
-        content: document.getElementById("memoContents").value,
+        contents: document.getElementById("memoContents").value,
       };
-      const jsonString = JSON.stringify(memo);
-      localStorage.setItem(key, jsonString);
-      key++;
-      clearText();
+
+      if (memo.title && memo.contents) {
+        if (memo.title.length <= 100 && memo.contents.length <= 1000) {
+          const jsonString = JSON.stringify(memo);
+          localStorage.setItem(key, jsonString);
+          appendMemo();
+          key++;
+          clearText();
+        }
+      }
+    }
+
+    function appendMemo() {
+      const memo = readMemo();
+
+      const ul = document.getElementById("memoList");
+      const li = document.createElement("li");
+      const text = document.createTextNode(memo);
+      li.appendChild(text);
+      ul.appendChild(li);
+    }
+
+    function readMemo() {
+      const memo = JSON.parse(localStorage.getItem(`${key}`));
+      const text = "title: " + memo.title + " contents: " + memo.contents;
+      console.log(text);
+      return text;
+      //console.log("title: %s contents: %s", memo.title, memo.contents);
     }
   </script>
 </html>
