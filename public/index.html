@@ -24,7 +24,11 @@
     </div>
   </body>
   <script>
-    let key = 0;
+    let key = 1;
+
+    window.onload = function () {
+      localStorage.clear();
+    };
 
     const clearText = () => {
       document.getElementById("memoTitle").value = "";
@@ -34,12 +38,19 @@
     function saveMemo() {
       const memo = {
         title: document.getElementById("memoTitle").value,
-        content: document.getElementById("memoContents").value,
+        contents: document.getElementById("memoContents").value,
       };
       const jsonString = JSON.stringify(memo);
       localStorage.setItem(key, jsonString);
+      readMemo();
       key++;
       clearText();
+    }
+
+    function readMemo() {
+      const memo = JSON.parse(localStorage.getItem(`${key}`));
+
+      console.log("title: %s contents: %s", memo.title, memo.contents);
     }
   </script>
 </html>
