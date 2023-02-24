@@ -7,5 +7,39 @@
   </head>
   <body>
     <h1>Hello, World!</h1>
+    <div>
+      <textarea
+        id="memoTitle"
+        class="title"
+        maxlength="100"
+        placeholder="title"
+      ></textarea>
+      <textarea
+        id="memoContents"
+        class="content"
+        maxlength="1000"
+        placeholder="memo"
+      ></textarea>
+      <button type="button" onclick="saveMemo()">Save</button>
+    </div>
   </body>
+  <script>
+    let key = 0;
+
+    const clearText = () => {
+      document.getElementById("memoTitle").value = "";
+      document.getElementById("memoContents").value = "";
+    };
+
+    function saveMemo() {
+      const memo = {
+        title: document.getElementById("memoTitle").value,
+        content: document.getElementById("memoContents").value,
+      };
+      const jsonString = JSON.stringify(memo);
+      localStorage.setItem(key, jsonString);
+      key++;
+      clearText();
+    }
+  </script>
 </html>
