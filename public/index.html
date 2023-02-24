@@ -43,11 +43,13 @@
       };
 
       if (memo.title && memo.contents) {
-        const jsonString = JSON.stringify(memo);
-        localStorage.setItem(key, jsonString);
-        appendMemo();
-        key++;
-        clearText();
+        if (memo.title.length <= 100 && memo.contents.length <= 1000) {
+          const jsonString = JSON.stringify(memo);
+          localStorage.setItem(key, jsonString);
+          appendMemo();
+          key++;
+          clearText();
+        }
       }
     }
 
