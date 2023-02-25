@@ -87,7 +87,7 @@
           const title = memo.title;
           const tag = memo.tags;
 
-          if (title == searchKeyword || tag.includes(searchKeyword)) {
+          if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
             const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
             console.log(text);
           }
