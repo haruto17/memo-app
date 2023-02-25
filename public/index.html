@@ -8,18 +8,8 @@
   <body>
     <h1>Hello, World!</h1>
     <div>
-      <textarea
-        id="memoTitle"
-        class="title"
-        maxlength="100"
-        placeholder="title"
-      ></textarea>
-      <textarea
-        id="memoContents"
-        class="content"
-        maxlength="1000"
-        placeholder="memo"
-      ></textarea>
+      <textarea id="memoTitle" class="title" maxlength="100" placeholder="title"></textarea>
+      <textarea id="memoContents" class="content" maxlength="1000" placeholder="memo"></textarea>
       <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
       <button type="button" onclick="saveMemo()">Save</button>
       <ul id="memoList"></ul>
@@ -52,11 +42,7 @@
       };
 
       if (memo.title && memo.contents) {
-        if (
-          memo.title.length <= 100 &&
-          memo.contents.length <= 1000 &&
-          memo.tags.length <= 5
-        ) {
+        if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
           const jsonString = JSON.stringify(memo);
           localStorage.setItem(key, jsonString);
           appendMemo();
@@ -78,13 +64,7 @@
 
     function readMemo() {
       const memo = JSON.parse(localStorage.getItem(`${key}`));
-      const text =
-        "title: " +
-        memo.title +
-        " contents: " +
-        memo.contents +
-        " tags: " +
-        memo.tags;
+      const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
       console.log(text);
       return text;
     }
