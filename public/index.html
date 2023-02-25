@@ -20,6 +20,7 @@
         maxlength="1000"
         placeholder="memo"
       ></textarea>
+      <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
       <button type="button" onclick="saveMemo()">Save</button>
       <ul id="memoList"></ul>
     </div>
@@ -34,16 +35,28 @@
     const clearText = () => {
       document.getElementById("memoTitle").value = "";
       document.getElementById("memoContents").value = "";
+      document.getElementById("memoTags").value = "";
     };
+
+    function splitTag(tags) {
+      let separatorString = /\s+/;
+      let tagArray = tags.split(separatorString);
+      return tagArray;
+    }
 
     function saveMemo() {
       const memo = {
         title: document.getElementById("memoTitle").value,
         contents: document.getElementById("memoContents").value,
+        tags: splitTag(document.getElementById("memoTags").value),
       };
 
       if (memo.title && memo.contents) {
-        if (memo.title.length <= 100 && memo.contents.length <= 1000) {
+        if (
+          memo.title.length <= 100 &&
+          memo.contents.length <= 1000 &&
+          memo.tags.length <= 5
+        ) {
           const jsonString = JSON.stringify(memo);
           localStorage.setItem(key, jsonString);
           appendMemo();
@@ -65,10 +78,15 @@
 
     function readMemo() {
       const memo = JSON.parse(localStorage.getItem(`${key}`));
-      const text = "title: " + memo.title + " contents: " + memo.contents;
+      const text =
+        "title: " +
+        memo.title +
+        " contents: " +
+        memo.contents +
+        " tags: " +
+        memo.tags;
       console.log(text);
       return text;
-      //console.log("title: %s contents: %s", memo.title, memo.contents);
     }
   </script>
 </html>
