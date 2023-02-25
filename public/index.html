@@ -8,15 +8,29 @@
   <body>
     <h1>Hello, World!</h1>
     <div>
-      <textarea id="memoTitle" class="title" maxlength="100" placeholder="title"></textarea>
-      <textarea id="memoContents" class="content" maxlength="1000" placeholder="memo"></textarea>
-      <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
-      <button type="button" onclick="saveMemo()">Save</button>
+      <div>
+        <input type="search" id="memoSearch" placeholder="title or tag" />
+        <button type="button" onclick="searchMemo()">Search</button>
+      </div>
+      <div>
+        <textarea id="memoTitle" class="title" maxlength="100" placeholder="title"></textarea>
+        <textarea id="memoContents" class="content" maxlength="1000" placeholder="memo"></textarea>
+        <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
+        <button type="button" onclick="saveMemo()">Save</button>
+      </div>
+      <div id="popup-wrapper">
+        <div id="popup-inside">
+          <div id="close">x</div>
+          <div id="message">
+            <ul id="searchResult"></ul>
+          </div>
+        </div>
+      </div>
       <ul id="memoList"></ul>
     </div>
   </body>
   <script>
-    let key = 1;
+    let index = 1;
 
     window.onload = function () {
       localStorage.clear();
@@ -44,9 +58,9 @@
       if (memo.title && memo.contents) {
         if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
           const jsonString = JSON.stringify(memo);
-          localStorage.setItem(key, jsonString);
+          localStorage.setItem(index, jsonString);
           appendMemo();
-          key++;
+          index++;
           clearText();
         }
       }
@@ -63,10 +77,46 @@
     }
 
     function readMemo() {
-      const memo = JSON.parse(localStorage.getItem(`${key}`));
+      const memo = JSON.parse(localStorage.getItem(`${index}`));
       const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
       console.log(text);
       return text;
+    }
+
+    function searchMemo() {
+      const popupWrapper = document.getElementById("popup-wrapper");
+      const close = document.getElementById("close");
+
+      const searchKeyword = document.getElementById("memoSearch").value;
+      const lengthStorage = localStorage.length;
+
+      if (!lengthStorage) {
+        alert("No Data!!");
+      } else {
+        for (let i = 1; i <= lengthStorage; i++) {
+          const memo = JSON.parse(localStorage.getItem(i));
+          const title = memo.title;
+          const tag = memo.tags;
+
+          if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
+            const ul = document.getElementById("searchResult");
+            const li = document.createElement("li");
+            const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
+            li.appendChild(document.createTextNode(text));
+            ul.appendChild(li);
+
+            popupWrapper.style.display = "block";
+          }
+        }
+      }
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+          const li = document.getElementById("searchResult");
+          li.innerHTML = ``;
+        }
+      });
     }
   </script>
 </html>
