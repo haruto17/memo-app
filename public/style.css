@@ -13,3 +13,9 @@ textarea.content {
     width: 50%;
     height: 200px;
 }
+
+textarea.tag {
+    resize: none;
+    width: 50%;
+    height: 50px;
+}
