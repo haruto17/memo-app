@@ -18,6 +18,14 @@
         <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
         <button type="button" onclick="saveMemo()">Save</button>
       </div>
+      <div id="popup-wrapper">
+        <div id="popup-inside">
+          <div id="close">x</div>
+          <div id="message">
+            <ul id="searchResult"></ul>
+          </div>
+        </div>
+      </div>
       <ul id="memoList"></ul>
     </div>
   </body>
@@ -76,11 +84,14 @@
     }
 
     function searchMemo() {
+      const popupWrapper = document.getElementById("popup-wrapper");
+      const close = document.getElementById("close");
+
       const searchKeyword = document.getElementById("memoSearch").value;
       const lengthStorage = localStorage.length;
 
       if (!lengthStorage) {
-        console.log("No Data!!");
+        alert("No Data!!");
       } else {
         for (let i = 1; i <= lengthStorage; i++) {
           const memo = JSON.parse(localStorage.getItem(i));
@@ -88,11 +99,24 @@
           const tag = memo.tags;
 
           if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
+            const ul = document.getElementById("searchResult");
+            const li = document.createElement("li");
             const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
-            console.log(text);
+            li.appendChild(document.createTextNode(text));
+            ul.appendChild(li);
+
+            popupWrapper.style.display = "block";
           }
         }
       }
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+          const li = document.getElementById("searchResult");
+          li.innerHTML = ``;
+        }
+      });
     }
   </script>
 </html>
