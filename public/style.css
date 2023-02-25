@@ -31,20 +31,13 @@ textarea.tag {
 }
 
 #popup-inside {
-    text-align: center;
+    /* text-align: center; */
     width: 100%;
     max-width: 300px;
     background: white;
     margin: 10% auto;
     padding: 20px;
     position: relative;
-}
-
-#message a {
-    background: purple;
-    color: white;
-    text-decoration: none;
-    padding: 6px 10px;
 }
 
 #close {
