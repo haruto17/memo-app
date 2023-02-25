@@ -52,7 +52,11 @@
       };
 
       if (memo.title && memo.contents) {
-        if (memo.title.length <= 100 && memo.contents.length <= 1000) {
+        if (
+          memo.title.length <= 100 &&
+          memo.contents.length <= 1000 &&
+          memo.tags.length <= 5
+        ) {
           const jsonString = JSON.stringify(memo);
           localStorage.setItem(key, jsonString);
           appendMemo();
