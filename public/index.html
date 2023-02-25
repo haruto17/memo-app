@@ -22,7 +22,7 @@
     </div>
   </body>
   <script>
-    let key = 1;
+    let index = 1;
 
     window.onload = function () {
       localStorage.clear();
@@ -50,9 +50,9 @@
       if (memo.title && memo.contents) {
         if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
           const jsonString = JSON.stringify(memo);
-          localStorage.setItem(key, jsonString);
+          localStorage.setItem(index, jsonString);
           appendMemo();
-          key++;
+          index++;
           clearText();
         }
       }
@@ -69,7 +69,7 @@
     }
 
     function readMemo() {
-      const memo = JSON.parse(localStorage.getItem(`${key}`));
+      const memo = JSON.parse(localStorage.getItem(`${index}`));
       const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
       console.log(text);
       return text;
