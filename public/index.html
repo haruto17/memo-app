@@ -51,8 +51,6 @@
         tags: splitTag(document.getElementById("memoTags").value),
       };
 
-      console.log(memo.tags);
-
       if (memo.title && memo.contents) {
         if (memo.title.length <= 100 && memo.contents.length <= 1000) {
           const jsonString = JSON.stringify(memo);
@@ -76,10 +74,15 @@
 
     function readMemo() {
       const memo = JSON.parse(localStorage.getItem(`${key}`));
-      const text = "title: " + memo.title + " contents: " + memo.contents;
+      const text =
+        "title: " +
+        memo.title +
+        " contents: " +
+        memo.contents +
+        " tags: " +
+        memo.tags;
       console.log(text);
       return text;
-      //console.log("title: %s contents: %s", memo.title, memo.contents);
     }
   </script>
 </html>
