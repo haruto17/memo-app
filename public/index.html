@@ -8,10 +8,16 @@
   <body>
     <h1>Hello, World!</h1>
     <div>
-      <textarea id="memoTitle" class="title" maxlength="100" placeholder="title"></textarea>
-      <textarea id="memoContents" class="content" maxlength="1000" placeholder="memo"></textarea>
-      <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
-      <button type="button" onclick="saveMemo()">Save</button>
+      <div>
+        <input type="search" id="memoSearch" placeholder="title or tag" />
+        <button type="button" onclick="searchMemo()">Search</button>
+      </div>
+      <div>
+        <textarea id="memoTitle" class="title" maxlength="100" placeholder="title"></textarea>
+        <textarea id="memoContents" class="content" maxlength="1000" placeholder="memo"></textarea>
+        <textarea id="memoTags" class="tag" placeholder="tag"></textarea>
+        <button type="button" onclick="saveMemo()">Save</button>
+      </div>
       <ul id="memoList"></ul>
     </div>
   </body>
@@ -67,6 +73,10 @@
       const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
       console.log(text);
       return text;
+    }
+
+    function searchMemo() {
+      console.log("searchMemo");
     }
   </script>
 </html>
