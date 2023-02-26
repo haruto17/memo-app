@@ -2,6 +2,24 @@ body {
     background: rgb(255, 255, 255);
 }
 
+#searchBox {
+    height: 60px;
+    width: 400px;
+    margin-left: auto;
+}
+
+#memoSearch {
+    height: 50px;
+    width: 300px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#iconSearch {
+    position: absolute;
+    top: 105px;
+    right: 110px;
+}
+
 textarea.title {
     resize: none;
     width: 100%;
@@ -82,3 +100,4 @@ textarea.tag {
     flex-direction: column;
     align-items: center;
 }
+
