@@ -27,6 +27,13 @@
         </div>
       </div>
       <ul id="memoList"></ul>
+      <button type="button" onclick="createMemo()">+</button>
+      <div id="popupCreate">
+        <div id="popupCreateInside">
+          <div id="close">x</div>
+          <div id="inputArea"></div>
+        </div>
+      </div>
     </div>
   </body>
   <script>
@@ -46,6 +53,21 @@
       let separatorString = /\s+/;
       let tagArray = tags.split(separatorString);
       return tagArray;
+    }
+
+    function createMemo() {
+      const popupWrapper = document.getElementById("popupCreate");
+      const close = document.getElementById("close");
+
+      popupWrapper.style.display = "block";
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+          const li = document.getElementById("searchResult");
+          li.innerHTML = ``;
+        }
+      });
     }
 
     function saveMemo() {
