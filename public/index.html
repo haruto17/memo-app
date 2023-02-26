@@ -50,6 +50,7 @@
 
     function saveMemo() {
       const memo = {
+        date: getTime(),
         title: document.getElementById("memoTitle").value,
         contents: document.getElementById("memoContents").value,
         tags: splitTag(document.getElementById("memoTags").value),
@@ -78,7 +79,8 @@
 
     function readMemo() {
       const memo = JSON.parse(localStorage.getItem(`${index}`));
-      const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
+      const text =
+        "date: " + memo.date + " title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
       console.log(text);
       return text;
     }
@@ -117,6 +119,21 @@
           li.innerHTML = ``;
         }
       });
+    }
+
+    function getTime() {
+      const date1 = new Date();
+      const date2 =
+        date1.getFullYear() +
+        "/" +
+        (date1.getMonth() + 1) +
+        "/" +
+        date1.getDate() +
+        "/" +
+        date1.getHours() +
+        "/" +
+        date1.getMinutes();
+      return date2;
     }
   </script>
 </html>
