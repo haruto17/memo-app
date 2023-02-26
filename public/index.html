@@ -87,11 +87,13 @@
 
       if (memo.title && memo.contents) {
         if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
+          const popupWrapper = document.getElementById("popupCreate");
           const jsonString = JSON.stringify(memo);
           localStorage.setItem(index, jsonString);
           appendMemo();
           index++;
           clearText();
+          popupWrapper.style.display = "none";
         }
       }
     }
