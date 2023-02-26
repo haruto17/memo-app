@@ -66,5 +66,6 @@ textarea.tag {
     background: white;
     margin: 10% auto;
     padding: 20px;
+    border-radius: 10px 10px 10px 10px;
     position: relative;
 }
