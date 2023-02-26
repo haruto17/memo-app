@@ -50,7 +50,7 @@
 
     function saveMemo() {
       const memo = {
-        //date:
+        date: getTime(),
         title: document.getElementById("memoTitle").value,
         contents: document.getElementById("memoContents").value,
         tags: splitTag(document.getElementById("memoTags").value),
@@ -80,7 +80,8 @@
 
     function readMemo() {
       const memo = JSON.parse(localStorage.getItem(`${index}`));
-      const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
+      const text =
+        "date: " + memo.date + " title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
       console.log(text);
       return text;
     }
@@ -133,7 +134,7 @@
         date1.getHours() +
         "/" +
         date1.getMinutes();
-      console.log(date2);
+      return date2;
     }
   </script>
 </html>
