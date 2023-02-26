@@ -50,6 +50,7 @@
 
     function saveMemo() {
       const memo = {
+        //date:
         title: document.getElementById("memoTitle").value,
         contents: document.getElementById("memoContents").value,
         tags: splitTag(document.getElementById("memoTags").value),
@@ -62,6 +63,7 @@
           appendMemo();
           index++;
           clearText();
+          getTime();
         }
       }
     }
@@ -117,6 +119,21 @@
           li.innerHTML = ``;
         }
       });
+    }
+
+    function getTime() {
+      const date1 = new Date();
+      const date2 =
+        date1.getFullYear() +
+        "/" +
+        (date1.getMonth() + 1) +
+        "/" +
+        date1.getDate() +
+        "/" +
+        date1.getHours() +
+        "/" +
+        date1.getMinutes();
+      console.log(date2);
     }
   </script>
 </html>
