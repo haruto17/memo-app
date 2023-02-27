@@ -110,7 +110,8 @@
     }
 
     function clickMemo(e) {
-      console.log(e.target.id);
+      const key = e.target.id;
+      console.log(localStorage.getItem(key));
     }
 
     function readMemo() {
