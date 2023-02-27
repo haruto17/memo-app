@@ -38,8 +38,6 @@
     </div>
   </body>
   <script>
-    let index = 1;
-
     window.onload = function () {
       localStorage.clear();
     };
@@ -85,7 +83,6 @@
           const jsonString = JSON.stringify(memo);
           localStorage.setItem(localStorage.length + 1, jsonString);
           appendMemo();
-          index++;
           clearText();
           popupWrapper.style.display = "none";
         }
@@ -102,7 +99,6 @@
       div.setAttribute("onclick", "clickMemo(event)");
       const line = document.createElement("hr");
       const titleText = document.createElement("p");
-      titleText.id = index;
       titleText.innerText = memo.title;
       div.appendChild(line);
       div.appendChild(titleText);
