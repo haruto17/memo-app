@@ -30,7 +30,20 @@
               <textarea id="memoTitle" class="title" placeholder="title"></textarea>
               <textarea id="memoContents" class="content" placeholder="contents"></textarea>
               <textarea id="memoTags" class="tag" placeholder="tags"></textarea>
-              <button type="button" onclick="saveMemo()">Save</button>
+              <button type="button" onclick="saveMemo(1)">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="popupEdit">
+        <div id="popupEditInside">
+          <div id="close">x</div>
+          <div id="inputArea">
+            <div id="box">
+              <textarea id="memoTitle1" class="title" placeholder="title"></textarea>
+              <textarea id="memoContents1" class="content" placeholder="contents"></textarea>
+              <textarea id="memoTags1" class="tag" placeholder="tags"></textarea>
+              <button type="button" onclick="saveMemo(0)">Save</button>
             </div>
           </div>
         </div>
@@ -38,6 +51,8 @@
     </div>
   </body>
   <script>
+    let index = 0;
+
     window.onload = function () {
       localStorage.clear();
     };
@@ -46,6 +61,9 @@
       document.getElementById("memoTitle").value = "";
       document.getElementById("memoContents").value = "";
       document.getElementById("memoTags").value = "";
+      // document.getElementById("memoTitle1").value = "";
+      // document.getElementById("memoContents1").value = "";
+      // document.getElementById("memoTags1").value = "";
     };
 
     function splitTag(tags) {
@@ -69,7 +87,7 @@
       });
     }
 
-    function saveMemo() {
+    function saveMemo(key) {
       const memo = {
         date: getTime(),
         title: document.getElementById("memoTitle").value,
@@ -77,15 +95,28 @@
         tags: splitTag(document.getElementById("memoTags").value),
       };
 
-      if (memo.title && memo.contents) {
-        if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
-          const popupWrapper = document.getElementById("popupCreate");
-          const jsonString = JSON.stringify(memo);
-          localStorage.setItem(localStorage.length + 1, jsonString);
-          appendMemo();
-          clearText();
-          popupWrapper.style.display = "none";
+      if (key == 1) {
+        if (memo.title && memo.contents) {
+          if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
+            const popupWrapper = document.getElementById("popupCreate");
+            const jsonString = JSON.stringify(memo);
+            localStorage.setItem(localStorage.length + 1, jsonString);
+            appendMemo();
+            clearText();
+            popupWrapper.style.display = "none";
+          }
         }
+      }
+      if (key == 0) {
+        const memo2 = {
+          date: getTime(),
+          title: document.getElementById("memoTitle1").value,
+          contents: document.getElementById("memoContents1").value,
+          tags: splitTag(document.getElementById("memoTags1").value),
+        };
+        const jsonString2 = JSON.stringify(memo2);
+        localStorage.setItem(index, jsonString2);
+        //clearText();
       }
     }
 
@@ -107,7 +138,28 @@
 
     function clickMemo(e) {
       const key = e.target.id;
+      index = key;
+      const popupWrapper = document.getElementById("popupEdit");
+      const close = document.getElementById("close");
+      const title = document.getElementById("memoTitle1");
+      const contents = document.getElementById("memoContents1");
+      const tags = document.getElementById("memoTags1");
+      const memo = readMemo();
+
+      title.innerText = memo.title;
+      contents.innerText = memo.contents;
+      tags.innerText = memo.tags;
+
+      // ポップアップ表示
+      popupWrapper.style.display = "block";
+
       console.log(localStorage.getItem(key));
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+        }
+      });
     }
 
     function readMemo() {
