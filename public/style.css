@@ -104,10 +104,6 @@ textarea.tag {
 #memoList {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-}
-
-#memoArea {
     padding-left: 10%;
     padding-right: 10%;
 }
