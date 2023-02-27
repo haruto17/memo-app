@@ -35,6 +35,18 @@
           </div>
         </div>
       </div>
+      <div id="popupEdit">
+        <div id="popupEditInside">
+          <div id="close">x</div>
+          <div id="inputArea">
+            <div id="box">
+              <textarea id="memoTitle1" class="title" placeholder="title"></textarea>
+              <textarea id="memoContents1" class="content" placeholder="contents"></textarea>
+              <textarea id="memoTags1" class="tag" placeholder="tags"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script>
@@ -107,7 +119,29 @@
 
     function clickMemo(e) {
       const key = e.target.id;
+      const popupWrapper = document.getElementById("popupEdit");
+      const close = document.getElementById("close");
+      const title = document.getElementById("memoTitle1");
+      const contents = document.getElementById("memoContents1");
+      const tags = document.getElementById("memoTags1");
+      const memo = readMemo();
+
+      title.innerText = memo.title;
+      contents.innerText = memo.contents;
+      tags.innerText = memo.tags;
+
+      // ポップアップ表示
+      popupWrapper.style.display = "block";
+
       console.log(localStorage.getItem(key));
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+          const li = document.getElementById("searchResult");
+          li.innerHTML = ``;
+        }
+      });
     }
 
     function readMemo() {
