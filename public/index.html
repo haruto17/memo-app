@@ -61,9 +61,9 @@
       document.getElementById("memoTitle").value = "";
       document.getElementById("memoContents").value = "";
       document.getElementById("memoTags").value = "";
-      document.getElementById("memoTitle1").value = "";
-      document.getElementById("memoContents1").value = "";
-      document.getElementById("memoTags1").value = "";
+      // document.getElementById("memoTitle1").value = "";
+      // document.getElementById("memoContents1").value = "";
+      // document.getElementById("memoTags1").value = "";
     };
 
     function splitTag(tags) {
@@ -116,7 +116,7 @@
         };
         const jsonString2 = JSON.stringify(memo2);
         localStorage.setItem(index, jsonString2);
-        // clearText();
+        //clearText();
       }
     }
 
@@ -158,8 +158,6 @@
       popupWrapper.addEventListener("click", (e) => {
         if (e.target.id === popupWrapper.id || e.target.id === close.id) {
           popupWrapper.style.display = "none";
-          const li = document.getElementById("searchResult");
-          li.innerHTML = ``;
         }
       });
     }
