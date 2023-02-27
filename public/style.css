@@ -108,7 +108,7 @@ textarea.tag {
     padding-right: 10%;
 }
 
-#memo{
+.memo{
     width: 250px;
     height: 150px;
     border: 1px solid #000;

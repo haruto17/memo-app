@@ -38,8 +38,6 @@
     </div>
   </body>
   <script>
-    let index = 1;
-
     window.onload = function () {
       localStorage.clear();
     };
@@ -83,9 +81,8 @@
         if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
           const popupWrapper = document.getElementById("popupCreate");
           const jsonString = JSON.stringify(memo);
-          localStorage.setItem(index, jsonString);
+          localStorage.setItem(localStorage.length + 1, jsonString);
           appendMemo();
-          index++;
           clearText();
           popupWrapper.style.display = "none";
         }
@@ -97,30 +94,25 @@
 
       const list = document.getElementById("memoList");
       const div = document.createElement("div");
-      div.id = "memo";
-      div.setAttribute("onclick", "clickMemo()");
+      div.className = "memo";
+      div.id = localStorage.length;
+      div.setAttribute("onclick", "clickMemo(event)");
       const line = document.createElement("hr");
       const titleText = document.createElement("p");
-      titleText.innerText = "title";
+      titleText.innerText = memo.title;
       div.appendChild(line);
       div.appendChild(titleText);
-
-      // const li = document.createElement("li");
-      // const text = document.createTextNode(memo);
-      // li.appendChild(text);
       list.appendChild(div);
     }
 
-    function clickMemo() {
-      console.log("click!!");
+    function clickMemo(e) {
+      const key = e.target.id;
+      console.log(localStorage.getItem(key));
     }
 
     function readMemo() {
-      const memo = JSON.parse(localStorage.getItem(`${index}`));
-      const text =
-        "date: " + memo.date + " title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
-      console.log(text);
-      return text;
+      const memo = JSON.parse(localStorage.getItem(localStorage.length));
+      return memo;
     }
 
     function searchMemo() {
