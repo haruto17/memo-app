@@ -148,3 +148,13 @@ p {
     border-radius: 10px 10px 10px 10px;
     position: relative;
 }
+
+.create-btn {
+    position: fixed;
+    bottom: 10%;
+    right: 15%;
+}
+
+.material-icons-outlined {
+    color: black;
+}
