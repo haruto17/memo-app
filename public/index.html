@@ -101,22 +101,17 @@
       div.setAttribute("onclick", "clickMemo()");
       const line = document.createElement("hr");
       const titleText = document.createElement("p");
-      titleText.innerText = "title";
+      titleText.innerText = memo.title;
       div.appendChild(line);
       div.appendChild(titleText);
       list.appendChild(div);
     }
 
-    function clickMemo() {
-      console.log("click!!");
-    }
+    function clickMemo() {}
 
     function readMemo() {
       const memo = JSON.parse(localStorage.getItem(`${index}`));
-      const text =
-        "date: " + memo.date + " title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
-      console.log(text);
-      return text;
+      return memo;
     }
 
     function searchMemo() {
