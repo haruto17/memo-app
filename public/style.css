@@ -113,3 +113,15 @@ textarea.tag {
     border: 1px solid #000;
     border-radius: 10px 10px 10px 10px;
 }
+
+hr {
+    border: 1px solid #000;
+    position: relative;
+    top: 100px;
+}
+
+p {
+    position: relative;
+    top: 95px;
+    text-align: center;
+}
