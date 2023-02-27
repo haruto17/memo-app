@@ -107,6 +107,11 @@ textarea.tag {
     gap: 4px;
 }
 
+#memoArea {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 #memo{
     width: 250px;
     height: 150px;
