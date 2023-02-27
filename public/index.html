@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <ul id="memoList"></ul>
+      <div id="memoList"></div>
       <button type="button" onclick="createMemo()">+</button>
       <div id="popupCreate">
         <div id="popupCreateInside">
@@ -95,11 +95,24 @@
     function appendMemo() {
       const memo = readMemo();
 
-      const ul = document.getElementById("memoList");
-      const li = document.createElement("li");
-      const text = document.createTextNode(memo);
-      li.appendChild(text);
-      ul.appendChild(li);
+      const list = document.getElementById("memoList");
+      const div = document.createElement("div");
+      div.id = "memo";
+      div.setAttribute("onclick", "clickMemo()");
+      const line = document.createElement("hr");
+      const titleText = document.createElement("p");
+      titleText.innerText = "title";
+      div.appendChild(line);
+      div.appendChild(titleText);
+
+      // const li = document.createElement("li");
+      // const text = document.createTextNode(memo);
+      // li.appendChild(text);
+      list.appendChild(div);
+    }
+
+    function clickMemo() {
+      console.log("click!!");
     }
 
     function readMemo() {

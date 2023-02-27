@@ -101,3 +101,28 @@ textarea.tag {
     align-items: center;
 }
 
+#memoList {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#memo{
+    width: 250px;
+    height: 150px;
+    border: 1px solid #000;
+    border-radius: 10px 10px 10px 10px;
+}
+
+hr {
+    border: 1px solid #000;
+    position: relative;
+    top: 100px;
+}
+
+p {
+    position: relative;
+    top: 95px;
+    text-align: center;
+}
