@@ -98,11 +98,16 @@
       const ul = document.getElementById("memoList");
       const div = document.createElement("div");
       div.id = "memo";
+      div.setAttribute("onclick", "clickMemo()");
 
       // const li = document.createElement("li");
       // const text = document.createTextNode(memo);
       // li.appendChild(text);
       ul.appendChild(div);
+    }
+
+    function clickMemo() {
+      console.log("click!!");
     }
 
     function readMemo() {
