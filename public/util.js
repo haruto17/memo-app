@@ -116,6 +116,7 @@ function clickMemo(e) {
         }
         if (e.target.id === deletebtn.id) {
             deleteMemo(key);
+            refreshMemo()
             popupWrapper.style.display = "none";
         }
     });
@@ -129,6 +130,21 @@ function deleteMemo(key) {
 // メモリストの更新
 function refreshMemo() {
 
+    // メモリストの子要素を一旦削除
+    const li = document.getElementById("memoList");
+    li.innerHTML = ``;
+
+    // 今localStorageに保存されているメモのkeyをすべて取得
+    const nowKey = Object.keys(localStorage);
+    // ソート
+    nowKey.sort();
+
+    // メモを再度リストに追加
+    for (const key of nowKey) {
+        appendMemo(key);
+    }
+
+    console.log(nowKey);
 }
 
 // localStorageからメモ取得。JSONで返す
