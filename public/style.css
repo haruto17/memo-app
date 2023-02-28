@@ -20,27 +20,24 @@ body {
     right: 110px;
 }
 
-textarea.title {
+textarea {
     resize: none;
     width: 100%;
-    height: 50px;
     border-radius: 10px 10px 10px 10px;
+}
+
+textarea.title {
+    height: 50px;
     margin: 5%;
 }
 
 textarea.content {
-    resize: none;
-    width: 100%;
     height: 200px;
-    border-radius: 10px 10px 10px 10px;
     margin: 5%;
 }
 
 textarea.tag {
-    resize: none;
-    width: 100%;
     height: 50px;
-    border-radius: 10px 10px 10px 10px;
     margin: 5%
 }
 
