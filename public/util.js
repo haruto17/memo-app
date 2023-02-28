@@ -53,7 +53,7 @@ function saveMemo(key) {
             const popupWrapper = document.getElementById("popupCreate");
             const jsonString = JSON.stringify(memo);
             localStorage.setItem(localStorage.length + 1, jsonString);
-            appendMemo();
+            appendMemo(localStorage.length);
             clearText();
             popupWrapper.style.display = "none";
         }
@@ -73,13 +73,14 @@ function saveMemo(key) {
 }
 
 // リストへのメモ追加
-function appendMemo() {
-    const memo = readMemo();
+function appendMemo(key) {
+    const memo = readMemo(key);
 
     const list = document.getElementById("memoList");
     const div = document.createElement("div");
     div.className = "memo";
-    div.id = localStorage.length;
+    // div.id = localStorage.length;
+    div.id = key;
     div.setAttribute("onclick", "clickMemo(event)");
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
@@ -99,7 +100,7 @@ function clickMemo(e) {
     const title = document.getElementById("memoTitle1");
     const contents = document.getElementById("memoContents1");
     const tags = document.getElementById("memoTags1");
-    const memo = readMemo();
+    const memo = readMemo(key);
 
     title.innerText = memo.title;
     contents.innerText = memo.contents;
@@ -113,21 +114,40 @@ function clickMemo(e) {
     popupWrapper.addEventListener("click", (e) => {
         if (e.target.id === popupWrapper.id || e.target.id === close.id) {
             popupWrapper.style.display = "none";
-        }
-        if (e.target.id === deletebtn.id) {
-            deleteMemo(index);
-            popupWrapper.style.display = "none";
+        } else if (e.target.id === deletebtn.id) {
+            deleteMemo(key);
+            refreshMemo()
+            // popupWrapper.style.display = "none";
         }
     });
 }
 
+// localStorage上のメモの削除
 function deleteMemo(key) {
     localStorage.removeItem(key);
 }
 
+// メモリストの更新
+function refreshMemo() {
+
+    // メモリストの子要素を一旦削除
+    const li = document.getElementById("memoList");
+    li.innerHTML = ``;
+
+    // 今localStorageに保存されているメモのkeyをすべて取得
+    let nowKey = Object.keys(localStorage);
+    // ソート
+    nowKey.sort();
+
+    // メモを再度リストに追加
+    nowKey.forEach(element => appendMemo(element));
+
+    console.log(nowKey);
+}
+
 // localStorageからメモ取得。JSONで返す
-function readMemo() {
-    const memo = JSON.parse(localStorage.getItem(localStorage.length));
+function readMemo(key) {
+    const memo = JSON.parse(localStorage.getItem(key));
     return memo;
 }
 
