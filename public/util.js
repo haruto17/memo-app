@@ -53,7 +53,7 @@ function saveMemo(key) {
             const popupWrapper = document.getElementById("popupCreate");
             const jsonString = JSON.stringify(memo);
             localStorage.setItem(localStorage.length + 1, jsonString);
-            appendMemo();
+            appendMemo(localStorage.length);
             clearText();
             popupWrapper.style.display = "none";
         }
@@ -73,8 +73,8 @@ function saveMemo(key) {
 }
 
 // リストへのメモ追加
-function appendMemo() {
-    const memo = readMemo(localStorage.length);
+function appendMemo(key) {
+    const memo = readMemo(key);
 
     const list = document.getElementById("memoList");
     const div = document.createElement("div");
@@ -124,6 +124,11 @@ function clickMemo(e) {
 // localStorage上のメモの削除
 function deleteMemo(key) {
     localStorage.removeItem(key);
+}
+
+// メモリストの更新
+function refreshMemo() {
+
 }
 
 // localStorageからメモ取得。JSONで返す
