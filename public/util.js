@@ -17,8 +17,8 @@ const clearText = () => {
 
 // 空白でタグ分割
 function splitTag(tags) {
-    let separatorString = /\s+/;
-    let tagArray = tags.split(separatorString);
+    const separatorString = /\s+/;
+    const tagArray = tags.split(separatorString);
     return tagArray;
 }
 
