@@ -114,11 +114,10 @@ function clickMemo(e) {
     popupWrapper.addEventListener("click", (e) => {
         if (e.target.id === popupWrapper.id || e.target.id === close.id) {
             popupWrapper.style.display = "none";
-        }
-        if (e.target.id === deletebtn.id) {
+        } else if (e.target.id === deletebtn.id) {
             deleteMemo(key);
             refreshMemo()
-            popupWrapper.style.display = "none";
+            // popupWrapper.style.display = "none";
         }
     });
 }
