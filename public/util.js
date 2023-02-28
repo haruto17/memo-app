@@ -136,14 +136,12 @@ function refreshMemo() {
     li.innerHTML = ``;
 
     // 今localStorageに保存されているメモのkeyをすべて取得
-    const nowKey = Object.keys(localStorage);
+    let nowKey = Object.keys(localStorage);
     // ソート
     nowKey.sort();
 
     // メモを再度リストに追加
-    for (const key of nowKey) {
-        appendMemo(key);
-    }
+    nowKey.forEach(element => appendMemo(element));
 
     console.log(nowKey);
 }
