@@ -61,10 +61,10 @@ function saveMemo(key) {
     }
     if (key == 0) {
         const memo2 = {
-        date: getTime(),
-        title: document.getElementById("memoTitle1").value,
-        contents: document.getElementById("memoContents1").value,
-        tags: splitTag(document.getElementById("memoTags1").value),
+            date: getTime(),
+            title: document.getElementById("memoTitle1").value,
+            contents: document.getElementById("memoContents1").value,
+            tags: splitTag(document.getElementById("memoTags1").value),
         };
         const jsonString2 = JSON.stringify(memo2);
         localStorage.setItem(index, jsonString2);
@@ -95,6 +95,7 @@ function clickMemo(e) {
     index = key;
     const popupWrapper = document.getElementById("popupEdit");
     const close = document.getElementById("close");
+    const deletebtn = document.getElementById("delete");
     const title = document.getElementById("memoTitle1");
     const contents = document.getElementById("memoContents1");
     const tags = document.getElementById("memoTags1");
@@ -111,9 +112,17 @@ function clickMemo(e) {
 
     popupWrapper.addEventListener("click", (e) => {
         if (e.target.id === popupWrapper.id || e.target.id === close.id) {
-        popupWrapper.style.display = "none";
+            popupWrapper.style.display = "none";
+        }
+        if (e.target.id === deletebtn.id) {
+            deleteMemo(index);
+            popupWrapper.style.display = "none";
         }
     });
+}
+
+function deleteMemo(key) {
+    localStorage.removeItem(key);
 }
 
 // localStorageからメモ取得。JSONで返す
