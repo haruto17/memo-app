@@ -79,7 +79,8 @@ function appendMemo(key) {
     const list = document.getElementById("memoList");
     const div = document.createElement("div");
     div.className = "memo";
-    div.id = localStorage.length;
+    // div.id = localStorage.length;
+    div.id = key;
     div.setAttribute("onclick", "clickMemo(event)");
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
