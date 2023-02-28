@@ -121,6 +121,7 @@ function clickMemo(e) {
     });
 }
 
+// localStorage上のメモの削除
 function deleteMemo(key) {
     localStorage.removeItem(key);
 }
