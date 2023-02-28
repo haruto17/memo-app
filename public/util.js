@@ -74,7 +74,7 @@ function saveMemo(key) {
 
 // リストへのメモ追加
 function appendMemo() {
-    const memo = readMemo();
+    const memo = readMemo(localStorage.length);
 
     const list = document.getElementById("memoList");
     const div = document.createElement("div");
@@ -99,7 +99,7 @@ function clickMemo(e) {
     const title = document.getElementById("memoTitle1");
     const contents = document.getElementById("memoContents1");
     const tags = document.getElementById("memoTags1");
-    const memo = readMemo();
+    const memo = readMemo(key);
 
     title.innerText = memo.title;
     contents.innerText = memo.contents;
@@ -115,7 +115,7 @@ function clickMemo(e) {
             popupWrapper.style.display = "none";
         }
         if (e.target.id === deletebtn.id) {
-            deleteMemo(index);
+            deleteMemo(key);
             popupWrapper.style.display = "none";
         }
     });
@@ -127,8 +127,8 @@ function deleteMemo(key) {
 }
 
 // localStorageからメモ取得。JSONで返す
-function readMemo() {
-    const memo = JSON.parse(localStorage.getItem(localStorage.length));
+function readMemo(key) {
+    const memo = JSON.parse(localStorage.getItem(key));
     return memo;
 }
 
