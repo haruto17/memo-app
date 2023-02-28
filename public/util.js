@@ -116,6 +116,7 @@ function clickMemo(e) {
         }
         if (e.target.id === deletebtn.id) {
             deleteMemo(index);
+            popupWrapper.style.display = "none";
         }
     });
 }
