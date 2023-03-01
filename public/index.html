@@ -3,14 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css" />
-    <title>index</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+    <title>memo-app</title>
   </head>
   <body>
-    <h1>Hello, World!</h1>
+    <h1>memo-app</h1>
     <div>
       <div id="searchBox">
         <input type="search" id="memoSearch" placeholder="title or tag" />
-        <button type="button" id="iconSearch" onclick="searchMemo()">Search</button>
+        <button type="button" id="iconSearch" onclick="searchMemo()">
+          <span class="material-symbols-outlined"> search </span>
+        </button>
       </div>
       <div id="popup-wrapper">
         <div id="popup-inside">
@@ -22,12 +31,13 @@
       </div>
       <div id="memoList"></div>
       <div class="create-btn">
-        <!-- <span class="material-icons-outlined"> add </span> -->
-        <button type="button" onclick="createMemo()">+</button>
+        <button type="button" onclick="createMemo()" class="material-symbols-outlined">
+          <span class="material-symbols add"> add </span>
+        </button>
       </div>
       <div id="popupCreate" class="popup">
         <div class="popupInside">
-          <div id="close">x</div>
+          <div id="close"><span class="material-symbols-outlined"> close </span></div>
           <div id="inputArea">
             <div id="box">
               <textarea id="memoTitle" class="title" placeholder="title"></textarea>
@@ -40,8 +50,8 @@
       </div>
       <div id="popupEdit" class="popup">
         <div class="popupInside">
-          <div id="delete">🗑️</div>
-          <div id="close">x</div>
+          <div id="delete"><span class="material-symbols-outlined"> delete </span></div>
+          <div id="close"><span class="material-symbols-outlined"> close </span></div>
           <div id="inputArea">
             <div id="box">
               <textarea id="memoTitle1" class="title" placeholder="title"></textarea>
