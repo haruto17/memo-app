@@ -40,25 +40,25 @@ function createMemo() {
 
 // メモ保存
 function saveMemo(key) {
-    const memo = {
-        date: getTime(),
-        title: document.getElementById("memoTitle").value,
-        contents: document.getElementById("memoContents").value,
-        tags: splitTag(document.getElementById("memoTags").value),
-    };
-
     if (key == 1) {
+        const memo = {
+            date: getTime(),
+            title: document.getElementById("memoTitle").value,
+            contents: document.getElementById("memoContents").value,
+            tags: splitTag(document.getElementById("memoTags").value),
+        };
         if (memo.title && memo.contents) {
-        if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
-            const popupWrapper = document.getElementById("popupCreate");
-            const jsonString = JSON.stringify(memo);
-            localStorage.setItem(localStorage.length + 1, jsonString);
-            appendMemo(localStorage.length);
-            clearText();
-            popupWrapper.style.display = "none";
-        }
+            if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
+                const popupWrapper = document.getElementById("popupCreate");
+                const jsonString = JSON.stringify(memo);
+                localStorage.setItem(localStorage.length + 1, jsonString);
+                appendMemo(localStorage.length);
+                clearText();
+                popupWrapper.style.display = "none";
+            }
         }
     }
+    
     if (key == 0) {
         const memo2 = {
             date: getTime(),
