@@ -40,25 +40,25 @@ function createMemo() {
 
 // メモ保存
 function saveMemo(key) {
-    const memo = {
-        date: getTime(),
-        title: document.getElementById("memoTitle").value,
-        contents: document.getElementById("memoContents").value,
-        tags: splitTag(document.getElementById("memoTags").value),
-    };
-
     if (key == 1) {
+        const memo = {
+            date: getTime(),
+            title: document.getElementById("memoTitle").value,
+            contents: document.getElementById("memoContents").value,
+            tags: splitTag(document.getElementById("memoTags").value),
+        };
         if (memo.title && memo.contents) {
-        if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
-            const popupWrapper = document.getElementById("popupCreate");
-            const jsonString = JSON.stringify(memo);
-            localStorage.setItem(localStorage.length + 1, jsonString);
-            appendMemo(localStorage.length);
-            clearText();
-            popupWrapper.style.display = "none";
-        }
+            if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
+                const popupWrapper = document.getElementById("popupCreate");
+                const jsonString = JSON.stringify(memo);
+                localStorage.setItem(localStorage.length + 1, jsonString);
+                appendMemo(localStorage.length);
+                clearText();
+                popupWrapper.style.display = "none";
+            }
         }
     }
+    
     if (key == 0) {
         const memo2 = {
             date: getTime(),
@@ -66,9 +66,13 @@ function saveMemo(key) {
             contents: document.getElementById("memoContents1").value,
             tags: splitTag(document.getElementById("memoTags1").value),
         };
-        const jsonString2 = JSON.stringify(memo2);
-        localStorage.setItem(index, jsonString2);
-        //clearText();
+        if (memo2.title && memo2.contents) {
+            if(memo2.title.length <= 100 && memo2.contents.length <= 1000 && memo2.tags.length <= 5){
+                const jsonString2 = JSON.stringify(memo2);
+                localStorage.setItem(index, jsonString2);
+                //clearText();
+            }
+        }
     }
 }
 
@@ -115,13 +119,15 @@ function clickMemo(e) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
         } else if (e.target.id === deletebtn.id) {
+            popupWrapper.style.display = "none";
+            popupWrapper.removeEventListener("click",clickEventListener);
             deleteMemo(key);
             refreshMemo()
-            // popupWrapper.style.display = "none";
         }
     }
-    
+
     popupWrapper.addEventListener("click", clickEventListener);
+
 }
 
 // localStorage上のメモの削除
