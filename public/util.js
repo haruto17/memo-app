@@ -66,9 +66,13 @@ function saveMemo(key) {
             contents: document.getElementById("memoContents1").value,
             tags: splitTag(document.getElementById("memoTags1").value),
         };
-        const jsonString2 = JSON.stringify(memo2);
-        localStorage.setItem(index, jsonString2);
-        //clearText();
+        if (memo2.title && memo2.contents) {
+            if(memo2.title.length <= 100 && memo2.contents.length <= 1000 && memo2.tags.length <= 5){
+                const jsonString2 = JSON.stringify(memo2);
+                localStorage.setItem(index, jsonString2);
+                //clearText();
+            }
+        }
     }
 }
 
