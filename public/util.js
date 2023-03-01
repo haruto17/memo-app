@@ -116,6 +116,7 @@ function clickMemo(e) {
             popupWrapper.removeEventListener("click",clickEventListener);
         } else if (e.target.id === deletebtn.id) {
             popupWrapper.style.display = "none";
+            popupWrapper.removeEventListener("click",clickEventListener);
             deleteMemo(key);
             refreshMemo()
         }
