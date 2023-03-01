@@ -147,8 +147,8 @@ p {
 
 #delete{
     position: absolute;
-    top: 0;
-    right: 30px;
+    top: 3px;
+    right: 40px;
     cursor: pointer;
 }
 
