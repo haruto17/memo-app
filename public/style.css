@@ -135,10 +135,6 @@ p {
     pointer-events: none;
 }
 
-/* a {
-    pointer-events: none;
-} */
-
 .create-btn {
     position: fixed;
     bottom: 10%;
