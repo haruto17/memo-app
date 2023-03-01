@@ -15,9 +15,15 @@ body {
 }
 
 #iconSearch {
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     position: absolute;
-    top: 105px;
+    top: 95px;
     right: 110px;
+    cursor: pointer;
 }
 
 textarea {
