@@ -125,12 +125,14 @@ hr {
     border: 1px solid #000;
     position: relative;
     top: 100px;
+    pointer-events: none;
 }
 
 p {
     position: relative;
     top: 95px;
     text-align: center;
+    pointer-events: none;
 }
 
 .create-btn {
