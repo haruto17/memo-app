@@ -94,7 +94,7 @@ textarea.tag {
 
 #close {
     position: absolute;
-    top: 0;
+    top: 3px;
     right: 10px;
     cursor: pointer;
 }
