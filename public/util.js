@@ -115,13 +115,14 @@ function clickMemo(e) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
         } else if (e.target.id === deletebtn.id) {
+            popupWrapper.style.display = "none";
             deleteMemo(key);
             refreshMemo()
-            // popupWrapper.style.display = "none";
         }
     }
-    
+
     popupWrapper.addEventListener("click", clickEventListener);
+
 }
 
 // localStorage上のメモの削除
