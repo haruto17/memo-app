@@ -131,9 +131,19 @@ p {
     right: 15%;
 }
 
+.create-btn button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
 #delete{
     position: absolute;
     top: 0;
     right: 30px;
     cursor: pointer;
+}
+
+.material-symbols.add {
+    font-size: 40px;
 }
