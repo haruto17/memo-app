@@ -38,12 +38,28 @@
       <div id="popupCreate" class="popup">
         <div class="popupInside">
           <div><span id="close" class="material-symbols-outlined"> close </span></div>
+          <div class="code-btn">
+            <button type="button" onclick="addCode()" class="material-symbols-outlined">
+              <span class="material-symbols code"> code </span>
+            </button>
+          </div>
           <div id="inputArea">
-            <div id="box">
-              <textarea id="memoTitle" class="title" placeholder="title"></textarea>
-              <textarea id="memoContents" class="content" placeholder="contents"></textarea>
-              <textarea id="memoTags" class="tag" placeholder="tags"></textarea>
-              <button type="button" onclick="saveMemo(1)">Save</button>
+            <div class="box">
+              <div class="title">
+                <label>Title</label>
+                <textarea id="memoTitle"></textarea>
+              </div>
+              <div class="content">
+                <label>Contents</label>
+                <textarea id="memoContents"></textarea>
+              </div>
+              <div class="tag">
+                <label>Tags</label>
+                <textarea id="memoTags"></textarea>
+              </div>
+              <div class="save-btn">
+                <button type="button" onclick="saveMemo(1)">Save</button>
+              </div>
             </div>
           </div>
         </div>
@@ -53,11 +69,22 @@
           <div><span id="delete" class="material-symbols-outlined"> delete </span></div>
           <div><span id="close" class="material-symbols-outlined"> close </span></div>
           <div id="inputArea">
-            <div id="box">
-              <textarea id="memoTitle1" class="title" placeholder="title"></textarea>
-              <textarea id="memoContents1" class="content" placeholder="contents"></textarea>
-              <textarea id="memoTags1" class="tag" placeholder="tags"></textarea>
-              <button type="button" onclick="saveMemo(0)">Save</button>
+            <div class="box">
+              <div class="title">
+                <label>Title</label>
+                <textarea id="memoTitle1"></textarea>
+              </div>
+              <div class="content">
+                <label>Contents</label>
+                <textarea id="memoContents1"></textarea>
+              </div>
+              <div class="tag">
+                <label>Tags</label>
+                <textarea id="memoTags1"></textarea>
+              </div>
+              <div class="save-btn">
+                <button type="button" onclick="saveMemo(0)">Save</button>
+              </div>
             </div>
           </div>
         </div>

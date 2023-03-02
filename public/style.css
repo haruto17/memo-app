@@ -27,25 +27,55 @@ body {
     cursor: pointer;
 }
 
-textarea {
+.title {
+    width: 100%;
+    margin: 2% 2%;
+}
+
+.title textarea {
     resize: none;
     width: 100%;
+    height: 50px;
     border-radius: 10px 10px 10px 10px;
 }
 
-textarea.title {
-    height: 50px;
-    margin: 5%;
+.content {
+    width: 100%;
+    margin: 2% 2%;
 }
 
-textarea.content {
-    height: 200px;
-    margin: 5%;
+.content textarea {
+    resize: none;
+    width: 100%;
+    height: 400px;
+    border-radius: 10px 10px 10px 10px;
 }
 
-textarea.tag {
+.tag {
+    width: 100%;
+    margin: 2% 2%;
+}
+
+.tag textarea {
+    resize: none;
+    width: 100%;
     height: 50px;
-    margin: 5%
+    border-radius: 10px 10px 10px 10px;
+}
+
+.save-btn {
+    margin: 2% 2%;
+}
+
+.save-btn button{
+    background-color: white;
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 100px;
+    border-width: 1px;
+    cursor: pointer;
 }
 
 #popup-wrapper {
@@ -82,11 +112,11 @@ textarea.tag {
 
 .popupInside {
     width: 100%;
-    max-width: 300px;
+    max-width: 600px;
     height: 100%;
-    max-height: 500px;
+    max-height: 750px;
     background: white;
-    margin: 10% auto;
+    margin: 5% auto 5% auto;
     padding: 20px;
     border-radius: 10px 10px 10px 10px;
     position: relative;
@@ -100,7 +130,7 @@ textarea.tag {
 }
 
 
-#box {
+.box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -145,6 +175,7 @@ p {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 #delete{
@@ -156,4 +187,21 @@ p {
 
 .material-symbols.add {
     font-size: 40px;
+}
+
+.code-btn {
+    position: absolute;
+    top: 130px;
+    right: 50px;
+}
+
+.code-btn button {
+    background-color: transparent;
+    border-width: 1px;
+    /* border-radius: 50%; */
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    cursor: pointer;
+    font-size: 16px;
 }
