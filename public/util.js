@@ -257,49 +257,62 @@ function editMemo(key) {
 }
 
 function splitContent(s) {
-    if (s.indexOf('`')) {
+    let anytext = "";
+    let codetext = "";
+    let flip = false;
+    for (let i = 0; i < s.length; i++) {
+        console.log(i,s[i]);
+        if(s[i] == '`') {
+            if(i == 0) {
+                flip = true;
+                continue;
+            } else if(flip == true && i != 0) {
+                flip = false;
+                // codetext追加
+                const li = document.getElementById("contentsListArea");
+                const div = document.createElement("div");
+                const pre = document.createElement("pre");
+                pre.className = "prettyprint";
+                const code = document.createElement("code");
+                code.innerText = codetext;
+                pre.appendChild(code);
+                div.appendChild(pre);
+                li.appendChild(div);
+                codetext = "";
+                continue;
+            }
+            else if(flip == false && i != 0) {
+                flip = true;
+                // anytext追加
+                const li = document.getElementById("contentsListArea");
+                const div = document.createElement("div");
+                const pre = document.createElement("pre");
+                const p = document.createElement("p");
+                p.innerText = anytext;
+                pre.appendChild(p);
+                div.appendChild(pre);
+                li.appendChild(div);
+                anytext = "";
+                continue;
+            }
+        }
+
+        if(flip) {
+            codetext += s[i];
+        } else if(!flip) {
+            anytext += s[i];
+        }
+    }
+
+    if (anytext.length != 0) {
         const li = document.getElementById("contentsListArea");
         const div = document.createElement("div");
         const pre = document.createElement("pre");
         const p = document.createElement("p");
-        p.innerText = s;
+        p.innerText = anytext;
         pre.appendChild(p);
         div.appendChild(pre);
         li.appendChild(div);
-        return;
     }
-    let anytext = "";
-    let codetext = "";
-    let flip = false;
-    for(let i = 0; i < s.length; i++) {
-        if (!flip) {
-            anytext += s[i];
-        } else if (flip) {
-            codetext += s[i];
-        }
 
-        if(!flip && s[i] == "`") {
-            console.log("adsfasd")
-            flip = true;
-            const li = document.getElementById("contentsListArea");
-            const div = document.createElement("div");
-            const pre = document.createElement("pre");
-            const p = document.createElement("p");
-            p.innerText = anytext;
-            pre.appendChild(p)
-            div.appendChild(pre);
-            li.appendChild(div);
-            anytext = "";
-        } else if(flip && s[i] == "`") {
-            flip = false;
-            const li = document.getElementById("contentsListArea");
-            const pre = document.createElement("pre");
-            pre.className = "prettyprint";
-            const code = document.createElement("code");
-            code.innerText = codetext;
-            pre.appendChild(code);
-            li.appendChild(pre);
-            codetext = "";
-        }
-    }
 }
