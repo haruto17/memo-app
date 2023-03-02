@@ -211,3 +211,7 @@ function getTime() {
         date1.getMinutes();
     return date2;
 }
+
+function addCode() {
+    console.log("hello");
+}

@@ -188,3 +188,20 @@ p {
 .material-symbols.add {
     font-size: 40px;
 }
+
+.code-btn {
+    position: absolute;
+    top: 130px;
+    right: 50px;
+}
+
+.code-btn button {
+    background-color: transparent;
+    border-width: 1px;
+    /* border-radius: 50%; */
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    cursor: pointer;
+    font-size: 16px;
+}
