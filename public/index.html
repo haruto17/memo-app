@@ -40,9 +40,18 @@
           <div><span id="close" class="material-symbols-outlined"> close </span></div>
           <div id="inputArea">
             <div id="box">
-              <textarea id="memoTitle" class="title" placeholder="title"></textarea>
-              <textarea id="memoContents" class="content" placeholder="contents"></textarea>
-              <textarea id="memoTags" class="tag" placeholder="tags"></textarea>
+              <div class="title">
+                <label>Title</label>
+                <textarea id="memoTitle"></textarea>
+              </div>
+              <div class="content">
+                <label>Contents</label>
+                <textarea id="memoContents"></textarea>
+              </div>
+              <div class="tag">
+                <label>Tags</label>
+                <textarea id="memoTags"></textarea>
+              </div>
               <button type="button" onclick="saveMemo(1)">Save</button>
             </div>
           </div>
