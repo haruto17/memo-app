@@ -128,14 +128,23 @@ function clickMemo(e) {
         if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            title.innerText = ``;
+            contentslist.innerHTML = ``;
+            tags.innerText = ``;
         } else if (e.target.id === editbtn.id) {
             console.log("edit");
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            title.innerText = ``;
+            contentslist.innerHTML = ``;
+            tags.innerText = ``;
             editMemo(key);
         } else if (e.target.id === deletebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            title.innerText = ``;
+            contentslist.innerHTML = ``;
+            tags.innerText = ``;
             deleteMemo(key);
             refreshMemo()
         }
