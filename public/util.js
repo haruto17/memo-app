@@ -91,6 +91,7 @@ function appendMemo(key) {
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
     titleText.innerText = memo.title;
+    titleText.className = "title-text";
     div.appendChild(line);
     div.appendChild(titleText);
     list.appendChild(div);
@@ -105,13 +106,15 @@ function clickMemo(e) {
     const deletebtn = document.getElementById("delete");
     const editbtn = document.getElementById("edit");
     const title = document.getElementById("showTitle");
-    const contents = document.getElementById("showContents");
+    // const contents = document.getElementById("showContents");
     const tags = document.getElementById("showTags");
     const memo = readMemo(key);
 
     title.innerText = memo.title;
-    contents.innerText = memo.contents;
+    // contents.innerText = memo.contents;
     tags.innerText = memo.tags;
+
+    splitContent(memo.contents);
 
     // ポップアップ表示
     popupWrapper.style.display = "block";
@@ -248,4 +251,48 @@ function editMemo(key) {
             popupWrapper.style.display = "none";
         }
     });
+}
+
+function splitContent(s) {
+    if (s.indexOf('`')) {
+        const li = document.getElementById("contentsListArea");
+        const div = document.createElement("div");
+        const p = document.createElement("p");
+        p.innerText = s;
+        div.appendChild(p);
+        li.appendChild(div);
+        return;
+    }
+    let anytext = "";
+    let codetext = "";
+    let flip = false;
+    for(let i = 0; i < s.length; i++) {
+        if (!flip) {
+            anytext += s[i];
+        } else if (flip) {
+            codetext += s[i];
+        }
+
+        if(!flip && s[i] == "`") {
+            console.log("adsfasd")
+            flip = true;
+            const li = document.getElementById("contentsListArea");
+            const div = document.createElement("div");
+            const p = document.createElement("p");
+            p.innerText = anytext;
+            div.appendChild(p);
+            li.appendChild(div);
+            anytext = "";
+        } else if(flip && s[i] == "`") {
+            flip = false;
+            const li = document.getElementById("contentsListArea");
+            const pre = document.createElement("pre");
+            pre.className = "prettyprint";
+            const code = document.createElement("code");
+            code.innerText = codetext;
+            pre.appendChild(code);
+            li.appendChild(pre);
+            codetext = "";
+        }
+    }
 }

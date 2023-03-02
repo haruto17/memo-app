@@ -158,7 +158,7 @@ hr {
     pointer-events: none;
 }
 
-p {
+.title-text {
     position: relative;
     top: 95px;
     text-align: center;
@@ -221,4 +221,8 @@ p {
     top: 3px;
     right: 40px;
     cursor: pointer;
+}
+
+.contentsList p {
+    pointer-events: none;
 }
