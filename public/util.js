@@ -258,9 +258,11 @@ function splitContent(s) {
     if (s.indexOf('`')) {
         const li = document.getElementById("contentsListArea");
         const div = document.createElement("div");
+        const pre = document.createElement("pre");
         const p = document.createElement("p");
         p.innerText = s;
-        div.appendChild(p);
+        pre.appendChild(p);
+        div.appendChild(pre);
         li.appendChild(div);
         return;
     }
@@ -279,9 +281,11 @@ function splitContent(s) {
             flip = true;
             const li = document.getElementById("contentsListArea");
             const div = document.createElement("div");
+            const pre = document.createElement("pre");
             const p = document.createElement("p");
             p.innerText = anytext;
-            div.appendChild(p);
+            pre.appendChild(p)
+            div.appendChild(pre);
             li.appendChild(div);
             anytext = "";
         } else if(flip && s[i] == "`") {
