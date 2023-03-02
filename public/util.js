@@ -38,8 +38,10 @@ function createMemo() {
     });
 }
 
-// メモ保存
+// メモ保存関連
 function saveMemo(key) {
+
+    // メモの作成
     if (key == 1) {
         const memo = {
             date: getTime(),
@@ -59,12 +61,13 @@ function saveMemo(key) {
         }
     }
     
+    // メモの編集時、既存メモの更新
     if (key == 0) {
         const memo2 = {
             date: getTime(),
-            title: document.getElementById("showTitle").value,
-            contents: document.getElementById("showContents").value,
-            tags: splitTag(document.getElementById("showTags").value),
+            title: document.getElementById("editTitle").value,
+            contents: document.getElementById("editContents").value,
+            tags: splitTag(document.getElementById("editTags").value),
         };
         if (memo2.title && memo2.contents) {
             if(memo2.title.length <= 100 && memo2.contents.length <= 1000 && memo2.tags.length <= 5){
@@ -225,6 +228,8 @@ function addCode() {
 
 // メモの編集用ポップアップの表示
 function editMemo(key) {
+    console.log("key is:", key);
+
     const popupWrapper = document.getElementById("popupEdit");
     const title = document.getElementById("editTitle");
     const contents = document.getElementById("editContents");
@@ -238,12 +243,9 @@ function editMemo(key) {
     
     popupWrapper.style.display = "block";
 
-
     popupWrapper.addEventListener("click", (e) => {
         if (e.target.id === popupWrapper.id || e.target.id === close.id) {
             popupWrapper.style.display = "none";
-            const li = document.getElementById("searchResult");
-            li.innerHTML = ``;
         }
     });
 }
