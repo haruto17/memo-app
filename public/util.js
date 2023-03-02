@@ -111,7 +111,6 @@ function clickMemo(e) {
     const memo = readMemo(key);
 
     title.innerText = memo.title;
-    // contents.innerText = memo.contents;
     tags.innerText = memo.tags;
 
     splitContent(memo.contents);
@@ -125,6 +124,8 @@ function clickMemo(e) {
         if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            const contentslist = document.getElementById("contentsListArea");
+            contentslist.innerHTML = ``;
         } else if (e.target.id === editbtn.id) {
             console.log("edit");
             popupWrapper.style.display = "none";
