@@ -223,7 +223,7 @@ function addCode() {
     document.getElementById("memoContents").value += "``";
 }
 
-// メモの編集
+// メモの編集用ポップアップの表示
 function editMemo(key) {
     const popupWrapper = document.getElementById("popupEdit");
     const title = document.getElementById("editTitle");
