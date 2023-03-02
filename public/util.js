@@ -123,6 +123,7 @@ function clickMemo(e) {
             console.log("edit");
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            editMemo(key);
         } else if (e.target.id === deletebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
@@ -220,4 +221,29 @@ function getTime() {
 function addCode() {
     console.log("addCode");
     document.getElementById("memoContents").value += "``";
+}
+
+// メモの編集
+function editMemo(key) {
+    const popupWrapper = document.getElementById("popupCreate");
+    const title = document.getElementById("memoTitle");
+    const contents = document.getElementById("memoContents");
+    const tags = document.getElementById("memoTags");
+    const close = document.getElementById("close");
+    const memo = readMemo(key);
+
+    title.value = memo.title;
+    contents.value = memo.contents;
+    tags.value = memo.tags;
+    
+    popupWrapper.style.display = "block";
+
+
+    popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+            popupWrapper.style.display = "none";
+            const li = document.getElementById("searchResult");
+            li.innerHTML = ``;
+        }
+    });
 }
