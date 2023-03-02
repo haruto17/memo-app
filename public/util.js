@@ -121,11 +121,13 @@ function clickMemo(e) {
     console.log(localStorage.getItem(key));
 
     const clickEventListener =  (e) => {
+        const contentslist = document.getElementById("contentsListArea");
+        title.innerText = ``;
+        contentslist.innerHTML = ``;
+        tags.innerText = ``;
         if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
-            const contentslist = document.getElementById("contentsListArea");
-            contentslist.innerHTML = ``;
         } else if (e.target.id === editbtn.id) {
             console.log("edit");
             popupWrapper.style.display = "none";
