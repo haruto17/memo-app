@@ -98,8 +98,9 @@ function clickMemo(e) {
     const key = e.target.id;
     index = key;
     const popupWrapper = document.getElementById("popupEdit");
-    const close = document.getElementById("close");
+    const closebtn = document.getElementById("close");
     const deletebtn = document.getElementById("delete");
+    const editbtn = document.getElementById("edit");
     const title = document.getElementById("memoTitle1");
     const contents = document.getElementById("memoContents1");
     const tags = document.getElementById("memoTags1");
@@ -115,7 +116,11 @@ function clickMemo(e) {
     console.log(localStorage.getItem(key));
 
     const clickEventListener =  (e) => {
-        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+        if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
+            popupWrapper.style.display = "none";
+            popupWrapper.removeEventListener("click",clickEventListener);
+        } else if (e.target.id === editbtn.id) {
+            console.log("edit");
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
         } else if (e.target.id === deletebtn.id) {
