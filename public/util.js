@@ -10,9 +10,9 @@ const clearText = () => {
     document.getElementById("memoTitle").value = "";
     document.getElementById("memoContents").value = "";
     document.getElementById("memoTags").value = "";
-    // document.getElementById("memoTitle1").value = "";
-    // document.getElementById("memoContents1").value = "";
-    // document.getElementById("memoTags1").value = "";
+    // document.getElementById("showTitle").value = "";
+    // document.getElementById("showContents").value = "";
+    // document.getElementById("showTags").value = "";
 };
 
 // 空白でタグ分割
@@ -62,9 +62,9 @@ function saveMemo(key) {
     if (key == 0) {
         const memo2 = {
             date: getTime(),
-            title: document.getElementById("memoTitle1").value,
-            contents: document.getElementById("memoContents1").value,
-            tags: splitTag(document.getElementById("memoTags1").value),
+            title: document.getElementById("showTitle").value,
+            contents: document.getElementById("showContents").value,
+            tags: splitTag(document.getElementById("showTags").value),
         };
         if (memo2.title && memo2.contents) {
             if(memo2.title.length <= 100 && memo2.contents.length <= 1000 && memo2.tags.length <= 5){
@@ -97,13 +97,13 @@ function appendMemo(key) {
 function clickMemo(e) {
     const key = e.target.id;
     index = key;
-    const popupWrapper = document.getElementById("popupEdit");
+    const popupWrapper = document.getElementById("popupShow");
     const closebtn = document.getElementById("close");
     const deletebtn = document.getElementById("delete");
     const editbtn = document.getElementById("edit");
-    const title = document.getElementById("memoTitle1");
-    const contents = document.getElementById("memoContents1");
-    const tags = document.getElementById("memoTags1");
+    const title = document.getElementById("showTitle");
+    const contents = document.getElementById("showContents");
+    const tags = document.getElementById("showTags");
     const memo = readMemo(key);
 
     title.innerText = memo.title;
@@ -225,10 +225,10 @@ function addCode() {
 
 // メモの編集
 function editMemo(key) {
-    const popupWrapper = document.getElementById("popupCreate");
-    const title = document.getElementById("memoTitle");
-    const contents = document.getElementById("memoContents");
-    const tags = document.getElementById("memoTags");
+    const popupWrapper = document.getElementById("popupEdit");
+    const title = document.getElementById("editTitle");
+    const contents = document.getElementById("editContents");
+    const tags = document.getElementById("editTags");
     const close = document.getElementById("close");
     const memo = readMemo(key);
 
