@@ -213,5 +213,6 @@ function getTime() {
 }
 
 function addCode() {
-    console.log("hello");
+    console.log("addCode");
+    document.getElementById("memoContents").value += "``";
 }
