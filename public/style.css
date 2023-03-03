@@ -94,7 +94,37 @@ body {
     border-radius: 100px;
     border-width: 1px;
     cursor: pointer;
+    transition: .4s;
 }
+
+.save-btn button:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
+}
+
+.edit-btn {
+    margin: 2% 2%;
+}
+
+.edit-btn button {
+    background-color: white;
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 100px;
+    border-width: 1px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.edit-btn button:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
+}
+
 
 #popup-wrapper {
     background-color: rgba(0, 0, 0, .5);
@@ -199,6 +229,13 @@ hr {
     height: 100px;
     border-radius: 50%;
     cursor: pointer;
+    transition: .4s;
+}
+
+.create-btn button:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
 }
 
 #delete{
@@ -227,6 +264,13 @@ hr {
     margin: auto;
     cursor: pointer;
     font-size: 16px;
+    transition: .4s;
+}
+
+.code-btn button:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
 }
 
 .prettyprint ol.linenums > li {
