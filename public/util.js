@@ -10,9 +10,6 @@ const clearText = () => {
     document.getElementById("memoTitle").value = "";
     document.getElementById("memoContents").value = "";
     document.getElementById("memoTags").value = "";
-    // document.getElementById("showTitle").value = "";
-    // document.getElementById("showContents").value = "";
-    // document.getElementById("showTags").value = "";
 };
 
 // 空白でタグ分割
