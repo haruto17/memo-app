@@ -137,14 +137,19 @@ body {
 }
 
 #memoList {
-    display: flex;
-    flex-wrap: wrap;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    justify-content: center;
+    /* flex-wrap: wrap; */
     padding-left: 10%;
     padding-right: 10%;
+    grid-gap: 8px;
 }
 
 .memo{
-    width: 250px;
+    /* width: 250px; */
+    max-width: 250px;
     height: 150px;
     border: 1px solid #000;
     border-radius: 10px 10px 10px 10px;
@@ -152,7 +157,7 @@ body {
 }
 
 hr {
-    border: 1px solid #000;
+    border: 1px solid #00000062;
     position: relative;
     top: 100px;
     pointer-events: none;
