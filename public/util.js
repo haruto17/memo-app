@@ -70,7 +70,8 @@ function saveMemo(key) {
             if(memo2.title.length <= 100 && memo2.contents.length <= 1000 && memo2.tags.length <= 5){
                 const jsonString2 = JSON.stringify(memo2);
                 localStorage.setItem(index, jsonString2);
-                //clearText();
+                const popupWrapper = document.getElementById("popupEdit");
+                popupWrapper.style.display = "none";
             }
         }
     }
