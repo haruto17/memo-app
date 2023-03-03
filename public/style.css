@@ -35,6 +35,7 @@ body {
 .title.show {
     border: 1px solid #00000062;
     border-radius: 10px 10px 10px 10px;
+    padding: 5px;
 }
 
 .title textarea {
@@ -52,6 +53,7 @@ body {
 .content.show {
     border: 1px solid #00000062;
     border-radius: 10px 10px 10px 10px;
+    padding: 5px;
 }
 
 .content textarea {
@@ -69,6 +71,7 @@ body {
 .tags.show {
     border: 1px solid #00000062;
     border-radius: 10px 10px 10px 10px;
+    padding: 5px;
 }
 
 .tags textarea {
