@@ -10,9 +10,9 @@ const clearText = () => {
     document.getElementById("memoTitle").value = "";
     document.getElementById("memoContents").value = "";
     document.getElementById("memoTags").value = "";
-    // document.getElementById("memoTitle1").value = "";
-    // document.getElementById("memoContents1").value = "";
-    // document.getElementById("memoTags1").value = "";
+    // document.getElementById("showTitle").value = "";
+    // document.getElementById("showContents").value = "";
+    // document.getElementById("showTags").value = "";
 };
 
 // 空白でタグ分割
@@ -38,8 +38,10 @@ function createMemo() {
     });
 }
 
-// メモ保存
+// メモ保存関連
 function saveMemo(key) {
+
+    // メモの作成
     if (key == 1) {
         const memo = {
             date: getTime(),
@@ -59,12 +61,13 @@ function saveMemo(key) {
         }
     }
     
+    // メモの編集時、既存メモの更新
     if (key == 0) {
         const memo2 = {
             date: getTime(),
-            title: document.getElementById("memoTitle1").value,
-            contents: document.getElementById("memoContents1").value,
-            tags: splitTag(document.getElementById("memoTags1").value),
+            title: document.getElementById("editTitle").value,
+            contents: document.getElementById("editContents").value,
+            tags: splitTag(document.getElementById("editTags").value),
         };
         if (memo2.title && memo2.contents) {
             if(memo2.title.length <= 100 && memo2.contents.length <= 1000 && memo2.tags.length <= 5){
@@ -88,6 +91,7 @@ function appendMemo(key) {
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
     titleText.innerText = memo.title;
+    titleText.className = "title-text";
     div.appendChild(line);
     div.appendChild(titleText);
     list.appendChild(div);
@@ -97,17 +101,19 @@ function appendMemo(key) {
 function clickMemo(e) {
     const key = e.target.id;
     index = key;
-    const popupWrapper = document.getElementById("popupEdit");
-    const close = document.getElementById("close");
+    const popupWrapper = document.getElementById("popupShow");
+    const closebtn = document.getElementById("close");
     const deletebtn = document.getElementById("delete");
-    const title = document.getElementById("memoTitle1");
-    const contents = document.getElementById("memoContents1");
-    const tags = document.getElementById("memoTags1");
+    const editbtn = document.getElementById("edit");
+    const title = document.getElementById("showTitle");
+    // const contents = document.getElementById("showContents");
+    const tags = document.getElementById("showTags");
     const memo = readMemo(key);
 
     title.innerText = memo.title;
-    contents.innerText = memo.contents;
     tags.innerText = memo.tags;
+
+    splitContent(memo.contents);
 
     // ポップアップ表示
     popupWrapper.style.display = "block";
@@ -115,12 +121,27 @@ function clickMemo(e) {
     console.log(localStorage.getItem(key));
 
     const clickEventListener =  (e) => {
-        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+        const contentslist = document.getElementById("contentsListArea");
+        if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            title.innerText = ``;
+            contentslist.innerHTML = ``;
+            tags.innerText = ``;
+        } else if (e.target.id === editbtn.id) {
+            console.log("edit");
+            popupWrapper.style.display = "none";
+            popupWrapper.removeEventListener("click",clickEventListener);
+            title.innerText = ``;
+            contentslist.innerHTML = ``;
+            tags.innerText = ``;
+            editMemo(key);
         } else if (e.target.id === deletebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
+            title.innerText = ``;
+            contentslist.innerHTML = ``;
+            tags.innerText = ``;
             deleteMemo(key);
             refreshMemo()
         }
@@ -213,5 +234,91 @@ function getTime() {
 }
 
 function addCode() {
-    console.log("hello");
+    console.log("addCode");
+    document.getElementById("memoContents").value += "``";
+}
+
+// メモの編集用ポップアップの表示
+function editMemo(key) {
+    console.log("key is:", key);
+
+    const popupWrapper = document.getElementById("popupEdit");
+    const title = document.getElementById("editTitle");
+    const contents = document.getElementById("editContents");
+    const tags = document.getElementById("editTags");
+    const close = document.getElementById("close");
+    const memo = readMemo(key);
+
+    title.value = memo.title;
+    contents.value = memo.contents;
+    tags.value = memo.tags;
+    
+    popupWrapper.style.display = "block";
+
+    popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+            popupWrapper.style.display = "none";
+        }
+    });
+}
+
+function splitContent(s) {
+    let anytext = "";
+    let codetext = "";
+    let flip = false;
+    for (let i = 0; i < s.length; i++) {
+        console.log(i,s[i]);
+        if(s[i] == '`') {
+            if(i == 0) {
+                flip = true;
+                continue;
+            } else if(flip == true && i != 0) {
+                flip = false;
+                // codetext追加
+                const li = document.getElementById("contentsListArea");
+                const div = document.createElement("div");
+                const pre = document.createElement("pre");
+                pre.className = "prettyprint";
+                const code = document.createElement("code");
+                code.innerText = codetext;
+                pre.appendChild(code);
+                div.appendChild(pre);
+                li.appendChild(div);
+                codetext = "";
+                continue;
+            }
+            else if(flip == false && i != 0) {
+                flip = true;
+                // anytext追加
+                const li = document.getElementById("contentsListArea");
+                const div = document.createElement("div");
+                const pre = document.createElement("pre");
+                const p = document.createElement("p");
+                p.innerText = anytext;
+                pre.appendChild(p);
+                div.appendChild(pre);
+                li.appendChild(div);
+                anytext = "";
+                continue;
+            }
+        }
+
+        if(flip) {
+            codetext += s[i];
+        } else if(!flip) {
+            anytext += s[i];
+        }
+    }
+
+    if (anytext.length != 0) {
+        const li = document.getElementById("contentsListArea");
+        const div = document.createElement("div");
+        const pre = document.createElement("pre");
+        const p = document.createElement("p");
+        p.innerText = anytext;
+        pre.appendChild(p);
+        div.appendChild(pre);
+        li.appendChild(div);
+    }
+
 }
