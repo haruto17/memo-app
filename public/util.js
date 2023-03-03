@@ -122,9 +122,6 @@ function clickMemo(e) {
 
     const clickEventListener =  (e) => {
         const contentslist = document.getElementById("contentsListArea");
-        title.innerText = ``;
-        contentslist.innerHTML = ``;
-        tags.innerText = ``;
         if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
             popupWrapper.style.display = "none";
             popupWrapper.removeEventListener("click",clickEventListener);
