@@ -232,9 +232,13 @@ function getTime() {
 
 function addCode(sum) {
     if (sum == 1) {
-        document.getElementById("memoContents").value += "``";
+        const contents = document.getElementById("memoContents");
+        contents.value += "``";
+        contents.focus();
     } else if(sum == 0) {
-        document.getElementById("editContents").value += "``";
+        const editcontents = document.getElementById("editContents");
+        editcontents.value += "``";
+        editcontents.focus();
     }
 }
 
