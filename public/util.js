@@ -230,9 +230,12 @@ function getTime() {
     return date2;
 }
 
-function addCode() {
-    console.log("addCode");
-    document.getElementById("memoContents").value += "``";
+function addCode(sum) {
+    if (sum == 1) {
+        document.getElementById("memoContents").value += "``";
+    } else if(sum == 0) {
+        document.getElementById("editContents").value += "``";
+    }
 }
 
 // メモの編集用ポップアップの表示
