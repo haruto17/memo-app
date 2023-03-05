@@ -20,7 +20,8 @@ export function createAccount() {
         alert('create!!!');
 
         const userinfo = auth.currentUser;
-        console.log(userinfo.email);
+        sessionStorage.setItem("email",userinfo.email);
+        sessionStorage.setItem("uid",userinfo.uid);
 
         window.location.href = "main.html";
     })
@@ -44,7 +45,8 @@ export function login() {
         alert('login!!!');
 
         const userinfo = auth.currentUser;
-        console.log(userinfo.uid);
+        sessionStorage.setItem("email",userinfo.email);
+        sessionStorage.setItem("uid",userinfo.uid);
 
         window.location.href = "main.html";
     })
