@@ -2,13 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebas
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAB51o-qe7xlAT7AQaWuypMSHrQWjuA0Ss",
-    authDomain: "memo-app-19559.firebaseapp.com",
-    projectId: "memo-app-19559",
-    storageBucket: "memo-app-19559.appspot.com",
-    messagingSenderId: "94326403042",
-    appId: "1:94326403042:web:5816e6390d09e3b47853bb",
-    measurementId: "G-2YNG42RFGZ"
+
 };
 
 const app = initializeApp(firebaseConfig);
@@ -49,12 +43,8 @@ export function login() {
 
         alert('login!!!');
 
-        // const userinfo = auth.currentUser;
-        // console.log(userinfo.uid);
-
         const userinfo = auth.currentUser;
-        sessionStorage.setItem("email",userinfo.email);
-        sessionStorage.setItem("uid",userinfo.uid);
+        console.log(userinfo.uid);
 
         window.location.href = "main.html";
     })
