@@ -21,6 +21,8 @@ export function createAccount() {
 
         const userinfo = auth.currentUser;
         console.log(userinfo.email);
+
+        window.location.href = "main.html";
     })
     .catch((error) => {
         const errorCode = error.errorCode;
