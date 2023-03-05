@@ -7,114 +7,27 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <title>memo-app</title>
   </head>
   <body>
     <h1>memo-app</h1>
     <div>
-      <div id="searchBox">
-        <input type="search" id="memoSearch" placeholder="title or tag" />
-        <button type="button" id="iconSearch" onclick="searchMemo()">
-          <span class="material-symbols-outlined"> search </span>
-        </button>
-      </div>
-      <div id="popup-wrapper">
-        <div id="popup-inside">
-          <div id="close">x</div>
-          <div id="message">
-            <ul id="searchResult"></ul>
-          </div>
-        </div>
-      </div>
-      <div id="memoList"></div>
-      <div class="create-btn">
-        <button type="button" onclick="createMemo()" class="material-symbols-outlined">
-          <span class="material-symbols add"> add </span>
-        </button>
-      </div>
-      <div id="popupCreate" class="popup">
-        <div class="popupInside">
-          <div><span id="close" class="material-symbols-outlined"> close </span></div>
-          <div class="code-btn">
-            <button type="button" onclick="addCode(1)" class="material-symbols-outlined">
-              <span class="material-symbols code"> code </span>
-            </button>
-          </div>
-          <div id="inputArea">
-            <div class="box">
-              <div class="title">
-                <label>Title</label>
-                <textarea id="memoTitle"></textarea>
-              </div>
-              <div class="content">
-                <label>Contents</label>
-                <textarea id="memoContents"></textarea>
-              </div>
-              <div class="tags">
-                <label>Tags</label>
-                <textarea id="memoTags"></textarea>
-              </div>
-              <div class="save-btn">
-                <button type="button" onclick="saveMemo(1)">Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="popupEdit" class="popup">
-        <div class="popupInside">
-          <div><span id="close" class="material-symbols-outlined"> close </span></div>
-          <div class="code-btn">
-            <button type="button" onclick="addCode(0)" class="material-symbols-outlined">
-              <span class="material-symbols code"> code </span>
-            </button>
-          </div>
-          <div id="inputArea">
-            <div class="box">
-              <div class="title">
-                <label>Title</label>
-                <textarea id="editTitle"></textarea>
-              </div>
-              <div class="content">
-                <label>Contents</label>
-                <textarea id="editContents"></textarea>
-              </div>
-              <div class="tags">
-                <label>Tags</label>
-                <textarea id="editTags"></textarea>
-              </div>
-              <div class="edit-btn">
-                <button type="button" onclick="saveMemo(0)">Edit</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="popupShow" class="popup">
-        <div class="popupInside">
-          <div><span id="delete" class="material-symbols-outlined"> delete </span></div>
-          <div><span id="edit" class="material-symbols-outlined"> edit_note </span></div>
-          <div><span id="close" class="material-symbols-outlined"> close </span></div>
-          <div id="inputArea">
-            <div class="box">
-              <div class="title show">
-                <h2 id="showTitle"></h2>
-              </div>
-              <div class="content show">
-                <div id="contentsListArea" class="contentsList"></div>
-              </div>
-              <div class="tags show">
-                <p id="showTags"></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <label> e-mail </label>
+      <input id="email" type="text" />
+    </div>
+    <div>
+      <label> password </label>
+      <input id="password" type="text" />
+    </div>
+    <div>
+      <button id="login-btn">login</button>
+    </div>
+    <div>
+      <a href="create.html">Create account</a>
     </div>
   </body>
-  <script src="util.js"></script>
+  <script type="module">
+    import { login } from "./firebase.js";
+
+    document.getElementById("login-btn").addEventListener("click", login);
+  </script>
 </html>

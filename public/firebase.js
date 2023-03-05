@@ -42,7 +42,9 @@ export function login() {
         alert('login!!!');
 
         const userinfo = auth.currentUser;
-        console.log(userinfo.email);
+        console.log(userinfo.uid);
+
+        window.location.href = "main.html";
     })
     .catch((error) => {
         const errorCode = error.errorCode;
