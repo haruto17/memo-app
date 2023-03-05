@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getAuth , createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 
 const firebaseConfig = {
 
@@ -17,7 +17,7 @@ export function createAccount() {
     .then((userCredential) => {
         const user = userCredential.user;
 
-        alert('登録成功しました');
+        alert('create!!!');
 
         const userinfo = auth.currentUser;
         console.log(userinfo.email);
@@ -25,7 +25,29 @@ export function createAccount() {
     .catch((error) => {
         const errorCode = error.errorCode;
         const errorMessage = error.message;
-        alert('登録に失敗しました');
+        alert('Failed!!!');
+        console.log(error);
+        console.log(errorMessage);
+    })
+}
+
+export function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user = userCredential.user;
+
+        alert('login!!!');
+
+        const userinfo = auth.currentUser;
+        console.log(userinfo.email);
+    })
+    .catch((error) => {
+        const errorCode = error.errorCode;
+        const errorMessage = error.message;
+        alert('login Failed!!!');
         console.log(error);
         console.log(errorMessage);
     })
