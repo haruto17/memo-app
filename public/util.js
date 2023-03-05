@@ -2,6 +2,7 @@ let index = 0;
 
 // リロード時にlocalStorageの削除
 window.onload = function () {
+    window.location.href = 'login.html';
     localStorage.clear();
 };
 
