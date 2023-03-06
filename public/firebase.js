@@ -1,11 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import {getFirestore,collection,addDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
 
 };
 
 const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
 
 const auth = getAuth(app);
 
@@ -57,4 +60,16 @@ export function login() {
         console.log(error);
         console.log(errorMessage);
     })
+}
+
+export async function addData() {
+    try {
+        const docRef = await addDoc(collection(db,"test"),{
+            1:["Hello","See you","Good bye"]
+        });
+        console.log("ドキュメントID",docRef.id);
+        console.log("データの保存が成功しました");
+    }catch(e) {
+        console.error("error",e);
+    }
 }
