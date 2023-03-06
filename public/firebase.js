@@ -1,9 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import {getFirestore,collection,addDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
+import {getFirestore,collection,doc,addDoc,setDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
-
+    
 };
 
 const app = initializeApp(firebaseConfig);
@@ -63,13 +63,23 @@ export function login() {
 }
 
 export async function addData() {
-    try {
-        const docRef = await addDoc(collection(db,"test"),{
-            1:["Hello","See you","Good bye"]
-        });
-        console.log("ドキュメントID",docRef.id);
-        console.log("データの保存が成功しました");
-    }catch(e) {
-        console.error("error",e);
-    }
+    // try {
+    //     const docRef = await addDoc(collection(db,"test"),{
+    //         1:["Hello","See you","Good bye"]
+    //     });
+    //     console.log("ドキュメントID",docRef.id);
+    //     console.log("データの保存が成功しました");
+    // }catch(e) {
+    //     console.error("error",e);
+    // }
+
+    const docRef = doc(db,"eve","2");
+    const data = ["Grape","Banana","Orange"];
+    const obj = Object.assign({},data);
+    setDoc(docRef,obj)
+    .then(docRef => {
+        console.log("成功")
+    }).catch(error => {
+        console.log(error);
+    })
 }
