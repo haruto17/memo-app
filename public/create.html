@@ -12,18 +12,19 @@
     <h1>memo-app</h1>
     <div>
       <label>e-mail</label>
-      <input type="text" />
+      <input type="text" id="email" />
     </div>
     <div>
       <label>password</label>
-      <input type="text" />
+      <input type="text" id="password" />
     </div>
     <div>
-      <button type="button" onclick="createAccount()">Create account</button>
+      <button id="create-btn">Create account</button>
     </div>
   </body>
-  <script>
-    // firebaseアカウント作成
-    function createAccount() {}
+  <script type="module">
+    import { createAccount } from "./firebase.js";
+
+    document.getElementById("create-btn").addEventListener("click", createAccount);
   </script>
 </html>
