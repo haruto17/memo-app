@@ -1,3 +1,5 @@
+import { addData } from "./firebase.js";
+
 let index = 0;
 
 // リロード時にlocalStorageの削除
@@ -20,7 +22,7 @@ function splitTag(tags) {
 }
 
 // 作成用ポップアップ表示
-function createMemo() {
+export function createMemo() {
     const popupWrapper = document.getElementById("popupCreate");
     const close = document.getElementById("close");
 
@@ -36,8 +38,8 @@ function createMemo() {
 }
 
 // メモ保存関連
-function saveMemo(key) {
-
+export function saveMemo(key) {
+    console.log("save")
     // メモの作成
     if (key == 1) {
         const memo = {
@@ -54,6 +56,7 @@ function saveMemo(key) {
                 appendMemo(localStorage.length);
                 clearText();
                 popupWrapper.style.display = "none";
+                addData();
             }
         }
     }

@@ -32,7 +32,7 @@
       </div>
       <div id="memoList"></div>
       <div class="create-btn">
-        <button type="button" onclick="createMemo()" class="material-symbols-outlined">
+        <button id="btn-create" type="button" class="material-symbols-outlined">
           <span class="material-symbols add"> add </span>
         </button>
       </div>
@@ -59,7 +59,7 @@
                 <textarea id="memoTags"></textarea>
               </div>
               <div class="save-btn">
-                <button type="button" onclick="saveMemo(1)">Save</button>
+                <button id="btn-save">Save</button>
               </div>
             </div>
           </div>
@@ -116,5 +116,12 @@
       </div>
     </div>
   </body>
-  <script src="util.js"></script>
+  <script type="module">
+    import { createMemo, saveMemo } from "./util.js";
+
+    document.getElementById("btn-create").addEventListener("click", createMemo);
+    document.getElementById("btn-save").addEventListener("click", function () {
+      saveMemo(1);
+    });
+  </script>
 </html>
