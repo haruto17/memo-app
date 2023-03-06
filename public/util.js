@@ -56,7 +56,7 @@ export function saveMemo(key) {
                 appendMemo(localStorage.length);
                 clearText();
                 popupWrapper.style.display = "none";
-                addData();
+                addData(memo.title,memo.contents,"tagsText");
             }
         }
     }

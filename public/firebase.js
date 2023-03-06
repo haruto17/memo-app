@@ -62,7 +62,7 @@ export function login() {
     })
 }
 
-export function addData() {
+export function addData(title,contents,tags) {
     // try {
     //     const docRef = await addDoc(collection(db,"test"),{
     //         1:["Hello","See you","Good bye"]
@@ -73,8 +73,11 @@ export function addData() {
     //     console.error("error",e);
     // }
 
-    const docRef = doc(db,"eve","3");
-    const data = ["Grape","Banana","Orange"];
+    const docRef = doc(db,"eve","4");
+    const data = [];
+    data.push(title);
+    data.push(contents);
+    data.push(tags);
     const obj = Object.assign({},data);
     setDoc(docRef,obj)
     .then(docRef => {
