@@ -83,11 +83,6 @@ export function saveMemo(key) {
     }
 }
 
-// localStorage上のメモの削除
-function deleteMemo(key) {
-    localStorage.removeItem(key);
-}
-
 // メモリストの更新
 function refreshMemo() {
 
@@ -199,4 +194,9 @@ function editMemo(key) {
 // ログアウトボタンが押されたとき firebase.jsのlogout()を呼び出す
 export function logoutAccount() {
     logout();
+}
+
+// localStorage上のメモの削除
+export function deleteMemo(key) {
+    localStorage.removeItem(key);
 }
