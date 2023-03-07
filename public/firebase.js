@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import {getFirestore,collection,doc,addDoc,setDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
+import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import {getFirestore,doc,setDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
 
@@ -59,6 +59,18 @@ export function login() {
         alert('login Failed!!!');
         console.log(error);
         console.log(errorMessage);
+    })
+}
+
+export function logout() {
+    signOut(auth)
+    .then(() => {
+        alert("logout");
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    })
+    .catch((error) => {
+        console.log(error);
     })
 }
 

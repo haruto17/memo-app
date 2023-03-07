@@ -1,4 +1,4 @@
-import { addData } from "./firebase.js";
+import { addData,logout } from "./firebase.js";
 
 let index = 0;
 
@@ -194,5 +194,5 @@ function editMemo(key) {
 }
 
 export function logoutAccount() {
-    console.log("logout");
+    logout();
 }
