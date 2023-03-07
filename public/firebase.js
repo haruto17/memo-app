@@ -76,7 +76,7 @@ export function logout() {
 
 export function addData(title,contents,tags) {
     const uid = sessionStorage.getItem("uid");
-    const docRef = doc(db,uid,"4");
+    const docRef = doc(db,uid,"0");
     const data = [];
     data.push(title);
     data.push(contents);
@@ -103,6 +103,8 @@ export async function getData() {
         const docSnap = await getDoc(docRef);
         if(docSnap.exists()) {
             console.log("Document data:",docSnap.data());
+            const stringDS = JSON.stringify(docSnap.data());
+            localStorage.setItem(i,stringDS);
             // localStorage.setItem(i,docSnap.data());
         }
         else {
