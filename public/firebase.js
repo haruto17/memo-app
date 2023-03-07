@@ -137,6 +137,6 @@ export async function getData() {
 // ドキュメントの削除
 export async function deleteData(key) {
     const uid = sessionStorage.getItem("uid");
-    await deleteDoc(doc(db,uid,"5"));
-    alert("ドキュメント[5]を削除しました");
+    await deleteDoc(doc(db,uid,String(key)));
+    alert(`ドキュメント[${key}]を削除しました`);
 }

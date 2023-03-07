@@ -199,5 +199,5 @@ export function logoutAccount() {
 // localStorage上のメモの削除
 export function deleteMemo(key) {
     localStorage.removeItem(key);
-    deleteData();
+    deleteData(key);
 }
