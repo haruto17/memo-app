@@ -1,10 +1,11 @@
-import { addData,logout } from "./firebase.js";
+import { addData,getData,logout } from "./firebase.js";
 
 let index = 0;
 
 // リロード時にlocalStorageの削除
 window.onload = function () {
     localStorage.clear();
+    getData();
 };
 
 // テキストエリアの削除
