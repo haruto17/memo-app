@@ -5,6 +5,8 @@ let index = 0;
 // リロード時にlocalStorageの削除
 window.onload = function () {
     localStorage.clear();
+
+    // firestoreからデータ取得
     getData();
 };
 
@@ -194,6 +196,7 @@ function editMemo(key) {
     });
 }
 
+// ログアウトボタンが押されたとき firebase.jsのlogout()を呼び出す
 export function logoutAccount() {
     logout();
 }

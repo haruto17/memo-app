@@ -12,6 +12,7 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
+// アカウント作成、e-mailとパスワードで作成
 export function createAccount() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -26,6 +27,7 @@ export function createAccount() {
         sessionStorage.setItem("email",userinfo.email);
         sessionStorage.setItem("uid",userinfo.uid);
 
+        // main.htmlに遷移
         window.location.href = "main.html";
     })
     .catch((error) => {
@@ -37,6 +39,7 @@ export function createAccount() {
     })
 }
 
+// ログイン処理
 export function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -51,6 +54,7 @@ export function login() {
         sessionStorage.setItem("email",userinfo.email);
         sessionStorage.setItem("uid",userinfo.uid);
 
+        // main.htmlに遷移
         window.location.href = "main.html";
     })
     .catch((error) => {
@@ -62,6 +66,7 @@ export function login() {
     })
 }
 
+// ログアウト処理 sessionStorageの削除とindex.htmlに遷移
 export function logout() {
     signOut(auth)
     .then(() => {
@@ -74,6 +79,7 @@ export function logout() {
     })
 }
 
+// firestoreにデータ保存
 export function addData(title,contents,tags) {
     const uid = sessionStorage.getItem("uid");
     const docRef = doc(db,uid,"0");
@@ -92,6 +98,7 @@ export function addData(title,contents,tags) {
     console.log("Save to firestore");
 }
 
+// firestoreからデータ取得 localStorageに保存した後memoListに要素追加
 export async function getData() {
     const uid = sessionStorage.getItem("uid");
     const docRef = doc(db,uid,"1");
