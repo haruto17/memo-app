@@ -180,3 +180,7 @@ export function deleteMemo(key) {
     popupWrapper.style.display = "none";
 
 }
+
+export function editMemo() {
+    console.log("editMemo");
+}

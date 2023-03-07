@@ -91,7 +91,7 @@
                 <textarea id="editTags"></textarea>
               </div>
               <div class="edit-btn">
-                <button type="button" onclick="saveMemo(0)">Edit</button>
+                <button id="btn-edit" type="button">Edit</button>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo, logoutAccount, deleteMemo } from "./util.js";
+    import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", function () {
@@ -130,6 +130,7 @@
     document.getElementById("btn-delete").addEventListener("click", function () {
       deleteMemo(now);
     });
+    document.getElementById("btn-edit").addEventListener("click", editMemo);
   </script>
   <script>
     let now = 0;
