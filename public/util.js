@@ -200,4 +200,7 @@ export function logoutAccount() {
 export function deleteMemo(key) {
     localStorage.removeItem(key);
     deleteData(key);
+    const popupWrapper = document.getElementById("popupShow");
+    popupWrapper.style.display = "none";
+
 }

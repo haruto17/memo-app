@@ -139,4 +139,5 @@ export async function deleteData(key) {
     const uid = sessionStorage.getItem("uid");
     await deleteDoc(doc(db,uid,String(key)));
     alert(`ドキュメント[${key}]を削除しました`);
+    
 }
