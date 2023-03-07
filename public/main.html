@@ -99,7 +99,7 @@
       </div>
       <div id="popupShow" class="popup">
         <div class="popupInside">
-          <div><span id="delete" class="material-symbols-outlined"> delete </span></div>
+          <div><span id="btn-delete" class="material-symbols-outlined"> delete </span></div>
           <div><span id="edit" class="material-symbols-outlined"> edit_note </span></div>
           <div><span id="close" class="material-symbols-outlined"> close </span></div>
           <div id="inputArea">
@@ -120,15 +120,20 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo, logoutAccount } from "./util.js";
+    import { createMemo, saveMemo, logoutAccount, deleteMemo } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", function () {
       saveMemo(1);
     });
     document.getElementById("btn-logout").addEventListener("click", logoutAccount);
+    document.getElementById("btn-delete").addEventListener("click", function () {
+      deleteMemo(now);
+    });
   </script>
   <script>
+    let now = 0;
+
     // localStorageからメモ取得。JSONで返す
     function readMemo(key) {
       const memo = JSON.parse(localStorage.getItem(key));
@@ -155,8 +160,8 @@
 
     // 表示されたメモのクリック時
     function clickMemo(e) {
-      console.log("clickMemo");
       const key = e.target.id;
+      now = key;
       index = key;
       const popupWrapper = document.getElementById("popupShow");
       const closebtn = document.getElementById("close");
@@ -193,15 +198,15 @@
           contentslist.innerHTML = ``;
           tags.innerText = ``;
           editMemo(key);
-        } else if (e.target.id === deletebtn.id) {
-          popupWrapper.style.display = "none";
-          popupWrapper.removeEventListener("click", clickEventListener);
-          title.innerText = ``;
-          contentslist.innerHTML = ``;
-          tags.innerText = ``;
-          deleteMemo(key);
-          refreshMemo();
-        }
+        } // else if (e.target.id === deletebtn.id) {
+        //   popupWrapper.style.display = "none";
+        //   popupWrapper.removeEventListener("click", clickEventListener);
+        //   title.innerText = ``;
+        //   contentslist.innerHTML = ``;
+        //   tags.innerText = ``;
+        //   deleteMemo(key);
+        //   refreshMemo();
+        // }
       };
 
       popupWrapper.addEventListener("click", clickEventListener);
@@ -212,7 +217,7 @@
       let codetext = "";
       let flip = false;
       for (let i = 0; i < s.length; i++) {
-        console.log(i, s[i]);
+        // console.log(i, s[i]);
         if (s[i] == "`") {
           if (i == 0) {
             flip = true;

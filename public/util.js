@@ -1,4 +1,4 @@
-import { addData,getData,logout } from "./firebase.js";
+import { addData,getData,deleteData,logout } from "./firebase.js";
 
 let index = 0;
 
@@ -81,11 +81,6 @@ export function saveMemo(key) {
             }
         }
     }
-}
-
-// localStorage上のメモの削除
-function deleteMemo(key) {
-    localStorage.removeItem(key);
 }
 
 // メモリストの更新
@@ -199,4 +194,13 @@ function editMemo(key) {
 // ログアウトボタンが押されたとき firebase.jsのlogout()を呼び出す
 export function logoutAccount() {
     logout();
+}
+
+// localStorage上のメモの削除
+export function deleteMemo(key) {
+    localStorage.removeItem(key);
+    deleteData(key);
+    const popupWrapper = document.getElementById("popupShow");
+    popupWrapper.style.display = "none";
+
 }
