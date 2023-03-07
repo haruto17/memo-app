@@ -63,28 +63,19 @@ export function login() {
 }
 
 export function addData(title,contents,tags) {
-    // try {
-    //     const docRef = await addDoc(collection(db,"test"),{
-    //         1:["Hello","See you","Good bye"]
-    //     });
-    //     console.log("ドキュメントID",docRef.id);
-    //     console.log("データの保存が成功しました");
-    // }catch(e) {
-    //     console.error("error",e);
-    // }
-
-    // const docRef = doc(db,"eve","4");
-    // const data = [];
-    // data.push(title);
-    // data.push(contents);
-    // data.push(tags);
-    // const obj = Object.assign({},data);
-    // setDoc(docRef,obj)
-    // .then(docRef => {
-    //     console.log("成功")
-    // }).catch(error => {
-    //     console.log(error);
-    // })
+    const uid = sessionStorage.getItem("uid")
+    const docRef = doc(db,uid,"4");
+    const data = [];
+    data.push(title);
+    data.push(contents);
+    data.push(tags);
+    const obj = Object.assign({},data);
+    setDoc(docRef,obj)
+    .then(docRef => {
+        console.log("成功")
+    }).catch(error => {
+        console.log(error);
+    })
 
     console.log("Save to firestore");
 }
