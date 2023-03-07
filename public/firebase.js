@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import {getFirestore,doc,setDoc,getDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
+import {getFirestore,getCount,collection,doc,setDoc,getDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
 
@@ -94,8 +94,11 @@ export function addData(title,contents,tags) {
 
 export async function getData() {
     const uid = sessionStorage.getItem("uid");
-    const docRef = doc(db,uid,"4");
+    const docRef = doc(db,uid,"1");
     const docSnap = await getDoc(docRef);
+    const count = await getCount(collection(db,"test"));
+
+    console.log("document num:",count.data().count);
 
     if(docSnap.exists()) {
         console.log("Document data:",docSnap.data());
