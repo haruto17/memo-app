@@ -80,78 +80,6 @@ export function saveMemo(key) {
     }
 }
 
-// リストへのメモ追加
-function appendMemo(key) {
-    const memo = readMemo(key);
-
-    const list = document.getElementById("memoList");
-    const div = document.createElement("div");
-    div.className = "memo";
-    div.id = key;
-    div.setAttribute("onclick", "clickMemo(event)");
-    const line = document.createElement("hr");
-    const titleText = document.createElement("p");
-    titleText.innerText = memo.title;
-    titleText.className = "title-text";
-    div.appendChild(line);
-    div.appendChild(titleText);
-    list.appendChild(div);
-}
-
-// 表示されたメモのクリック時
-function clickMemo(e) {
-    const key = e.target.id;
-    index = key;
-    const popupWrapper = document.getElementById("popupShow");
-    const closebtn = document.getElementById("close");
-    const deletebtn = document.getElementById("delete");
-    const editbtn = document.getElementById("edit");
-    const title = document.getElementById("showTitle");
-    // const contents = document.getElementById("showContents");
-    const tags = document.getElementById("showTags");
-    const memo = readMemo(key);
-
-    title.innerText = memo.title;
-    tags.innerText = memo.tags;
-
-    splitContent(memo.contents);
-
-    // ポップアップ表示
-    popupWrapper.style.display = "block";
-
-    console.log(localStorage.getItem(key));
-
-    const clickEventListener =  (e) => {
-        const contentslist = document.getElementById("contentsListArea");
-        if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
-            popupWrapper.style.display = "none";
-            popupWrapper.removeEventListener("click",clickEventListener);
-            title.innerText = ``;
-            contentslist.innerHTML = ``;
-            tags.innerText = ``;
-        } else if (e.target.id === editbtn.id) {
-            console.log("edit");
-            popupWrapper.style.display = "none";
-            popupWrapper.removeEventListener("click",clickEventListener);
-            title.innerText = ``;
-            contentslist.innerHTML = ``;
-            tags.innerText = ``;
-            editMemo(key);
-        } else if (e.target.id === deletebtn.id) {
-            popupWrapper.style.display = "none";
-            popupWrapper.removeEventListener("click",clickEventListener);
-            title.innerText = ``;
-            contentslist.innerHTML = ``;
-            tags.innerText = ``;
-            deleteMemo(key);
-            refreshMemo()
-        }
-    }
-
-    popupWrapper.addEventListener("click", clickEventListener);
-
-}
-
 // localStorage上のメモの削除
 function deleteMemo(key) {
     localStorage.removeItem(key);
@@ -175,11 +103,6 @@ function refreshMemo() {
     console.log(nowKey);
 }
 
-// localStorageからメモ取得。JSONで返す
-function readMemo(key) {
-    const memo = JSON.parse(localStorage.getItem(key));
-    return memo;
-}
 
 // メモ検索。結果のポップアップ表示
 function searchMemo() {
@@ -270,63 +193,3 @@ function editMemo(key) {
     });
 }
 
-function splitContent(s) {
-    let anytext = "";
-    let codetext = "";
-    let flip = false;
-    for (let i = 0; i < s.length; i++) {
-        console.log(i,s[i]);
-        if(s[i] == '`') {
-            if(i == 0) {
-                flip = true;
-                continue;
-            } else if(flip == true && i != 0) {
-                flip = false;
-                // codetext追加
-                const li = document.getElementById("contentsListArea");
-                const div = document.createElement("div");
-                const pre = document.createElement("pre");
-                pre.className = "prettyprint";
-                const code = document.createElement("code");
-                code.innerText = codetext;
-                pre.appendChild(code);
-                div.appendChild(pre);
-                li.appendChild(div);
-                codetext = "";
-                continue;
-            }
-            else if(flip == false && i != 0) {
-                flip = true;
-                // anytext追加
-                const li = document.getElementById("contentsListArea");
-                const div = document.createElement("div");
-                const pre = document.createElement("pre");
-                const p = document.createElement("p");
-                p.innerText = anytext;
-                pre.appendChild(p);
-                div.appendChild(pre);
-                li.appendChild(div);
-                anytext = "";
-                continue;
-            }
-        }
-
-        if(flip) {
-            codetext += s[i];
-        } else if(!flip) {
-            anytext += s[i];
-        }
-    }
-
-    if (anytext.length != 0) {
-        const li = document.getElementById("contentsListArea");
-        const div = document.createElement("div");
-        const pre = document.createElement("pre");
-        const p = document.createElement("p");
-        p.innerText = anytext;
-        pre.appendChild(p);
-        div.appendChild(pre);
-        li.appendChild(div);
-    }
-
-}

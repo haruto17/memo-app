@@ -73,16 +73,18 @@ export function addData(title,contents,tags) {
     //     console.error("error",e);
     // }
 
-    const docRef = doc(db,"eve","4");
-    const data = [];
-    data.push(title);
-    data.push(contents);
-    data.push(tags);
-    const obj = Object.assign({},data);
-    setDoc(docRef,obj)
-    .then(docRef => {
-        console.log("成功")
-    }).catch(error => {
-        console.log(error);
-    })
+    // const docRef = doc(db,"eve","4");
+    // const data = [];
+    // data.push(title);
+    // data.push(contents);
+    // data.push(tags);
+    // const obj = Object.assign({},data);
+    // setDoc(docRef,obj)
+    // .then(docRef => {
+    //     console.log("成功")
+    // }).catch(error => {
+    //     console.log(error);
+    // })
+
+    console.log("Save to firestore");
 }
