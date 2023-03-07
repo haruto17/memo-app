@@ -15,6 +15,9 @@
   </head>
   <body>
     <h1>memo-app</h1>
+    <div id="logout">
+      <button type="button" id="btn-logout">logout</button>
+    </div>
     <div>
       <div id="searchBox">
         <input type="search" id="memoSearch" placeholder="title or tag" />
@@ -117,12 +120,13 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo } from "./util.js";
+    import { createMemo, saveMemo, logoutAccount } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", function () {
       saveMemo(1);
     });
+    document.getElementById("btn-logout").addEventListener("click", logoutAccount);
   </script>
   <script>
     // localStorageからメモ取得。JSONで返す
