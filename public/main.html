@@ -297,5 +297,17 @@
         li.appendChild(div);
       }
     }
+
+    function addCode(sum) {
+      if (sum == 1) {
+        const contents = document.getElementById("memoContents");
+        contents.value += "``";
+        contents.focus();
+      } else if (sum == 0) {
+        const editcontents = document.getElementById("editContents");
+        editcontents.value += "``";
+        editcontents.focus();
+      }
+    }
   </script>
 </html>
