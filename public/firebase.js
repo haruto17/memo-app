@@ -96,14 +96,26 @@ export async function getData() {
     const uid = sessionStorage.getItem("uid");
     const docRef = doc(db,uid,"1");
     const docSnap = await getDoc(docRef);
-    const count = await getCount(collection(db,"test"));
+    const docCount = await getCount(collection(db,uid));
 
-    console.log("document num:",count.data().count);
+    for(let i = 1; i <= docCount.data().count; i++) {
+        const docRef = doc(db,uid,String(i));
+        const docSnap = await getDoc(docRef);
+        if(docSnap.exists()) {
+            console.log("Document data:",docSnap.data());
+            // localStorage.setItem(i,docSnap.data());
+        }
+        else {
+            console.log("No such document!");
+            break;
+        }
+    }
 
-    if(docSnap.exists()) {
-        console.log("Document data:",docSnap.data());
-    }
-    else {
-        console.log("No such document!");
-    }
+    // if(docSnap.exists()) {
+    //     console.log(count.data);
+    //     console.log("Document data:",docSnap.data());
+    // }
+    // else {
+    //     console.log("No such document!");
+    // }
 }
