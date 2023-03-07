@@ -155,18 +155,6 @@ function getTime() {
     return date2;
 }
 
-function addCode(sum) {
-    if (sum == 1) {
-        const contents = document.getElementById("memoContents");
-        contents.value += "``";
-        contents.focus();
-    } else if(sum == 0) {
-        const editcontents = document.getElementById("editContents");
-        editcontents.value += "``";
-        editcontents.focus();
-    }
-}
-
 // ログアウトボタンが押されたとき firebase.jsのlogout()を呼び出す
 export function logoutAccount() {
     logout();

@@ -24,14 +24,9 @@
     <div>
       <a href="create.html">Create account</a>
     </div>
-    <div>
-      <button id="add-btn">add</button>
-    </div>
   </body>
   <script type="module">
-    import { login, addData } from "./firebase.js";
-
-    document.getElementById("add-btn").addEventListener("click", addData);
+    import { login } from "./firebase.js";
 
     document.getElementById("login-btn").addEventListener("click", login);
   </script>
