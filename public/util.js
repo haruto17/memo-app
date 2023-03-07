@@ -193,3 +193,6 @@ function editMemo(key) {
     });
 }
 
+export function logoutAccount() {
+    console.log("logout");
+}
