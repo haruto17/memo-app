@@ -1,4 +1,4 @@
-import { addData,getData,deleteData,logout } from "./firebase.js";
+import { addData,getData,deleteData,overWriteData,logout } from "./firebase.js";
 
 let index = 0;
 
@@ -181,6 +181,20 @@ export function deleteMemo(key) {
 
 }
 
-export function editMemo() {
-    console.log("editMemo");
+export function editMemo(key) {
+    console.log("editMemo",key);
+    const title = document.getElementById("editTitle").value;
+    const contents = document.getElementById("editContents").value;
+    const tags = document.getElementById("editTags").value;
+    // オブジェクト作成
+    const memo = {
+        "0":title,
+        "1":contents,
+        "2":tags
+    };
+    // localStorageのメモを上書き
+    localStorage.setItem(key,JSON.stringify(memo));
+
+    // firestoreのドキュメントの上書き
+    overWriteData(key,memo);
 }

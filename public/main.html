@@ -130,7 +130,9 @@
     document.getElementById("btn-delete").addEventListener("click", function () {
       deleteMemo(now);
     });
-    document.getElementById("btn-edit").addEventListener("click", editMemo);
+    document.getElementById("btn-edit").addEventListener("click", function () {
+      editMemo(now);
+    });
   </script>
   <script>
     let now = 0;
@@ -192,7 +194,7 @@
           contentslist.innerHTML = ``;
           tags.innerText = ``;
         } else if (e.target.id === editbtn.id) {
-          console.log("edit");
+          // console.log("edit");
           popupWrapper.style.display = "none";
           popupWrapper.removeEventListener("click", clickEventListener);
           title.innerText = ``;
