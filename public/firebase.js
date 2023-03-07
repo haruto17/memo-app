@@ -141,3 +141,17 @@ export async function deleteData(key) {
     alert(`ドキュメント[${key}]を削除しました`);
     
 }
+
+export function overWriteData(key,memo) {
+    const uid = sessionStorage.getItem("uid");
+    const docRef = doc(db,uid,key);
+
+    setDoc(docRef,memo)
+    .then(docRef => {
+        console.log("Success!!")
+    }).catch(error => {
+        console.log(error);
+    })
+
+    console.log("Overwrite to firestore");
+}

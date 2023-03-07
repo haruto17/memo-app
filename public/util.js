@@ -1,4 +1,4 @@
-import { addData,getData,deleteData,logout } from "./firebase.js";
+import { addData,getData,deleteData,overWriteData,logout } from "./firebase.js";
 
 let index = 0;
 
@@ -167,30 +167,6 @@ function addCode(sum) {
     }
 }
 
-// メモの編集用ポップアップの表示
-function editMemo(key) {
-    console.log("key is:", key);
-
-    const popupWrapper = document.getElementById("popupEdit");
-    const title = document.getElementById("editTitle");
-    const contents = document.getElementById("editContents");
-    const tags = document.getElementById("editTags");
-    const close = document.getElementById("close");
-    const memo = readMemo(key);
-
-    title.value = memo.title;
-    contents.value = memo.contents;
-    tags.value = memo.tags;
-    
-    popupWrapper.style.display = "block";
-
-    popupWrapper.addEventListener("click", (e) => {
-        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
-            popupWrapper.style.display = "none";
-        }
-    });
-}
-
 // ログアウトボタンが押されたとき firebase.jsのlogout()を呼び出す
 export function logoutAccount() {
     logout();
@@ -203,4 +179,22 @@ export function deleteMemo(key) {
     const popupWrapper = document.getElementById("popupShow");
     popupWrapper.style.display = "none";
 
+}
+
+export function editMemo(key) {
+    console.log("editMemo",key);
+    const title = document.getElementById("editTitle").value;
+    const contents = document.getElementById("editContents").value;
+    const tags = document.getElementById("editTags").value;
+    // オブジェクト作成
+    const memo = {
+        "0":title,
+        "1":contents,
+        "2":tags
+    };
+    // localStorageのメモを上書き
+    localStorage.setItem(key,JSON.stringify(memo));
+
+    // firestoreのドキュメントの上書き
+    overWriteData(key,memo);
 }

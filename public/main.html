@@ -91,7 +91,7 @@
                 <textarea id="editTags"></textarea>
               </div>
               <div class="edit-btn">
-                <button type="button" onclick="saveMemo(0)">Edit</button>
+                <button id="btn-edit" type="button">Edit</button>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo, logoutAccount, deleteMemo } from "./util.js";
+    import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", function () {
@@ -129,6 +129,9 @@
     document.getElementById("btn-logout").addEventListener("click", logoutAccount);
     document.getElementById("btn-delete").addEventListener("click", function () {
       deleteMemo(now);
+    });
+    document.getElementById("btn-edit").addEventListener("click", function () {
+      editMemo(now);
     });
   </script>
   <script>
@@ -191,7 +194,7 @@
           contentslist.innerHTML = ``;
           tags.innerText = ``;
         } else if (e.target.id === editbtn.id) {
-          console.log("edit");
+          // console.log("edit");
           popupWrapper.style.display = "none";
           popupWrapper.removeEventListener("click", clickEventListener);
           title.innerText = ``;
@@ -210,6 +213,30 @@
       };
 
       popupWrapper.addEventListener("click", clickEventListener);
+    }
+
+    // メモの編集用ポップアップの表示
+    function editMemo(key) {
+      console.log("key is:", key);
+
+      const popupWrapper = document.getElementById("popupEdit");
+      const title = document.getElementById("editTitle");
+      const contents = document.getElementById("editContents");
+      const tags = document.getElementById("editTags");
+      const close = document.getElementById("close");
+      const memo = readMemo(key);
+
+      title.value = memo[0];
+      contents.value = memo[1];
+      tags.value = memo[2];
+
+      popupWrapper.style.display = "block";
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+        }
+      });
     }
 
     function splitContent(s) {
