@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import {getFirestore,getCount,collection,doc,setDoc,getDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
+import {getFirestore,getCount,collection,doc,setDoc,getDoc,deleteDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
 
@@ -131,14 +131,12 @@ export async function getData() {
             break;
         }
     }
+}
 
-    
 
-    // if(docSnap.exists()) {
-    //     console.log(count.data);
-    //     console.log("Document data:",docSnap.data());
-    // }
-    // else {
-    //     console.log("No such document!");
-    // }
+// ドキュメントの削除
+export async function deleteData(key) {
+    const uid = sessionStorage.getItem("uid");
+    await deleteDoc(doc(db,uid,"5"));
+    alert("ドキュメント[5]を削除しました");
 }

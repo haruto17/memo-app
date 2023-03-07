@@ -1,4 +1,4 @@
-import { addData,getData,logout } from "./firebase.js";
+import { addData,getData,deleteData,logout } from "./firebase.js";
 
 let index = 0;
 
@@ -199,4 +199,5 @@ export function logoutAccount() {
 // localStorage上のメモの削除
 export function deleteMemo(key) {
     localStorage.removeItem(key);
+    deleteData();
 }
