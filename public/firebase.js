@@ -105,13 +105,27 @@ export async function getData() {
             console.log("Document data:",docSnap.data());
             const stringDS = JSON.stringify(docSnap.data());
             localStorage.setItem(i,stringDS);
-            // localStorage.setItem(i,docSnap.data());
+            
+            const list = document.getElementById("memoList");
+            const div = document.createElement("div");
+            div.className = "memo";
+            div.id = i;
+            div.setAttribute("onclick", "clickMemo(event)");
+            const line = document.createElement("hr");
+            const titleText = document.createElement("p");
+            titleText.innerText = docSnap.data()[1];
+            titleText.className = "title-text";
+            div.appendChild(line);
+            div.appendChild(titleText);
+            list.appendChild(div);
         }
         else {
             console.log("No such document!");
             break;
         }
     }
+
+    
 
     // if(docSnap.exists()) {
     //     console.log(count.data);

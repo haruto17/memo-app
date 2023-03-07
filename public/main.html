@@ -167,10 +167,10 @@
       const tags = document.getElementById("showTags");
       const memo = readMemo(key);
 
-      title.innerText = memo.title;
-      tags.innerText = memo.tags;
+      title.innerText = memo[0];
+      tags.innerText = memo[2];
 
-      splitContent(memo.contents);
+      splitContent(memo[1]);
 
       // ポップアップ表示
       popupWrapper.style.display = "block";
