@@ -167,30 +167,6 @@ function addCode(sum) {
     }
 }
 
-// メモの編集用ポップアップの表示
-function editMemo(key) {
-    console.log("key is:", key);
-
-    const popupWrapper = document.getElementById("popupEdit");
-    const title = document.getElementById("editTitle");
-    const contents = document.getElementById("editContents");
-    const tags = document.getElementById("editTags");
-    const close = document.getElementById("close");
-    const memo = readMemo(key);
-
-    title.value = memo.title;
-    contents.value = memo.contents;
-    tags.value = memo.tags;
-    
-    popupWrapper.style.display = "block";
-
-    popupWrapper.addEventListener("click", (e) => {
-        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
-            popupWrapper.style.display = "none";
-        }
-    });
-}
-
 // ログアウトボタンが押されたとき firebase.jsのlogout()を呼び出す
 export function logoutAccount() {
     logout();
