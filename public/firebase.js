@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import {getFirestore,doc,setDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
+import {getFirestore,doc,setDoc,getDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
 
@@ -75,7 +75,7 @@ export function logout() {
 }
 
 export function addData(title,contents,tags) {
-    const uid = sessionStorage.getItem("uid")
+    const uid = sessionStorage.getItem("uid");
     const docRef = doc(db,uid,"4");
     const data = [];
     data.push(title);
@@ -90,4 +90,17 @@ export function addData(title,contents,tags) {
     })
 
     console.log("Save to firestore");
+}
+
+export async function getData() {
+    const uid = sessionStorage.getItem("uid");
+    const docRef = doc(db,uid,"4");
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()) {
+        console.log("Document data:",docSnap.data());
+    }
+    else {
+        console.log("No such document!");
+    }
 }
