@@ -2,7 +2,10 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
@@ -10,21 +13,45 @@
   </head>
   <body>
     <h1>memo-app</h1>
-    <div>
-      <label>e-mail</label>
-      <input type="text" id="email" />
-    </div>
-    <div>
-      <label>password</label>
-      <input type="text" id="password" />
-    </div>
-    <div>
-      <button id="create-btn">Create account</button>
+    <div class="accountBox">
+      <div class="emailArea">
+        <div>
+          <label>e-mail</label>
+        </div>
+        <input type="text" id="email" />
+      </div>
+      <div class="passwordArea">
+        <div>
+          <label>password</label>
+        </div>
+        <div>
+          <input type="text" id="password" />
+          <span id="eyeIcon" class="material-symbols-outlined" onclick="pushHideButton()"> visibility </span>
+        </div>
+      </div>
+      <div>
+        <button id="btn-create">Create account</button>
+      </div>
     </div>
   </body>
   <script type="module">
     import { createAccount } from "./firebase.js";
 
-    document.getElementById("create-btn").addEventListener("click", createAccount);
+    document.getElementById("btn-create").addEventListener("click", createAccount);
+  </script>
+  <script>
+    // パスワード欄の表示・非表示切り替え
+    function pushHideButton() {
+      const input = document.getElementById("password");
+      const eye = document.getElementById("eyeIcon");
+
+      if (input.type === "password") {
+        input.type = "text";
+        eye.innerText = "visibility_off";
+      } else if (input.type === "text") {
+        input.type = "password";
+        eye.innerText = "visibility";
+      }
+    }
   </script>
 </html>
