@@ -6,6 +6,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
   </head>
   <body>
     <h1>memo-app</h1>
@@ -20,7 +24,10 @@
         <div>
           <label>password</label>
         </div>
-        <input type="text" id="password" />
+        <div>
+          <input type="text" id="password" />
+          <span id="eyeIcon" class="material-symbols-outlined" onclick="pushHideButton()"> visibility </span>
+        </div>
       </div>
       <div>
         <button id="btn-create">Create account</button>
@@ -31,5 +38,20 @@
     import { createAccount } from "./firebase.js";
 
     document.getElementById("btn-create").addEventListener("click", createAccount);
+  </script>
+  <script>
+    // パスワード欄の表示・非表示切り替え
+    function pushHideButton() {
+      const input = document.getElementById("password");
+      const eye = document.getElementById("eyeIcon");
+
+      if (input.type === "password") {
+        input.type = "text";
+        eye.innerText = "visibility_off";
+      } else if (input.type === "text") {
+        input.type = "password";
+        eye.innerText = "visibility";
+      }
+    }
   </script>
 </html>
