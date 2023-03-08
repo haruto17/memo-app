@@ -143,29 +143,10 @@
       return memo;
     }
 
-    // リストへのメモ追加
-    function appendMemo(key) {
-      const memo = readMemo(key);
-
-      const list = document.getElementById("memoList");
-      const div = document.createElement("div");
-      div.className = "memo";
-      div.id = key;
-      div.setAttribute("onclick", "clickMemo(event)");
-      const line = document.createElement("hr");
-      const titleText = document.createElement("p");
-      titleText.innerText = memo.title;
-      titleText.className = "title-text";
-      div.appendChild(line);
-      div.appendChild(titleText);
-      list.appendChild(div);
-    }
-
     // 表示されたメモのクリック時
     function clickMemo(e) {
       const key = e.target.id;
       now = key;
-      index = key;
       const popupWrapper = document.getElementById("popupShow");
       const closebtn = document.getElementById("close");
       const deletebtn = document.getElementById("delete");
