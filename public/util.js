@@ -70,8 +70,8 @@ export async function saveMemo(key) {
                     "1":contents,
                     "2":tags,
                 }
-                console.log(dataID);
                 localStorage.setItem(dataID,JSON.stringify(memodata));
+                appendMemo(dataID);
             }
         }
     }
@@ -93,6 +93,24 @@ export async function saveMemo(key) {
             }
         }
     }
+}
+
+// リストへのメモ追加
+function appendMemo(key) {
+    const memo = readMemo(key);
+
+    const list = document.getElementById("memoList");
+    const div = document.createElement("div");
+    div.className = "memo";
+    div.id = key;
+    div.setAttribute("onclick", "clickMemo(event)");
+    const line = document.createElement("hr");
+    const titleText = document.createElement("p");
+    titleText.innerText = memo[0];
+    titleText.className = "title-text";
+    div.appendChild(line);
+    div.appendChild(titleText);
+    list.appendChild(div);
 }
 
 // メモリストの更新
