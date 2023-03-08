@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import {getFirestore,getCount,collection,doc,setDoc,getDoc,deleteDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
+import {getFirestore,getCount,collection,doc,addDoc,setDoc,getDoc,getDocs,deleteDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAB51o-qe7xlAT7AQaWuypMSHrQWjuA0Ss",
@@ -86,55 +86,91 @@ export function logout() {
 }
 
 // firestoreにデータ保存
-export function addData(title,contents,tags) {
+export async function addData(title,contents,tags) {
     const uid = sessionStorage.getItem("uid");
-    const docRef = doc(db,uid,"0");
-    const data = [];
-    data.push(title);
-    data.push(contents);
-    data.push(tags);
-    const obj = Object.assign({},data);
-    setDoc(docRef,obj)
-    .then(docRef => {
-        console.log("成功")
-    }).catch(error => {
-        console.log(error);
+    // const docRef = doc(db,uid);
+    // const data = [];
+    // data.push(title);
+    // data.push(contents);
+    // data.push(tags);
+    // const obj = Object.assign({},data);
+    // addDoc(docRef,obj)
+    // .then(docRef => {
+    //     console.log("成功")
+    // }).catch(error => {
+    //     console.log(error);
+    // })
+
+    // console.log("Save to firestore");
+    
+    // ドキュメントの保存 idはランダム
+    try {
+        const docRef = await addDoc(collection(db,uid),{
+            "0":title,
+            "1":contents,
+            "2":tags,
+        });
+    }catch(e) {
+        console.log("error",e);
+    }
+}
+
+async function getDocumentID() {
+    const uid = sessionStorage.getItem("uid");
+    let li = [];
+    // ランダムなドキュメントIDを取得
+    const querySnapShot = await getDocs(collection(db,uid));
+    querySnapShot.forEach((doc) => {
+        li.push(String(doc.id));
     })
 
-    console.log("Save to firestore");
+    return li;
 }
 
 // firestoreからデータ取得 localStorageに保存した後memoListに要素追加
 export async function getData() {
-    const uid = sessionStorage.getItem("uid");
-    const docRef = doc(db,uid,"1");
-    const docSnap = await getDoc(docRef);
-    const docCount = await getCount(collection(db,uid));
+    // const uid = sessionStorage.getItem("uid");
+    // const docCount = await getCount(collection(db,uid));
 
-    for(let i = 1; i <= docCount.data().count; i++) {
-        const docRef = doc(db,uid,String(i));
-        const docSnap = await getDoc(docRef);
-        if(docSnap.exists()) {
-            console.log("Document data:",docSnap.data());
-            const stringDS = JSON.stringify(docSnap.data());
-            localStorage.setItem(i,stringDS);
+    // for(let i = 1; i <= docCount.data().count; i++) {
+    //     const docRef = doc(db,uid,String(i));
+    //     const docSnap = await getDoc(docRef);
+    //     if(docSnap.exists()) {
+    //         console.log("Document data:",docSnap.data());
+    //         const stringDS = JSON.stringify(docSnap.data());
+    //         localStorage.setItem(i,stringDS);
             
-            const list = document.getElementById("memoList");
-            const div = document.createElement("div");
-            div.className = "memo";
-            div.id = i;
-            div.setAttribute("onclick", "clickMemo(event)");
-            const line = document.createElement("hr");
-            const titleText = document.createElement("p");
-            titleText.innerText = docSnap.data()[1];
-            titleText.className = "title-text";
-            div.appendChild(line);
-            div.appendChild(titleText);
-            list.appendChild(div);
-        }
-        else {
-            console.log("No such document!");
-            break;
+    //         const list = document.getElementById("memoList");
+    //         const div = document.createElement("div");
+    //         div.className = "memo";
+    //         div.id = i;
+    //         div.setAttribute("onclick", "clickMemo(event)");
+    //         const line = document.createElement("hr");
+    //         const titleText = document.createElement("p");
+    //         titleText.innerText = docSnap.data()[1];
+    //         titleText.className = "title-text";
+    //         div.appendChild(line);
+    //         div.appendChild(titleText);
+    //         list.appendChild(div);
+    //     }
+    //     else {
+    //         console.log("No such document!");
+    //         break;
+    //     }
+    // }
+
+    const uid = sessionStorage.getItem("uid");
+
+    const idList = await getDocumentID();
+
+    console.log("idList",idList);
+
+    for(let i = 0; i < idList.length; i++) {
+        const docRef = doc(db,uid,idList[i]);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const stringDS = JSON.stringify(docSnap.data());
+            localStorage.setItem(idList[i],stringDS);
         }
     }
 }
