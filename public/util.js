@@ -1,4 +1,4 @@
-import { addData,getData,deleteData,overWriteData,logout } from "./firebase.js";
+import { addData,getData,deleteData,overWriteData,logout} from "./firebase.js";
 
 let index = 0;
 
@@ -41,25 +41,37 @@ export function createMemo() {
 }
 
 // メモ保存関連
-export function saveMemo(key) {
-    console.log("save")
+export async function saveMemo(key) {
     // メモの作成
     if (key == 1) {
-        const memo = {
-            date: getTime(),
-            title: document.getElementById("memoTitle").value,
-            contents: document.getElementById("memoContents").value,
-            tags: splitTag(document.getElementById("memoTags").value),
-        };
-        if (memo.title && memo.contents) {
-            if (memo.title.length <= 100 && memo.contents.length <= 1000 && memo.tags.length <= 5) {
+        // const memo = {
+        //     date: getTime(),
+        //     title: document.getElementById("memoTitle").value,
+        //     contents: document.getElementById("memoContents").value,
+        //     tags: splitTag(document.getElementById("memoTags").value),
+        // };
+
+        const title = document.getElementById("memoTitle").value;
+        const contents = document.getElementById("memoContents").value;
+        const tags = document.getElementById("memoTags").value;
+
+        if (title && contents) {
+            if (title.length <= 100 && contents.length <= 1000) {
                 const popupWrapper = document.getElementById("popupCreate");
-                const jsonString = JSON.stringify(memo);
-                localStorage.setItem(localStorage.length + 1, jsonString);
-                appendMemo(localStorage.length);
+                // const jsonString = JSON.stringify(memo);
+                // localStorage.setItem(localStorage.length + 1, jsonString);
+                // appendMemo(localStorage.length);
                 clearText();
                 popupWrapper.style.display = "none";
-                addData(memo.title,memo.contents,"tagsText");
+                // addData(memo.title,memo.contents,"tagsText");
+                const dataID = await addData(title,contents,tags);
+                const memodata = {
+                    "0":title,
+                    "1":contents,
+                    "2":tags,
+                }
+                console.log(dataID);
+                localStorage.setItem(dataID,JSON.stringify(memodata));
             }
         }
     }

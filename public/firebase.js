@@ -103,16 +103,23 @@ export async function addData(title,contents,tags) {
 
     // console.log("Save to firestore");
     
+    let dataID = "";
+
     // ドキュメントの保存 idはランダム
     try {
         const docRef = await addDoc(collection(db,uid),{
             "0":title,
             "1":contents,
             "2":tags,
-        });
+        })
+        .then(docRef => {
+            dataID = String(docRef.id);
+        })
     }catch(e) {
         console.log("error",e);
     }
+
+    return dataID;
 }
 
 async function getDocumentID() {
@@ -163,7 +170,7 @@ export async function getData() {
 
     const idList = await getDocumentID();
 
-    console.log("idList",idList);
+    // console.log("idList",idList);
 
     for(let i = 0; i < idList.length; i++) {
         const docRef = doc(db,uid,idList[i]);
