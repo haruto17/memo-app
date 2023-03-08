@@ -2,28 +2,34 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   </head>
   <body>
     <h1>memo-app</h1>
-    <div>
-      <label>e-mail</label>
-      <input type="text" id="email" />
-    </div>
-    <div>
-      <label>password</label>
-      <input type="text" id="password" />
-    </div>
-    <div>
-      <button id="create-btn">Create account</button>
+    <div class="accountBox">
+      <div class="emailArea">
+        <div>
+          <label>e-mail</label>
+        </div>
+        <input type="text" id="email" />
+      </div>
+      <div class="passwordArea">
+        <div>
+          <label>password</label>
+        </div>
+        <input type="text" id="password" />
+      </div>
+      <div>
+        <button id="btn-create">Create account</button>
+      </div>
     </div>
   </body>
   <script type="module">
     import { createAccount } from "./firebase.js";
 
-    document.getElementById("create-btn").addEventListener("click", createAccount);
+    document.getElementById("btn-create").addEventListener("click", createAccount);
   </script>
 </html>
