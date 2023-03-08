@@ -2,31 +2,37 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   </head>
   <body>
     <h1>memo-app</h1>
-    <div>
-      <label> e-mail </label>
-      <input id="email" type="text" />
-    </div>
-    <div>
-      <label> password </label>
-      <input id="password" type="text" />
-    </div>
-    <div>
-      <button id="login-btn">login</button>
-    </div>
-    <div>
-      <a href="create.html">Create account</a>
+    <div class="accountBox">
+      <div class="emailArea">
+        <div>
+          <label> e-mail </label>
+        </div>
+        <input id="email" type="text" />
+      </div>
+      <div class="passwordArea">
+        <div>
+          <label> password </label>
+        </div>
+        <input id="password" type="text" />
+      </div>
+      <div>
+        <button id="btn-login">login</button>
+      </div>
+      <div>
+        <a href="create.html">Create account</a>
+      </div>
     </div>
   </body>
   <script type="module">
     import { login } from "./firebase.js";
 
-    //document.getElementById("login-btn").addEventListener("click", login);
+    //document.getElementById("btn-login").addEventListener("click", login);
   </script>
 </html>
