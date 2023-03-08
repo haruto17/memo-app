@@ -171,6 +171,22 @@ export async function getData() {
         if (docSnap.exists()) {
             const stringDS = JSON.stringify(docSnap.data());
             localStorage.setItem(idList[i],stringDS);
+
+            const list = document.getElementById("memoList");
+            const div = document.createElement("div");
+            div.className = "memo";
+            div.id = idList[i];
+            div.setAttribute("onclick","clickMemo(event)");
+            const line = document.createElement("hr");
+            const titleText = document.createElement("p");
+            titleText.innerText = docSnap.data()[0];
+            titleText.className = "title-text";
+            div.appendChild(line);
+            div.appendChild(titleText);
+            list.appendChild(div);
+        } else {
+            console.log("No such document!");
+            break;
         }
     }
 }
