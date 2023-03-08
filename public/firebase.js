@@ -3,7 +3,13 @@ import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword,
 import {getFirestore,getCount,collection,doc,setDoc,getDoc,deleteDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
-
+    apiKey: "AIzaSyAB51o-qe7xlAT7AQaWuypMSHrQWjuA0Ss",
+    authDomain: "memo-app-19559.firebaseapp.com",
+    projectId: "memo-app-19559",
+    storageBucket: "memo-app-19559.appspot.com",
+    messagingSenderId: "94326403042",
+    appId: "1:94326403042:web:5816e6390d09e3b47853bb",
+    measurementId: "G-2YNG42RFGZ"
 };
 
 const app = initializeApp(firebaseConfig);
