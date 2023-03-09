@@ -23,7 +23,11 @@ const provider = new GithubAuthProvider();
 export function loginWithGithub() {
     signInWithPopup(auth,provider)
     .then((result) => {
+
+        alert('login!!!');
+
         window.location.href = "main.html";
+        sessionStorage.setItem("uid",result.uid);
     })
     .catch((error) => {
         const errorCode = error.code;
