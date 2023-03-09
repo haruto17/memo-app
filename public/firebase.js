@@ -26,8 +26,10 @@ export function loginWithGithub() {
 
         alert('login!!!');
 
+        const userinfo = auth.currentUser;
+        sessionStorage.setItem("uid",userinfo.uid);
         window.location.href = "main.html";
-        sessionStorage.setItem("uid",result.uid);
+
     })
     .catch((error) => {
         const errorCode = error.code;
