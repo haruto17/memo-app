@@ -5,7 +5,8 @@ let index = 0;
 // リロード時にlocalStorageの削除
 window.onload = function () {
     localStorage.clear();
-
+    const reset = document.getElementById("btn-reset");
+    reset.style.display = "none";
     // firestoreからデータ取得
     getData();
 };
@@ -132,8 +133,12 @@ function refreshMemo() {
 
 export function searchReset() {
     const memoli = document.getElementById("memoList");
+    const reset = document.getElementById("btn-reset");
+    const input = document.getElementById("searchInput");
+    input.value = "";
     memoli.innerHTML = ``;
     refreshMemo();
+    reset.style.display = "none";
 }
 
 
@@ -173,25 +178,32 @@ export function searchMemo() {
     //     }
     // });
 
-    console.log("searchMemo");
-
     const keyword = document.getElementById("searchInput").value;
     // 今localStorageに保存されているメモのkeyをすべて取得
     const nowKey = Object.keys(localStorage);
     const memoli = document.getElementById("memoList");
+    const reset = document.getElementById("btn-reset");
+    let keyli = [];
     if (!nowKey) {
         alert("No data");
     } else if (keyword.length > 0){
-        nowKey.forEach(element => {
-            const memo = JSON.parse(localStorage.getItem(element));
+        for (let i = 0; i < nowKey.length; i++) {
+            const memo = JSON.parse(localStorage.getItem(nowKey[i]));
             const title = memo[0];
             const tag = memo[2];
 
-            if(title.match(keyword) || tag.includes(keyword)) {
-                memoli.innerHTML = ``;
-                appendMemo(element);
+            if(title.indexOf(keyword) !== -1 || tag.includes(keyword)) {
+                keyli.push(nowKey[i]);
             }
-        })
+        }
+    }
+
+    if(keyli.length > 0) {
+        memoli.innerHTML = ``;
+        for(let i = 0; i < keyli.length; i++) {
+            appendMemo(keyli[i]);
+        }
+        reset.style.display = "block";
     }
 
 }
