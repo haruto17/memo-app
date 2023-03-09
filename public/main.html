@@ -23,17 +23,9 @@
     <div>
       <div class="searchBox">
         <input type="text" class="memoSearch" placeholder="title or tag" />
-        <button type="button" class="iconSearch" onclick="searchMemo()">
+        <button type="button" id="btn-search" class="iconSearch">
           <span class="material-symbols-outlined"> search </span>
         </button>
-      </div>
-      <div id="popup-wrapper">
-        <div id="popup-inside">
-          <div id="close">x</div>
-          <div id="message">
-            <ul id="searchResult"></ul>
-          </div>
-        </div>
       </div>
       <div id="memoList"></div>
       <div class="create-btn">
@@ -119,7 +111,7 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo } from "./util.js";
+    import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo, searchMemo } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", function () {
@@ -132,6 +124,7 @@
     document.getElementById("btn-edit").addEventListener("click", function () {
       editMemo(now);
     });
+    document.getElementById("btn-search").addEventListener("click", searchMemo);
   </script>
   <script>
     let now = 0;

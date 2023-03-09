@@ -133,40 +133,42 @@ function refreshMemo() {
 
 
 // メモ検索。結果のポップアップ表示
-function searchMemo() {
-    const popupWrapper = document.getElementById("popup-wrapper");
-    const close = document.getElementById("close");
+export function searchMemo() {
+    // const popupWrapper = document.getElementById("popup-wrapper");
+    // const close = document.getElementById("close");
 
-    const searchKeyword = document.getElementById("memoSearch").value;
-    const lengthStorage = localStorage.length;
+    // const searchKeyword = document.getElementById("memoSearch").value;
+    // const lengthStorage = localStorage.length;
 
-    if (!lengthStorage) {
-        alert("No Data!!");
-    } else {
-        for (let i = 1; i <= lengthStorage; i++) {
-        const memo = JSON.parse(localStorage.getItem(i));
-        const title = memo.title;
-        const tag = memo.tags;
+    // if (!lengthStorage) {
+    //     alert("No Data!!");
+    // } else {
+    //     for (let i = 1; i <= lengthStorage; i++) {
+    //     const memo = JSON.parse(localStorage.getItem(i));
+    //     const title = memo.title;
+    //     const tag = memo.tags;
 
-        if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
-            const ul = document.getElementById("searchResult");
-            const li = document.createElement("li");
-            const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
-            li.appendChild(document.createTextNode(text));
-            ul.appendChild(li);
+    //     if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
+    //         const ul = document.getElementById("searchResult");
+    //         const li = document.createElement("li");
+    //         const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
+    //         li.appendChild(document.createTextNode(text));
+    //         ul.appendChild(li);
 
-            popupWrapper.style.display = "block";
-        }
-        }
-    }
+    //         popupWrapper.style.display = "block";
+    //     }
+    //     }
+    // }
 
-    popupWrapper.addEventListener("click", (e) => {
-        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
-        popupWrapper.style.display = "none";
-        const li = document.getElementById("searchResult");
-        li.innerHTML = ``;
-        }
-    });
+    // popupWrapper.addEventListener("click", (e) => {
+    //     if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+    //     popupWrapper.style.display = "none";
+    //     const li = document.getElementById("searchResult");
+    //     li.innerHTML = ``;
+    //     }
+    // });
+
+    console.log("searchMemo");
 }
 
 // 日時の取得
