@@ -18,9 +18,8 @@ const clearText = () => {
 };
 
 // 空白でタグ分割
-function splitTag(tags) {
-    const separatorString = /\s+/;
-    const tagArray = tags.split(separatorString);
+function splitTag(tagString) {
+    const tagArray = tagString.split(",");
     return tagArray;
 }
 
@@ -53,7 +52,7 @@ export async function saveMemo(key) {
 
         const title = document.getElementById("memoTitle").value;
         const contents = document.getElementById("memoContents").value;
-        const tags = document.getElementById("memoTags").value;
+        const tags = splitTag(document.getElementById("memoTags").value);
 
         if (title && contents) {
             if (title.length <= 100 && contents.length <= 1000) {
@@ -206,7 +205,7 @@ export function editMemo(key) {
     console.log("editMemo",key);
     const title = document.getElementById("editTitle").value;
     const contents = document.getElementById("editContents").value;
-    const tags = document.getElementById("editTags").value;
+    const tags = splitTag(document.getElementById("editTags").value); 
     // オブジェクト作成
     const memo = {
         "0":title,
