@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getAuth , createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import { getAuth ,GithubAuthProvider, signInWithRedirect,createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 import {getFirestore,getCount,collection,doc,addDoc,setDoc,getDoc,getDocs,deleteDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
@@ -17,6 +17,23 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const auth = getAuth(app);
+
+const provider = new GithubAuthProvider();
+
+export function loginWithGithub() {
+    signInWithRedirect(auth,provider)
+    .then((result) => {
+        alert("login with github!!!");
+        console.log(result.id);
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("Failed login with github!!!");
+        console.log(errorCode);
+        console.log(errorMessage);
+    })
+}
 
 // アカウント作成、e-mailとパスワードで作成
 export function createAccount() {
