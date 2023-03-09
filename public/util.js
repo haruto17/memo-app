@@ -243,7 +243,8 @@ export function editMemo(key) {
     console.log("editMemo",key);
     const title = document.getElementById("editTitle").value;
     const contents = document.getElementById("editContents").value;
-    const tags = splitTag(document.getElementById("editTags").value); 
+    const tags = splitTag(document.getElementById("editTags").value);
+    const popupWrapper = document.getElementById("popupEdit"); 
     // オブジェクト作成
     const memo = {
         "0":title,
@@ -260,4 +261,6 @@ export function editMemo(key) {
     
     // firestoreのドキュメントの上書き
     overWriteData(key,memo);
+
+    popupWrapper.style.display = "none";
 }
