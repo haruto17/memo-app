@@ -214,6 +214,11 @@ export function editMemo(key) {
     // localStorageのメモを上書き
     localStorage.setItem(key,JSON.stringify(memo));
 
+    // リスト内にあるメモのタイトル変更
+    const memoli = document.getElementById(key);
+    const titleText = memoli.getElementsByTagName("p");
+    titleText[0].innerText = title;
+    
     // firestoreのドキュメントの上書き
     overWriteData(key,memo);
 }
