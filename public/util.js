@@ -130,6 +130,12 @@ function refreshMemo() {
     console.log(nowKey);
 }
 
+export function searchReset() {
+    const memoli = document.getElementById("memoList");
+    memoli.innerHTML = ``;
+    refreshMemo();
+}
+
 
 // メモ検索。結果のポップアップ表示
 export function searchMemo() {
