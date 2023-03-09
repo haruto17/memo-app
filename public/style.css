@@ -29,8 +29,6 @@ body {
     transition: .4s;
 }
 
-
-
 .searchBox {
     display: flex;
     height: 60px;
@@ -57,6 +55,23 @@ body {
 }
 
 .iconSearch:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
+}
+
+#btn-reset {
+    background: transparent;
+    border-width: 1px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 3%;
+    height: 54px;
+    width: 54px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+#btn-reset:hover {
     color: #000;
     background: #5bc8ac;
     transition: .4s;
