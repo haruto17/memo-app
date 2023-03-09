@@ -5,7 +5,8 @@ let index = 0;
 // リロード時にlocalStorageの削除
 window.onload = function () {
     localStorage.clear();
-
+    const reset = document.getElementById("btn-reset");
+    reset.style.display = "none";
     // firestoreからデータ取得
     getData();
 };
@@ -18,9 +19,8 @@ const clearText = () => {
 };
 
 // 空白でタグ分割
-function splitTag(tags) {
-    const separatorString = /\s+/;
-    const tagArray = tags.split(separatorString);
+function splitTag(tagString) {
+    const tagArray = tagString.split(",");
     return tagArray;
 }
 
@@ -53,7 +53,7 @@ export async function saveMemo(key) {
 
         const title = document.getElementById("memoTitle").value;
         const contents = document.getElementById("memoContents").value;
-        const tags = document.getElementById("memoTags").value;
+        const tags = splitTag(document.getElementById("memoTags").value);
 
         if (title && contents) {
             if (title.length <= 100 && contents.length <= 1000) {
@@ -131,42 +131,81 @@ function refreshMemo() {
     console.log(nowKey);
 }
 
+export function searchReset() {
+    const memoli = document.getElementById("memoList");
+    const reset = document.getElementById("btn-reset");
+    const input = document.getElementById("searchInput");
+    input.value = "";
+    memoli.innerHTML = ``;
+    refreshMemo();
+    reset.style.display = "none";
+}
+
 
 // メモ検索。結果のポップアップ表示
-function searchMemo() {
-    const popupWrapper = document.getElementById("popup-wrapper");
-    const close = document.getElementById("close");
+export function searchMemo() {
+    // const popupWrapper = document.getElementById("popup-wrapper");
+    // const close = document.getElementById("close");
 
-    const searchKeyword = document.getElementById("memoSearch").value;
-    const lengthStorage = localStorage.length;
+    // const searchKeyword = document.getElementById("memoSearch").value;
+    // const lengthStorage = localStorage.length;
 
-    if (!lengthStorage) {
-        alert("No Data!!");
-    } else {
-        for (let i = 1; i <= lengthStorage; i++) {
-        const memo = JSON.parse(localStorage.getItem(i));
-        const title = memo.title;
-        const tag = memo.tags;
+    // if (!lengthStorage) {
+    //     alert("No Data!!");
+    // } else {
+    //     for (let i = 1; i <= lengthStorage; i++) {
+    //     const memo = JSON.parse(localStorage.getItem(i));
+    //     const title = memo.title;
+    //     const tag = memo.tags;
 
-        if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
-            const ul = document.getElementById("searchResult");
-            const li = document.createElement("li");
-            const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
-            li.appendChild(document.createTextNode(text));
-            ul.appendChild(li);
+    //     if (title.match(searchKeyword) || tag.includes(searchKeyword)) {
+    //         const ul = document.getElementById("searchResult");
+    //         const li = document.createElement("li");
+    //         const text = "title: " + memo.title + " contents: " + memo.contents + " tags: " + memo.tags;
+    //         li.appendChild(document.createTextNode(text));
+    //         ul.appendChild(li);
 
-            popupWrapper.style.display = "block";
-        }
+    //         popupWrapper.style.display = "block";
+    //     }
+    //     }
+    // }
+
+    // popupWrapper.addEventListener("click", (e) => {
+    //     if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+    //     popupWrapper.style.display = "none";
+    //     const li = document.getElementById("searchResult");
+    //     li.innerHTML = ``;
+    //     }
+    // });
+
+    const keyword = document.getElementById("searchInput").value;
+    // 今localStorageに保存されているメモのkeyをすべて取得
+    const nowKey = Object.keys(localStorage);
+    const memoli = document.getElementById("memoList");
+    const reset = document.getElementById("btn-reset");
+    let keyli = [];
+    if (!nowKey) {
+        alert("No data");
+    } else if (keyword.length > 0){
+        for (let i = 0; i < nowKey.length; i++) {
+            const memo = JSON.parse(localStorage.getItem(nowKey[i]));
+            const title = memo[0];
+            const tag = memo[2];
+
+            if(title.indexOf(keyword) !== -1 || tag.includes(keyword)) {
+                keyli.push(nowKey[i]);
+            }
         }
     }
 
-    popupWrapper.addEventListener("click", (e) => {
-        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
-        popupWrapper.style.display = "none";
-        const li = document.getElementById("searchResult");
-        li.innerHTML = ``;
+    if(keyli.length > 0) {
+        memoli.innerHTML = ``;
+        for(let i = 0; i < keyli.length; i++) {
+            appendMemo(keyli[i]);
         }
-    });
+        reset.style.display = "block";
+    }
+
 }
 
 // 日時の取得
@@ -204,7 +243,7 @@ export function editMemo(key) {
     console.log("editMemo",key);
     const title = document.getElementById("editTitle").value;
     const contents = document.getElementById("editContents").value;
-    const tags = document.getElementById("editTags").value;
+    const tags = splitTag(document.getElementById("editTags").value); 
     // オブジェクト作成
     const memo = {
         "0":title,

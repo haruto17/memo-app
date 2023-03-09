@@ -3,28 +3,78 @@ body {
     font-family: 'Noto Sans JP',sans-serif;
 }
 
-#searchBox {
-    height: 60px;
-    width: 400px;
-    margin-left: auto;
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-#memoSearch {
-    height: 50px;
-    width: 300px;
-    border-radius: 10px 10px 10px 10px;
+#logout {
+    margin-right: 5%;
 }
 
-#iconSearch {
-    background-color: transparent;
-    border: none;
+#btn-logout {
+    background: transparent;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    position: absolute;
-    top: 90px;
-    right: 110px;
+    border-width: 1px;
+    border-radius: 10px 10px 10px 10px;
     cursor: pointer;
+    transition: .4s;
+}
+
+#btn-logout:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
+}
+
+.searchBox {
+    display: flex;
+    height: 60px;
+    width: 400px;
+    margin: 0% 5% 5% auto;
+}
+
+.memoSearch {
+    height: 50px;
+    width: 300px;
+    border-width: 1px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.iconSearch {
+    background-color: transparent;
+    border-width: 1px; 
+    border-radius: 0px 10px 10px 0px;
+    border-left: none;
+    width: 50px;
+    height: 54px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.iconSearch:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
+}
+
+#btn-reset {
+    background: transparent;
+    border-width: 1px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 3%;
+    height: 54px;
+    width: 54px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+#btn-reset:hover {
+    color: #000;
+    background: #5bc8ac;
+    transition: .4s;
 }
 
 .title {
