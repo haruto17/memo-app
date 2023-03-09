@@ -122,8 +122,6 @@ function refreshMemo() {
 
     // 今localStorageに保存されているメモのkeyをすべて取得
     let nowKey = Object.keys(localStorage);
-    // ソート
-    nowKey.sort();
 
     // メモを再度リストに追加
     nowKey.forEach(element => appendMemo(element));
