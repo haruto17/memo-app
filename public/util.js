@@ -168,6 +168,26 @@ export function searchMemo() {
     // });
 
     console.log("searchMemo");
+
+    const keyword = document.getElementById("searchInput").value;
+    // 今localStorageに保存されているメモのkeyをすべて取得
+    const nowKey = Object.keys(localStorage);
+    const memoli = document.getElementById("memoList");
+    if (!nowKey) {
+        alert("No data");
+    } else if (keyword.length > 0){
+        nowKey.forEach(element => {
+            const memo = JSON.parse(localStorage.getItem(element));
+            const title = memo[0];
+            const tag = memo[2];
+
+            if(title.match(keyword) || tag.includes(keyword)) {
+                memoli.innerHTML = ``;
+                appendMemo(element);
+            }
+        })
+    }
+
 }
 
 // 日時の取得
