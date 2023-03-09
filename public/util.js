@@ -122,8 +122,6 @@ function refreshMemo() {
 
     // 今localStorageに保存されているメモのkeyをすべて取得
     let nowKey = Object.keys(localStorage);
-    // ソート
-    nowKey.sort();
 
     // メモを再度リストに追加
     nowKey.forEach(element => appendMemo(element));
@@ -233,7 +231,9 @@ export function logoutAccount() {
 export function deleteMemo(key) {
     localStorage.removeItem(key);
     deleteData(key);
-    refreshMemo();
+    // refreshMemo();
+    const memo = document.getElementById(key);
+    memo.remove()
     const popupWrapper = document.getElementById("popupShow");
     popupWrapper.style.display = "none";
 
