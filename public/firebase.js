@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getAuth ,GithubAuthProvider, signInWithRedirect,createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import { getAuth ,GithubAuthProvider, signInWithPopup ,createUserWithEmailAndPassword ,  signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 import {getFirestore,getCount,collection,doc,addDoc,setDoc,getDoc,getDocs,deleteDoc} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore-lite.js";
 
 const firebaseConfig = {
@@ -21,10 +21,9 @@ const auth = getAuth(app);
 const provider = new GithubAuthProvider();
 
 export function loginWithGithub() {
-    signInWithRedirect(auth,provider)
+    signInWithPopup(auth,provider)
     .then((result) => {
-        alert("login with github!!!");
-        console.log(result.id);
+        window.location.href = "main.html";
     })
     .catch((error) => {
         const errorCode = error.code;
