@@ -20,6 +20,7 @@ const auth = getAuth(app);
 
 const provider = new GithubAuthProvider();
 
+// Githubアカウントを使ったログイン
 export function loginWithGithub() {
     signInWithPopup(auth,provider)
     .then((result) => {
@@ -42,7 +43,6 @@ export function loginWithGithub() {
 
 // アカウント作成、e-mailとパスワードで作成
 export function createAccount() {
-    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     createUserWithEmailAndPassword(auth,email,password)
@@ -52,7 +52,6 @@ export function createAccount() {
         alert('create!!!');
 
         const userinfo = auth.currentUser;
-        sessionStorage.setItem("email",userinfo.email);
         sessionStorage.setItem("uid",userinfo.uid);
 
         // main.htmlに遷移
@@ -79,7 +78,6 @@ export function login() {
         alert('login!!!');
 
         const userinfo = auth.currentUser;
-        sessionStorage.setItem("email",userinfo.email);
         sessionStorage.setItem("uid",userinfo.uid);
 
         // main.htmlに遷移
@@ -110,20 +108,6 @@ export function logout() {
 // firestoreにデータ保存
 export async function addData(title,contents,tags) {
     const uid = sessionStorage.getItem("uid");
-    // const docRef = doc(db,uid);
-    // const data = [];
-    // data.push(title);
-    // data.push(contents);
-    // data.push(tags);
-    // const obj = Object.assign({},data);
-    // addDoc(docRef,obj)
-    // .then(docRef => {
-    //     console.log("成功")
-    // }).catch(error => {
-    //     console.log(error);
-    // })
-
-    // console.log("Save to firestore");
     
     let dataID = "";
 
@@ -144,6 +128,7 @@ export async function addData(title,contents,tags) {
     return dataID;
 }
 
+// firestoreコレクション内のドキュメントIDをすべて取得
 async function getDocumentID() {
     const uid = sessionStorage.getItem("uid");
     let li = [];
@@ -158,41 +143,9 @@ async function getDocumentID() {
 
 // firestoreからデータ取得 localStorageに保存した後memoListに要素追加
 export async function getData() {
-    // const uid = sessionStorage.getItem("uid");
-    // const docCount = await getCount(collection(db,uid));
-
-    // for(let i = 1; i <= docCount.data().count; i++) {
-    //     const docRef = doc(db,uid,String(i));
-    //     const docSnap = await getDoc(docRef);
-    //     if(docSnap.exists()) {
-    //         console.log("Document data:",docSnap.data());
-    //         const stringDS = JSON.stringify(docSnap.data());
-    //         localStorage.setItem(i,stringDS);
-            
-    //         const list = document.getElementById("memoList");
-    //         const div = document.createElement("div");
-    //         div.className = "memo";
-    //         div.id = i;
-    //         div.setAttribute("onclick", "clickMemo(event)");
-    //         const line = document.createElement("hr");
-    //         const titleText = document.createElement("p");
-    //         titleText.innerText = docSnap.data()[1];
-    //         titleText.className = "title-text";
-    //         div.appendChild(line);
-    //         div.appendChild(titleText);
-    //         list.appendChild(div);
-    //     }
-    //     else {
-    //         console.log("No such document!");
-    //         break;
-    //     }
-    // }
-
     const uid = sessionStorage.getItem("uid");
 
     const idList = await getDocumentID();
-
-    // console.log("idList",idList);
 
     for(let i = 0; i < idList.length; i++) {
         const docRef = doc(db,uid,idList[i]);
@@ -229,6 +182,7 @@ export async function deleteData(key) {
     
 }
 
+// ドキュメントの上書き（メモ編集時）
 export function overWriteData(key,memo) {
     const uid = sessionStorage.getItem("uid");
     const docRef = doc(db,uid,key);
