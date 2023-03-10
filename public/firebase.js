@@ -43,6 +43,7 @@ export function loginWithGithub() {
 
 // アカウント作成、e-mailとパスワードで作成
 export function createAccount() {
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     createUserWithEmailAndPassword(auth,email,password)
