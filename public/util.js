@@ -178,6 +178,12 @@ export function deleteMemo(key) {
     const memo = document.getElementById(key);
     memo.remove()
     const popupWrapper = document.getElementById("popupShow");
+    const title = document.getElementById("showTitle");
+    const contents = document.getElementById("contentsListArea");
+    const tags = document.getElementById("showTags");
+    title.innerText = "";
+    contents.innerHTML = ``;
+    tags.innerText = "";
     popupWrapper.style.display = "none";
 }
 
