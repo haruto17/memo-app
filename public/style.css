@@ -266,6 +266,9 @@ hr {
     top: 95px;
     text-align: center;
     pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .create-btn {
