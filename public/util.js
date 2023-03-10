@@ -40,27 +40,24 @@ export function createMemo() {
 }
 
 // メモ保存関連
-export async function saveMemo(key) {
-    // メモの作成
-    if (key == 1) {
-        const title = document.getElementById("memoTitle").value;
-        const contents = document.getElementById("memoContents").value;
-        const tags = splitTag(document.getElementById("memoTags").value);
+export async function saveMemo() {
+    const title = document.getElementById("memoTitle").value;
+    const contents = document.getElementById("memoContents").value;
+    const tags = splitTag(document.getElementById("memoTags").value);
 
-        if (title && contents) {
-            if (title.length <= 100 && contents.length <= 1000) {
-                const popupWrapper = document.getElementById("popupCreate");
-                clearText();
-                popupWrapper.style.display = "none";
-                const dataID = await addData(title,contents,tags);
-                const memodata = {
-                    "0":title,
-                    "1":contents,
-                    "2":tags,
-                }
-                localStorage.setItem(dataID,JSON.stringify(memodata));
-                appendMemo(dataID);
+    if (title && contents) {
+        if (title.length <= 100 && contents.length <= 1000) {
+            const popupWrapper = document.getElementById("popupCreate");
+            clearText();
+            popupWrapper.style.display = "none";
+            const dataID = await addData(title,contents,tags);
+            const memodata = {
+                "0":title,
+                "1":contents,
+                "2":tags,
             }
+            localStorage.setItem(dataID,JSON.stringify(memodata));
+            appendMemo(dataID);
         }
     }
 }

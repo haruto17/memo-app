@@ -122,9 +122,7 @@
     import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo, searchMemo, searchReset } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
-    document.getElementById("btn-save").addEventListener("click", function () {
-      saveMemo(1);
-    });
+    document.getElementById("btn-save").addEventListener("click", saveMemo);
     document.getElementById("btn-logout").addEventListener("click", logoutAccount);
     document.getElementById("btn-delete").addEventListener("click", function () {
       deleteMemo(now);
