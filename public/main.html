@@ -153,7 +153,6 @@
       const deletebtn = document.getElementById("delete");
       const editbtn = document.getElementById("edit");
       const title = document.getElementById("showTitle");
-      // const contents = document.getElementById("showContents");
       const tags = document.getElementById("showTags");
       const memo = readMemo(key);
 
@@ -165,8 +164,6 @@
       // ポップアップ表示
       popupWrapper.style.display = "block";
 
-      console.log(localStorage.getItem(key));
-
       const clickEventListener = (e) => {
         const contentslist = document.getElementById("contentsListArea");
         if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
@@ -176,22 +173,13 @@
           contentslist.innerHTML = ``;
           tags.innerText = ``;
         } else if (e.target.id === editbtn.id) {
-          // console.log("edit");
           popupWrapper.style.display = "none";
           popupWrapper.removeEventListener("click", clickEventListener);
           title.innerText = ``;
           contentslist.innerHTML = ``;
           tags.innerText = ``;
           editMemo(key);
-        } // else if (e.target.id === deletebtn.id) {
-        //   popupWrapper.style.display = "none";
-        //   popupWrapper.removeEventListener("click", clickEventListener);
-        //   title.innerText = ``;
-        //   contentslist.innerHTML = ``;
-        //   tags.innerText = ``;
-        //   deleteMemo(key);
-        //   refreshMemo();
-        // }
+        }
       };
 
       popupWrapper.addEventListener("click", clickEventListener);
@@ -221,7 +209,9 @@
       });
     }
 
+    // ``で区切られた部分とそうでない部分を分けて、コンテンツ部分に追加
     function splitContent(s) {
+      const li = document.getElementById("contentsListArea");
       let anytext = "";
       let codetext = "";
       let flip = false;
@@ -234,7 +224,6 @@
           } else if (flip == true && i != 0) {
             flip = false;
             // codetext追加
-            const li = document.getElementById("contentsListArea");
             const div = document.createElement("div");
             const pre = document.createElement("pre");
             pre.className = "prettyprint";
@@ -248,7 +237,6 @@
           } else if (flip == false && i != 0) {
             flip = true;
             // anytext追加
-            const li = document.getElementById("contentsListArea");
             const div = document.createElement("div");
             const pre = document.createElement("pre");
             const p = document.createElement("p");
@@ -269,7 +257,6 @@
       }
 
       if (anytext.length != 0) {
-        const li = document.getElementById("contentsListArea");
         const div = document.createElement("div");
         const pre = document.createElement("pre");
         const p = document.createElement("p");
@@ -280,6 +267,7 @@
       }
     }
 
+    // コード部分追加
     function addCode(sum) {
       if (sum == 1) {
         const contents = document.getElementById("memoContents");
