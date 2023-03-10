@@ -39,25 +39,36 @@ export function createMemo() {
     });
 }
 
+function countGrapheme(string) {
+    const segmenter = new Intl.Segmenter("ja", { granularity: "grapheme" });
+    return [...segmenter.segment(string)].length;
+}
+
 // メモ保存関連
 export async function saveMemo() {
     const title = document.getElementById("memoTitle").value;
     const contents = document.getElementById("memoContents").value;
     const tags = splitTag(document.getElementById("memoTags").value);
 
-    if (title && contents) {
-        if (title.length <= 100 && contents.length <= 1000) {
-            const popupWrapper = document.getElementById("popupCreate");
-            clearText();
-            popupWrapper.style.display = "none";
-            const dataID = await addData(title,contents,tags);
-            const memodata = {
-                "0":title,
-                "1":contents,
-                "2":tags,
+    const titleLength = countGrapheme(title);
+    const contentsLength = countGrapheme(contents); 
+
+    // 文字数チェック
+    if (titleLength > 0 && titleLength <= 100) {
+        if (contentsLength > 0 && contentsLength <= 1000) {
+            if ([...tags].length <= 5) {
+                const popupWrapper = document.getElementById("popupCreate");
+                clearText();
+                popupWrapper.style.display = "none";
+                const dataID = await addData(title,contents,tags);
+                const memodata = {
+                    "0":title,
+                    "1":contents,
+                    "2":tags,
+                }
+                localStorage.setItem(dataID,JSON.stringify(memodata));
+                appendMemo(dataID);
             }
-            localStorage.setItem(dataID,JSON.stringify(memodata));
-            appendMemo(dataID);
         }
     }
 }
@@ -176,22 +187,33 @@ export function editMemo(key) {
     const contents = document.getElementById("editContents").value;
     const tags = splitTag(document.getElementById("editTags").value);
     const popupWrapper = document.getElementById("popupEdit"); 
-    // オブジェクト作成
-    const memo = {
-        "0":title,
-        "1":contents,
-        "2":tags
-    };
-    // localStorageのメモを上書き
-    localStorage.setItem(key,JSON.stringify(memo));
 
-    // リスト内にあるメモのタイトル変更
-    const memoli = document.getElementById(key);
-    const titleText = memoli.getElementsByTagName("p");
-    titleText[0].innerText = title;
-    
-    // firestoreのドキュメントの上書き
-    overWriteData(key,memo);
+    const titleLength = countGrapheme(title);
+    const contentsLength = countGrapheme(contents);
 
-    popupWrapper.style.display = "none";
+    // 文字数チェック
+    if (titleLength > 0 && titleLength <= 100) {
+        if (contentsLength  > 0 && contentsLength  <= 1000) {
+            if ([...tags].length <= 5) {
+                // オブジェクト作成
+                const memo = {
+                    "0":title,
+                    "1":contents,
+                    "2":tags
+                };
+                // localStorageのメモを上書き
+                localStorage.setItem(key,JSON.stringify(memo));
+
+                // リスト内にあるメモのタイトル変更
+                const memoli = document.getElementById(key);
+                const titleText = memoli.getElementsByTagName("p");
+                titleText[0].innerText = title;
+
+                // firestoreのドキュメントの上書き
+                overWriteData(key,memo);
+
+                popupWrapper.style.display = "none";
+            }
+        }
+    }
 }
