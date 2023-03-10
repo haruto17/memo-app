@@ -83,6 +83,7 @@ body {
 }
 
 .title.show {
+    overflow-wrap: break-word;
     border: 1px solid #00000062;
     border-radius: 10px 10px 10px 10px;
     padding: 5px;
