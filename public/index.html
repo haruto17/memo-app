@@ -36,15 +36,15 @@
         <a href="create.html">Create account</a>
       </div>
     </div>
-    <div>
-      <button id="btn-loginwithGithub">Github login</button>
+    <div class="githublogin">
+      <button id="btn-logingithub">Github login</button>
     </div>
   </body>
   <script type="module">
     import { login, loginWithGithub } from "./firebase.js";
 
     document.getElementById("btn-login").addEventListener("click", login);
-    document.getElementById("btn-loginwithGithub").addEventListener("click", loginWithGithub);
+    document.getElementById("btn-logingithub").addEventListener("click", loginWithGithub);
   </script>
   <script>
     // パスワード欄の表示・非表示切り替え
