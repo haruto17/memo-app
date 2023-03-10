@@ -83,6 +83,7 @@ body {
 }
 
 .title.show {
+    overflow-wrap: break-word;
     border: 1px solid #00000062;
     border-radius: 10px 10px 10px 10px;
     padding: 5px;
@@ -266,6 +267,9 @@ hr {
     top: 95px;
     text-align: center;
     pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .create-btn {
