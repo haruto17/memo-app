@@ -132,6 +132,24 @@
     });
     document.getElementById("btn-search").addEventListener("click", searchMemo);
     document.getElementById("btn-reset").addEventListener("click", searchReset);
+    document.addEventListener("keypress", keypress_event);
+    document.addEventListener("keyup", keyup_event);
+
+    function keypress_event(e) {
+      const addbtn = document.getElementById("btn-create");
+      if (e.code === "KeyA") {
+        addbtn.click();
+      }
+      return false;
+    }
+
+    function keyup_event(e) {
+      const search = document.getElementById("searchInput");
+      if (e.code === "KeyS") {
+        search.focus();
+      }
+      return false;
+    }
   </script>
   <script>
     let now = 0;
