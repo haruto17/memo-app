@@ -137,16 +137,26 @@
 
     function keypress_event(e) {
       const addbtn = document.getElementById("btn-create");
+      const create = document.getElementById("popupCreate");
+      const show = document.getElementById("popupShow");
+      const edit = document.getElementById("popupEdit");
       if (e.code === "KeyA") {
-        addbtn.click();
+        if (create.style.display == "none" && show.style.display == "none" && edit.style.display == "none") {
+          addbtn.click();
+        }
       }
       return false;
     }
 
     function keyup_event(e) {
       const search = document.getElementById("searchInput");
+      const create = document.getElementById("popupCreate");
+      const show = document.getElementById("popupShow");
+      const edit = document.getElementById("popupEdit");
       if (e.code === "KeyS") {
-        search.focus();
+        if (create.style.display == "none" && show.style.display == "none" && edit.style.display == "none") {
+          search.focus();
+        }
       }
       return false;
     }
