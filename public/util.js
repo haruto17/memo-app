@@ -172,19 +172,21 @@ export function logoutAccount() {
 
 // localStorage上のメモの削除
 export function deleteMemo(key) {
-    localStorage.removeItem(key);
-    deleteData(key);
-    // refreshMemo();
-    const memo = document.getElementById(key);
-    memo.remove()
-    const popupWrapper = document.getElementById("popupShow");
-    const title = document.getElementById("showTitle");
-    const contents = document.getElementById("contentsListArea");
-    const tags = document.getElementById("showTags");
-    title.innerText = "";
-    contents.innerHTML = ``;
-    tags.innerText = "";
-    popupWrapper.style.display = "none";
+    const modal = confirm("メモを削除しますか？")
+    if (modal == true) {
+        localStorage.removeItem(key);
+        deleteData(key);
+        const memo = document.getElementById(key);
+        memo.remove()
+        const popupWrapper = document.getElementById("popupShow");
+        const title = document.getElementById("showTitle");
+        const contents = document.getElementById("contentsListArea");
+        const tags = document.getElementById("showTags");
+        title.innerText = "";
+        contents.innerHTML = ``;
+        tags.innerText = "";
+        popupWrapper.style.display = "none";
+    }
 }
 
 // メモの編集
