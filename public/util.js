@@ -225,3 +225,29 @@ export function editMemo(key) {
         }
     }
 }
+
+
+// メモ出力・ダウンロード
+export function exportMemo(key) {
+    const file_name = key;
+    const memo = JSON.parse(localStorage.getItem(key));
+    const title = memo[0];
+    const contents = memo[1];
+    const tags = memo[2];
+    let text = "";
+    text += title;
+    text += "\n";
+    text += contents;
+    text += "\n";
+    text += tags;
+    text += "\n";
+    const blob = new Blob([text],{type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.download = file_name;
+    a.href = url;
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url); 
+}

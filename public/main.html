@@ -99,6 +99,7 @@
       <div id="popupShow" class="popup">
         <div class="popupInside">
           <div><span id="btn-delete" class="material-symbols-outlined"> delete </span></div>
+          <div><span id="export" class="material-symbols-outlined"> ios_share </span></div>
           <div><span id="edit" class="material-symbols-outlined"> edit_note </span></div>
           <div><span id="close" class="material-symbols-outlined"> close </span></div>
           <div id="inputArea">
@@ -119,7 +120,16 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo, searchMemo, searchReset } from "./util.js";
+    import {
+      createMemo,
+      saveMemo,
+      logoutAccount,
+      deleteMemo,
+      editMemo,
+      searchMemo,
+      searchReset,
+      exportMemo,
+    } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", saveMemo);
@@ -132,6 +142,9 @@
     });
     document.getElementById("btn-search").addEventListener("click", searchMemo);
     document.getElementById("btn-reset").addEventListener("click", searchReset);
+    document.getElementById("export").addEventListener("click", function () {
+      exportMemo(now);
+    });
     document.addEventListener("keypress", keypress_event);
     document.addEventListener("keyup", keyup_event);
 
