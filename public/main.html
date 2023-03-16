@@ -120,7 +120,16 @@
     </div>
   </body>
   <script type="module">
-    import { createMemo, saveMemo, logoutAccount, deleteMemo, editMemo, searchMemo, searchReset } from "./util.js";
+    import {
+      createMemo,
+      saveMemo,
+      logoutAccount,
+      deleteMemo,
+      editMemo,
+      searchMemo,
+      searchReset,
+      exportMemo,
+    } from "./util.js";
 
     document.getElementById("btn-create").addEventListener("click", createMemo);
     document.getElementById("btn-save").addEventListener("click", saveMemo);
@@ -133,6 +142,9 @@
     });
     document.getElementById("btn-search").addEventListener("click", searchMemo);
     document.getElementById("btn-reset").addEventListener("click", searchReset);
+    document.getElementById("export").addEventListener("click", function () {
+      exportMemo(now);
+    });
     document.addEventListener("keypress", keypress_event);
     document.addEventListener("keyup", keyup_event);
 
