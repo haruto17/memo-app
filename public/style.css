@@ -221,12 +221,7 @@ body {
     position: relative;
 }
 
-#close {
-    position: absolute;
-    top: 3px;
-    right: 10px;
-    cursor: pointer;
-}
+
 
 
 .box {
@@ -292,12 +287,7 @@ hr {
     transition: .4s;
 }
 
-#btn-delete{
-    position: absolute;
-    top: 3px;
-    right: 70px;
-    cursor: pointer;
-}
+
 
 .material-symbols.add {
     font-size: 40px;
@@ -353,6 +343,20 @@ hr {
     margin: 0;
 }
 
+#close {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#btn-delete{
+    position: absolute;
+    top: 3px;
+    right: 100px;
+    cursor: pointer;
+}
+
 #edit {
     position: absolute;
     top: 3px;
@@ -360,3 +364,9 @@ hr {
     cursor: pointer;
 }
 
+#export {
+    position: absolute;
+    top: 3px;
+    right: 70px;
+    cursor: pointer;
+}
