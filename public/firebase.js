@@ -70,7 +70,10 @@ export async function createAccount() {
 
             (async () => {
                 const verified = await sendEmailVerification(user, actionCodeSettings);
-                sessionStorage.setItem("uid", user.uid)
+                if (!alert("認証メールを送信しました。リンクをクリックして操作を完了してください。")) {
+                    sessionStorage.setItem("uid", user.uid);
+                    window.location.href = "index.html";
+                }
             })().catch((e) => {
                 console.log(e)
             })
@@ -107,7 +110,9 @@ export function login() {
             if (!user.emailVerified) {
                 (async () => {
                     const verified = await sendEmailVerification(user, actionCodeSettings);
-                    sessionStorage.setItem("uid", user.uid)
+                    if (!alert("まだ認証済みではないようです。リンクをクリックして操作を完了してください。")) {
+                        window.location.href = "index.html";
+                    }
                 })().catch((e) => {
                     console.log(e)
                 })
