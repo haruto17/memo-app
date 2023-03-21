@@ -12,6 +12,10 @@ const firebaseConfig = {
     measurementId: "G-2YNG42RFGZ"
 };
 
+const actionCodeSettings = {
+    url: "https://haruto17-memo-app.deno.dev/main.html"
+};
+
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
@@ -65,9 +69,6 @@ export async function createAccount() {
             const user = auth.currentUser;
 
             (async () => {
-                const actionCodeSettings = {
-                    url: "https://haruto17-memo-app.deno.dev/main.html"
-                };
                 const verified = await sendEmailVerification(user, actionCodeSettings);
                 sessionStorage.setItem("uid", user.uid)
             })().catch((e) => {
@@ -101,15 +102,27 @@ export function login() {
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
+            const user = auth.currentUser;
 
-            alert('login!!!');
+            if (!user.emailVerified) {
+                (async () => {
+                    const verified = await sendEmailVerification(user, actionCodeSettings);
+                    sessionStorage.setItem("uid", user.uid)
+                })().catch((e) => {
+                    console.log(e)
+                })
+            } else if (user.emailVerified) {
+                sessionStorage.setItem("uid", user.uid);
+                window.location.href = "main.html";
+            }
 
-            const userinfo = auth.currentUser;
-            sessionStorage.setItem("uid", userinfo.uid);
+            // alert('login!!!');
 
-            // main.htmlに遷移
-            window.location.href = "main.html";
+            // const userinfo = auth.currentUser;
+            // sessionStorage.setItem("uid", userinfo.uid);
+
+            // // main.htmlに遷移
+            // window.location.href = "main.html";
         })
         .catch((error) => {
             const errorCode = error.errorCode;
