@@ -46,12 +46,15 @@ function countGrapheme(string) {
 
 // メモ保存関連
 export async function saveMemo() {
+    const icon = document.getElementById("selectIcon").value;
     const title = document.getElementById("memoTitle").value;
     const contents = document.getElementById("memoContents").value;
     const tags = splitTag(document.getElementById("memoTags").value);
 
     const titleLength = countGrapheme(title);
-    const contentsLength = countGrapheme(contents); 
+    const contentsLength = countGrapheme(contents);
+
+    console.log(icon);
 
     // 文字数チェック
     if (titleLength > 0 && titleLength <= 100) {
