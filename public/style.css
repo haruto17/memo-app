@@ -168,7 +168,8 @@ body {
 }
 
 .edit-btn {
-    margin: 2% 2%;
+    text-align: center;
+    margin: 2% auto 2% auto;
 }
 
 .edit-btn button {
