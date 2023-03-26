@@ -195,6 +195,7 @@ export function deleteMemo(key) {
 
 // メモの編集
 export function editMemo(key) {
+    const icon = document.getElementById("editIcon").value;
     const title = document.getElementById("editTitle").value;
     const contents = document.getElementById("editContents").value;
     const tags = splitTag(document.getElementById("editTags").value);
@@ -209,9 +210,10 @@ export function editMemo(key) {
             if ([...tags].length <= 5) {
                 // オブジェクト作成
                 const memo = {
-                    "0":title,
-                    "1":contents,
-                    "2":tags
+                    "0":icon,
+                    "1":title,
+                    "2":contents,
+                    "3":tags
                 };
                 // localStorageのメモを上書き
                 localStorage.setItem(key,JSON.stringify(memo));
