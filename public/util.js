@@ -63,11 +63,12 @@ export async function saveMemo() {
                 const popupWrapper = document.getElementById("popupCreate");
                 clearText();
                 popupWrapper.style.display = "none";
-                const dataID = await addData(title,contents,tags);
+                const dataID = await addData(icon,title,contents,tags);
                 const memodata = {
-                    "0":title,
-                    "1":contents,
-                    "2":tags,
+                    "0":icon,
+                    "1":title,
+                    "2":contents,
+                    "3":tags,
                 }
                 localStorage.setItem(dataID,JSON.stringify(memodata));
                 appendMemo(dataID);
