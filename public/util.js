@@ -224,8 +224,9 @@ export function editMemo(key) {
 
                 // リスト内にあるメモのタイトル変更
                 const memoli = document.getElementById(key);
-                const titleText = memoli.getElementsByTagName("p");
-                titleText[0].innerText = title;
+                const tagp = memoli.getElementsByTagName("p");
+                tagp[0].innerText = icon;
+                tagp[1].innerText = title;
 
                 // firestoreのドキュメントの上書き
                 overWriteData(key,memo);
