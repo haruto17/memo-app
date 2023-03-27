@@ -86,10 +86,14 @@ function appendMemo(key) {
     div.className = "memo";
     div.id = key;
     div.setAttribute("onclick", "clickMemo(event)");
+    const icon = document.createElement("p");
+    icon.innerText = memo[0];
+    icon.className = "memoIcon";
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
     titleText.innerText = memo[1];
     titleText.className = "title-text";
+    div.appendChild(icon);
     div.appendChild(line);
     div.appendChild(titleText);
     list.appendChild(div);
