@@ -277,16 +277,23 @@ body {
     background-color:white;
 }
 
+.memoIcon {
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 0%;
+    font-size: 50px;
+    text-align: center;
+}
+
 hr {
     border: 1px solid #00000062;
     position: relative;
-    top: 100px;
+    top: 10px;
     pointer-events: none;
 }
 
 .title-text {
     position: relative;
-    top: 95px;
     text-align: center;
     pointer-events: none;
     white-space: nowrap;
