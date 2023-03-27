@@ -208,7 +208,7 @@ export async function getData() {
             div.setAttribute("onclick", "clickMemo(event)");
             const line = document.createElement("hr");
             const titleText = document.createElement("p");
-            titleText.innerText = docSnap.data()[0];
+            titleText.innerText = docSnap.data()[1];
             titleText.className = "title-text";
             div.appendChild(line);
             div.appendChild(titleText);
