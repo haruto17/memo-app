@@ -88,7 +88,7 @@ function appendMemo(key) {
     div.setAttribute("onclick", "clickMemo(event)");
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
-    titleText.innerText = memo[0];
+    titleText.innerText = memo[1];
     titleText.className = "title-text";
     div.appendChild(line);
     div.appendChild(titleText);
