@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <title>memo-app</title>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-  <title>memo-app</title>
-</head>
-
-<body>
-  <div class="header">
-    <h1>memo-app</h1>
-    <div id="logout">
-      <button type="button" id="btn-logout"><span class="material-symbols-outlined"> logout </span></button>
+  <body>
+    <div class="header">
+      <h1>memo-app</h1>
+      <div id="logout">
+        <button type="button" id="btn-logout"><span class="material-symbols-outlined"> logout </span></button>
+      </div>
     </div>
-  </div>
-  <div>
-    <div class="searchBox">
-      <input type="text" id="searchInput" class="memoSearch" placeholder="title or tag" />
-      <button type="button" id="btn-search" class="iconSearch">
-        <span class="material-symbols-outlined"> search </span>
-      </button>
-      <button id="btn-reset" type="button">
-        <span class="material-symbols-outlined"> refresh </span>
-      </button>
-    </div>
-    <div id="memoList"></div>
-    <div class="create-btn">
-      <button id="btn-create" type="button" class="material-symbols-outlined">
-        <span class="material-symbols add"> add </span>
-      </button>
-    </div>
-    <div id="popupCreate" class="popup">
-      <div class="popupInside">
-        <div>
-          <span id="close" class="material-symbols-outlined"> close </span>
-        </div>
-        <div class="code-btn">
-          <button type="button" onclick="addCode(1)" class="material-symbols-outlined">
-            <span class="material-symbols code"> code </span>
-          </button>
-        </div>
-        <div id="inputArea">
+    <div>
+      <div class="searchBox">
+        <input type="text" id="searchInput" class="memoSearch" placeholder="title or tag" />
+        <button type="button" id="btn-search" class="iconSearch">
+          <span class="material-symbols-outlined"> search </span>
+        </button>
+        <button id="btn-reset" type="button">
+          <span class="material-symbols-outlined"> refresh </span>
+        </button>
+      </div>
+      <div id="memoList"></div>
+      <div class="create-btn">
+        <button id="btn-create" type="button" class="material-symbols-outlined">
+          <span class="material-symbols add"> add </span>
+        </button>
+      </div>
+      <div id="popupCreate" class="popup">
+        <div class="popupInside">
           <div>
+            <span id="close" class="material-symbols-outlined"> close </span>
+          </div>
+          <div class="code-btn">
+            <button type="button" onclick="addCode(1)" class="material-symbols-outlined">
+              <span class="material-symbols code"> code </span>
+            </button>
+          </div>
+          <div id="inputArea">
             <div class="box2">
               <div>
                 <label>Icon</label>
@@ -76,20 +76,28 @@
           </div>
         </div>
       </div>
-    </div>
-    <div id="popupEdit" class="popup">
-      <div class="popupInside">
-        <div><span id="close" class="material-symbols-outlined"> close </span></div>
-        <div class="code-btn">
-          <button type="button" onclick="addCode(0)" class="material-symbols-outlined">
-            <span class="material-symbols code"> code </span>
-          </button>
-        </div>
-        <div id="inputArea">
-          <div class="box">
-            <div class="title">
-              <label>Title</label>
-              <textarea id="editTitle"></textarea>
+      <div id="popupEdit" class="popup">
+        <div class="popupInside">
+          <div><span id="close" class="material-symbols-outlined"> close </span></div>
+          <div class="code-btn">
+            <button type="button" onclick="addCode(0)" class="material-symbols-outlined">
+              <span class="material-symbols code"> code </span>
+            </button>
+          </div>
+          <div id="inputArea">
+            <div class="box2">
+              <div>
+                <label>Icon</label>
+                <select id="editIcon">
+                  <option>😊</option>
+                  <option>😂</option>
+                  <option>😁</option>
+                </select>
+              </div>
+              <div class="title2">
+                <label>Title</label>
+                <textarea id="editTitle"></textarea>
+              </div>
             </div>
             <div class="content">
               <label>Contents</label>
@@ -127,205 +135,203 @@
         </div>
       </div>
     </div>
-  </div>
-</body>
-<script type="module">
-  import {
-    createMemo,
-    saveMemo,
-    logoutAccount,
-    deleteMemo,
-    editMemo,
-    searchMemo,
-    searchReset,
-    exportMemo,
-  } from "./util.js";
+  </body>
+  <script type="module">
+    import {
+      createMemo,
+      saveMemo,
+      logoutAccount,
+      deleteMemo,
+      editMemo,
+      searchMemo,
+      searchReset,
+      exportMemo,
+    } from "./util.js";
 
-  document.getElementById("btn-create").addEventListener("click", createMemo);
-  document.getElementById("btn-save").addEventListener("click", saveMemo);
-  document.getElementById("btn-logout").addEventListener("click", logoutAccount);
-  document.getElementById("btn-delete").addEventListener("click", function () {
-    deleteMemo(now);
-  });
-  document.getElementById("btn-edit").addEventListener("click", function () {
-    editMemo(now);
-  });
-  document.getElementById("btn-search").addEventListener("click", searchMemo);
-  document.getElementById("btn-reset").addEventListener("click", searchReset);
-  document.getElementById("export").addEventListener("click", function () {
-    exportMemo(now);
-  });
-  document.addEventListener("keypress", keypress_event);
-  document.addEventListener("keyup", keyup_event);
-
-  function keypress_event(e) {
-    const addbtn = document.getElementById("btn-create");
-    const create = document.getElementById("popupCreate");
-    const show = document.getElementById("popupShow");
-    const edit = document.getElementById("popupEdit");
-    if (e.code === "KeyA") {
-      if (create.style.display == "none" && show.style.display == "none" && edit.style.display == "none") {
-        addbtn.click();
-      }
-    }
-    return false;
-  }
-
-  function keyup_event(e) {
-    const search = document.getElementById("searchInput");
-    const create = document.getElementById("popupCreate");
-    const show = document.getElementById("popupShow");
-    const edit = document.getElementById("popupEdit");
-    if (e.code === "KeyS") {
-      if (create.style.display == "none" && show.style.display == "none" && edit.style.display == "none") {
-        search.focus();
-      }
-    }
-    return false;
-  }
-</script>
-<script>
-  let now = 0;
-
-  // localStorageからメモ取得。JSONで返す
-  function readMemo(key) {
-    const memo = JSON.parse(localStorage.getItem(key));
-    return memo;
-  }
-
-  // 表示されたメモのクリック時
-  function clickMemo(e) {
-    const key = e.target.id;
-    now = key;
-    const popupWrapper = document.getElementById("popupShow");
-    const closebtn = document.getElementById("close");
-    const deletebtn = document.getElementById("delete");
-    const editbtn = document.getElementById("edit");
-    const title = document.getElementById("showTitle");
-    const tags = document.getElementById("showTags");
-    const memo = readMemo(key);
-
-    title.innerText = memo[0];
-    tags.innerText = memo[2];
-
-    splitContent(memo[1]);
-
-    // ポップアップ表示
-    popupWrapper.style.display = "block";
-
-    const clickEventListener = (e) => {
-      const contentslist = document.getElementById("contentsListArea");
-      if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
-        popupWrapper.style.display = "none";
-        popupWrapper.removeEventListener("click", clickEventListener);
-        title.innerText = ``;
-        contentslist.innerHTML = ``;
-        tags.innerText = ``;
-      } else if (e.target.id === editbtn.id) {
-        popupWrapper.style.display = "none";
-        popupWrapper.removeEventListener("click", clickEventListener);
-        title.innerText = ``;
-        contentslist.innerHTML = ``;
-        tags.innerText = ``;
-        editMemo(key);
-      }
-    };
-
-    popupWrapper.addEventListener("click", clickEventListener);
-  }
-
-  // メモの編集用ポップアップの表示
-  function editMemo(key) {
-    const popupWrapper = document.getElementById("popupEdit");
-    const title = document.getElementById("editTitle");
-    const contents = document.getElementById("editContents");
-    const tags = document.getElementById("editTags");
-    const close = document.getElementById("close");
-    const memo = readMemo(key);
-
-    title.value = memo[0];
-    contents.value = memo[1];
-    tags.value = memo[2];
-
-    popupWrapper.style.display = "block";
-
-    popupWrapper.addEventListener("click", (e) => {
-      if (e.target.id === popupWrapper.id || e.target.id === close.id) {
-        popupWrapper.style.display = "none";
-      }
+    document.getElementById("btn-create").addEventListener("click", createMemo);
+    document.getElementById("btn-save").addEventListener("click", saveMemo);
+    document.getElementById("btn-logout").addEventListener("click", logoutAccount);
+    document.getElementById("btn-delete").addEventListener("click", function () {
+      deleteMemo(now);
     });
-  }
+    document.getElementById("btn-edit").addEventListener("click", function () {
+      editMemo(now);
+    });
+    document.getElementById("btn-search").addEventListener("click", searchMemo);
+    document.getElementById("btn-reset").addEventListener("click", searchReset);
+    document.getElementById("export").addEventListener("click", function () {
+      exportMemo(now);
+    });
+    document.addEventListener("keypress", keypress_event);
+    document.addEventListener("keyup", keyup_event);
 
-  // ``で区切られた部分とそうでない部分を分けて、コンテンツ部分に追加
-  function splitContent(s) {
-    const li = document.getElementById("contentsListArea");
-    let anytext = "";
-    let codetext = "";
-    let flip = false;
-    for (let i = 0; i < s.length; i++) {
-      // console.log(i, s[i]);
-      if (s[i] == "`") {
-        if (i == 0) {
-          flip = true;
-          continue;
-        } else if (flip == true && i != 0) {
-          flip = false;
-          // codetext追加
-          const div = document.createElement("div");
-          const pre = document.createElement("pre");
-          pre.className = "prettyprint";
-          const code = document.createElement("code");
-          code.innerText = codetext;
-          pre.appendChild(code);
-          div.appendChild(pre);
-          li.appendChild(div);
-          codetext = "";
-          continue;
-        } else if (flip == false && i != 0) {
-          flip = true;
-          // anytext追加
-          const div = document.createElement("div");
-          const pre = document.createElement("pre");
-          const p = document.createElement("p");
-          p.innerText = anytext;
-          pre.appendChild(p);
-          div.appendChild(pre);
-          li.appendChild(div);
-          anytext = "";
-          continue;
+    function keypress_event(e) {
+      const addbtn = document.getElementById("btn-create");
+      const create = document.getElementById("popupCreate");
+      const show = document.getElementById("popupShow");
+      const edit = document.getElementById("popupEdit");
+      if (e.code === "KeyA") {
+        if (create.style.display == "none" && show.style.display == "none" && edit.style.display == "none") {
+          addbtn.click();
+        }
+      }
+      return false;
+    }
+
+    function keyup_event(e) {
+      const search = document.getElementById("searchInput");
+      const create = document.getElementById("popupCreate");
+      const show = document.getElementById("popupShow");
+      const edit = document.getElementById("popupEdit");
+      if (e.code === "KeyS") {
+        if (create.style.display == "none" && show.style.display == "none" && edit.style.display == "none") {
+          search.focus();
+        }
+      }
+      return false;
+    }
+  </script>
+  <script>
+    let now = 0;
+
+    // localStorageからメモ取得。JSONで返す
+    function readMemo(key) {
+      const memo = JSON.parse(localStorage.getItem(key));
+      return memo;
+    }
+
+    // 表示されたメモのクリック時
+    function clickMemo(e) {
+      const key = e.target.id;
+      now = key;
+      const popupWrapper = document.getElementById("popupShow");
+      const closebtn = document.getElementById("close");
+      const deletebtn = document.getElementById("delete");
+      const editbtn = document.getElementById("edit");
+      const title = document.getElementById("showTitle");
+      const tags = document.getElementById("showTags");
+      const memo = readMemo(key);
+
+      title.innerText = memo[1];
+      tags.innerText = memo[3];
+
+      splitContent(memo[2]);
+
+      // ポップアップ表示
+      popupWrapper.style.display = "block";
+
+      const clickEventListener = (e) => {
+        const contentslist = document.getElementById("contentsListArea");
+        if (e.target.id === popupWrapper.id || e.target.id === closebtn.id) {
+          popupWrapper.style.display = "none";
+          popupWrapper.removeEventListener("click", clickEventListener);
+          title.innerText = ``;
+          contentslist.innerHTML = ``;
+          tags.innerText = ``;
+        } else if (e.target.id === editbtn.id) {
+          popupWrapper.style.display = "none";
+          popupWrapper.removeEventListener("click", clickEventListener);
+          title.innerText = ``;
+          contentslist.innerHTML = ``;
+          tags.innerText = ``;
+          editMemo(key);
+        }
+      };
+
+      popupWrapper.addEventListener("click", clickEventListener);
+    }
+
+    // メモの編集用ポップアップの表示
+    function editMemo(key) {
+      const popupWrapper = document.getElementById("popupEdit");
+      const title = document.getElementById("editTitle");
+      const contents = document.getElementById("editContents");
+      const tags = document.getElementById("editTags");
+      const close = document.getElementById("close");
+      const memo = readMemo(key);
+
+      title.value = memo[1];
+      contents.value = memo[2];
+      tags.value = memo[3];
+
+      popupWrapper.style.display = "block";
+
+      popupWrapper.addEventListener("click", (e) => {
+        if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+          popupWrapper.style.display = "none";
+        }
+      });
+    }
+
+    // ``で区切られた部分とそうでない部分を分けて、コンテンツ部分に追加
+    function splitContent(s) {
+      const li = document.getElementById("contentsListArea");
+      let anytext = "";
+      let codetext = "";
+      let flip = false;
+      for (let i = 0; i < s.length; i++) {
+        // console.log(i, s[i]);
+        if (s[i] == "`") {
+          if (i == 0) {
+            flip = true;
+            continue;
+          } else if (flip == true && i != 0) {
+            flip = false;
+            // codetext追加
+            const div = document.createElement("div");
+            const pre = document.createElement("pre");
+            pre.className = "prettyprint";
+            const code = document.createElement("code");
+            code.innerText = codetext;
+            pre.appendChild(code);
+            div.appendChild(pre);
+            li.appendChild(div);
+            codetext = "";
+            continue;
+          } else if (flip == false && i != 0) {
+            flip = true;
+            // anytext追加
+            const div = document.createElement("div");
+            const pre = document.createElement("pre");
+            const p = document.createElement("p");
+            p.innerText = anytext;
+            pre.appendChild(p);
+            div.appendChild(pre);
+            li.appendChild(div);
+            anytext = "";
+            continue;
+          }
+        }
+
+        if (flip) {
+          codetext += s[i];
+        } else if (!flip) {
+          anytext += s[i];
         }
       }
 
-      if (flip) {
-        codetext += s[i];
-      } else if (!flip) {
-        anytext += s[i];
+      if (anytext.length != 0) {
+        const div = document.createElement("div");
+        const pre = document.createElement("pre");
+        const p = document.createElement("p");
+        p.innerText = anytext;
+        pre.appendChild(p);
+        div.appendChild(pre);
+        li.appendChild(div);
       }
     }
 
-    if (anytext.length != 0) {
-      const div = document.createElement("div");
-      const pre = document.createElement("pre");
-      const p = document.createElement("p");
-      p.innerText = anytext;
-      pre.appendChild(p);
-      div.appendChild(pre);
-      li.appendChild(div);
+    // コード部分追加
+    function addCode(sum) {
+      if (sum == 1) {
+        const contents = document.getElementById("memoContents");
+        contents.value += "``";
+        contents.focus();
+      } else if (sum == 0) {
+        const editcontents = document.getElementById("editContents");
+        editcontents.value += "``";
+        editcontents.focus();
+      }
     }
-  }
-
-  // コード部分追加
-  function addCode(sum) {
-    if (sum == 1) {
-      const contents = document.getElementById("memoContents");
-      contents.value += "``";
-      contents.focus();
-    } else if (sum == 0) {
-      const editcontents = document.getElementById("editContents");
-      editcontents.value += "``";
-      editcontents.focus();
-    }
-  }
-</script>
-
+  </script>
 </html>

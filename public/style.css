@@ -168,7 +168,8 @@ body {
 }
 
 .edit-btn {
-    margin: 2% 2%;
+    text-align: center;
+    margin: 2% auto 2% auto;
 }
 
 .edit-btn button {
@@ -276,16 +277,24 @@ body {
     background-color:white;
 }
 
+.memoIcon {
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 0%;
+    font-size: 50px;
+    text-align: center;
+    pointer-events: none;
+}
+
 hr {
     border: 1px solid #00000062;
     position: relative;
-    top: 100px;
+    top: 10px;
     pointer-events: none;
 }
 
 .title-text {
     position: relative;
-    top: 95px;
     text-align: center;
     pointer-events: none;
     white-space: nowrap;

@@ -63,11 +63,12 @@ export async function saveMemo() {
                 const popupWrapper = document.getElementById("popupCreate");
                 clearText();
                 popupWrapper.style.display = "none";
-                const dataID = await addData(title,contents,tags);
+                const dataID = await addData(icon,title,contents,tags);
                 const memodata = {
-                    "0":title,
-                    "1":contents,
-                    "2":tags,
+                    "0":icon,
+                    "1":title,
+                    "2":contents,
+                    "3":tags,
                 }
                 localStorage.setItem(dataID,JSON.stringify(memodata));
                 appendMemo(dataID);
@@ -85,10 +86,14 @@ function appendMemo(key) {
     div.className = "memo";
     div.id = key;
     div.setAttribute("onclick", "clickMemo(event)");
+    const icon = document.createElement("p");
+    icon.innerText = memo[0];
+    icon.className = "memoIcon";
     const line = document.createElement("hr");
     const titleText = document.createElement("p");
-    titleText.innerText = memo[0];
+    titleText.innerText = memo[1];
     titleText.className = "title-text";
+    div.appendChild(icon);
     div.appendChild(line);
     div.appendChild(titleText);
     list.appendChild(div);
@@ -194,6 +199,7 @@ export function deleteMemo(key) {
 
 // メモの編集
 export function editMemo(key) {
+    const icon = document.getElementById("editIcon").value;
     const title = document.getElementById("editTitle").value;
     const contents = document.getElementById("editContents").value;
     const tags = splitTag(document.getElementById("editTags").value);
@@ -208,17 +214,19 @@ export function editMemo(key) {
             if ([...tags].length <= 5) {
                 // オブジェクト作成
                 const memo = {
-                    "0":title,
-                    "1":contents,
-                    "2":tags
+                    "0":icon,
+                    "1":title,
+                    "2":contents,
+                    "3":tags
                 };
                 // localStorageのメモを上書き
                 localStorage.setItem(key,JSON.stringify(memo));
 
                 // リスト内にあるメモのタイトル変更
                 const memoli = document.getElementById(key);
-                const titleText = memoli.getElementsByTagName("p");
-                titleText[0].innerText = title;
+                const tagp = memoli.getElementsByTagName("p");
+                tagp[0].innerText = icon;
+                tagp[1].innerText = title;
 
                 // firestoreのドキュメントの上書き
                 overWriteData(key,memo);

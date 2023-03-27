@@ -152,7 +152,7 @@ export function logout() {
 }
 
 // firestoreにデータ保存
-export async function addData(title, contents, tags) {
+export async function addData(icon,title, contents, tags) {
     const uid = sessionStorage.getItem("uid");
 
     let dataID = "";
@@ -160,9 +160,10 @@ export async function addData(title, contents, tags) {
     // ドキュメントの保存 idはランダム
     try {
         const docRef = await addDoc(collection(db, uid), {
-            "0": title,
-            "1": contents,
-            "2": tags,
+            "0": icon,
+            "1": title,
+            "2": contents,
+            "3": tags,
         })
             .then(docRef => {
                 dataID = String(docRef.id);
@@ -205,10 +206,14 @@ export async function getData() {
             div.className = "memo";
             div.id = idList[i];
             div.setAttribute("onclick", "clickMemo(event)");
+            const icon = document.createElement("p");
+            icon.innerText = docSnap.data()[0];
+            icon.className = "memoIcon";
             const line = document.createElement("hr");
             const titleText = document.createElement("p");
-            titleText.innerText = docSnap.data()[0];
+            titleText.innerText = docSnap.data()[1];
             titleText.className = "title-text";
+            div.appendChild(icon);
             div.appendChild(line);
             div.appendChild(titleText);
             list.appendChild(div);
