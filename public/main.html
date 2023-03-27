@@ -212,10 +212,10 @@
       const tags = document.getElementById("showTags");
       const memo = readMemo(key);
 
-      title.innerText = memo[0];
-      tags.innerText = memo[2];
+      title.innerText = memo[1];
+      tags.innerText = memo[3];
 
-      splitContent(memo[1]);
+      splitContent(memo[2]);
 
       // ポップアップ表示
       popupWrapper.style.display = "block";
