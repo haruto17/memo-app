@@ -322,25 +322,26 @@ hr {
   font-size: 40px;
 }
 
-.code-btn {
+.btn-box {
   position: absolute;
   top: 120px;
-  right: 50px;
+  right: 30px;
+  display: flex;
+  gap: 4px;
 }
 
-.code-btn button {
+.btn-box button {
   background-color: transparent;
-  border-width: 1px;
-  /* border-radius: 50%; */
-  width: 30px;
   height: 30px;
-  margin: auto;
+  width: 30px;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   transition: 0.4s;
 }
 
-.code-btn button:hover {
+.btn-box button:hover {
   color: #000;
   background: #5bc8ac;
   transition: 0.4s;
