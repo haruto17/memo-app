@@ -44,7 +44,7 @@
           </div>
           <div class="btn-box">
             <div>
-              <button type="button" class="material-symbols-outlined">
+              <button type="button" onclick="addLink(0)" class="material-symbols-outlined">
                 <span class="material-symbols link"> link </span>
               </button>
             </div>
@@ -116,7 +116,7 @@
           <div><span id="close" class="material-symbols-outlined"> close </span></div>
           <div class="btn-box">
             <div>
-              <button type="button" class="material-symbols-outlined">
+              <button type="button" onclick="addLink(1)" class="material-symbols-outlined">
                 <span class="material-symbols link"> link </span>
               </button>
             </div>
@@ -401,6 +401,17 @@
         const editcontents = document.getElementById("editContents");
         editcontents.value += "``";
         editcontents.focus();
+      }
+    }
+
+    // リンク部分追加
+    function addLink(sum) {
+      if (sum == 0) {
+        memoContents.value += "[]u";
+        memoContents.focus();
+      } else if (sum == 1) {
+        editContents.value += "[]u";
+        editContents.focus();
       }
     }
   </script>
